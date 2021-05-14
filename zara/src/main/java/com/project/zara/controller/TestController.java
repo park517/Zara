@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.project.zara.model.Test;
 import com.project.zara.service.TestService;
 
+import lombok.extern.log4j.Log4j;
+
 @Controller
+@Log4j
 @RequestMapping("/test")
+
 public class TestController {
 	
 	@Autowired
