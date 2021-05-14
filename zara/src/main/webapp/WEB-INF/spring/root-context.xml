@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
+	<!--  Connection pool를 이용하기 위한 Hikari 설정 및 오라클 DB 설정-->
+	
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:ORCL"></property>
+		<property name="username" value="testdb"></property>
+		<property name="password" value="testdb"></property>
+	</bean>
+	
+	<!-- HikariCP configuration -->
+	<!-- 자바에서는 DateSource라는 인터페이스를 이용해서 커넥션풀을 사용한다. -->
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
+		<constructor-arg ref="hikariConfig" />
+	</bean>
+	
+		<!--  Mybatis와 Oracle 서버를 연결해주는 객체 설정 -->
+	
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+<!-- 		<property name="configLocation" value="/WEB-INF/mybatisAlias/mybatisAlias.xml"></property> -->
+	</bean>
+	
+	<!-- 트랜잭션 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<tx:annotation-driven />
+	
+
+	<!-- Mybatis에서 Mapper파일을 찾아가게 하기 위해서 Mapper 파일들의 위치를 설정해준다. -->
+	<mybatis-spring:scan
+		base-package="com.project.zara.mapper"/>
+
+	<!--@Service 서비스 파일들의 위치를 설정해준다. -->
+	<context:component-scan
+		base-package="com.project.zara.service">
+	</context:component-scan>
+	
 </beans>

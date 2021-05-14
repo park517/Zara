@@ -8,10 +8,10 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
+		<java-version>1.8</java-version>
+		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
+		<org.aspectj-version>1.9.0</org.aspectj-version>
+		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -115,7 +115,91 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency> 
+		
+				<!--  커넥션 풀 이용 -->
+	
+
+		<!--sql 로그 -->
+		<dependency>
+			<groupId>org.bgee.log4jdbc-log4j2</groupId>
+			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+			<version>1.16</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-api</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+		    <artifactId>log4j-core</artifactId>
+		    <version>2.0.1</version>
+		</dependency>
+				
+		<!-- 스프링 JDBC -->
+
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- 마이바티스 -->
+
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+
+		<!--  Mybatis 사용을 위한 라이브러리 설치  -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.7</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>2.0.6</version>
+		</dependency>
+		
+		<dependency>
+		   <groupId>com.oracle.database.jdbc</groupId>
+		   <artifactId>ojdbc6</artifactId>
+		   <version>11.2.0.4</version>
+		</dependency>
+
+		<!-- getter, setter, 생성자 등을 자동으로 생성해주는 -->
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- 파일 첨부를 위한 라이브러리 -->
+		
+		<dependency>
+	    	<groupId>commons-io</groupId>
+	    	<artifactId>commons-io</artifactId>
+	    	<version>2.8.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>   
+	 
+		       
 	</dependencies>
     <build>
         <plugins>
