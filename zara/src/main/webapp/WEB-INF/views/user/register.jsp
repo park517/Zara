@@ -82,7 +82,7 @@
 						<h4 class="card-title text-center mb-4 mt-1">회원가입</h4>
 						<hr>
 						<p class="text-success text-center">다양한 서비스를 이용하시려면 회원가입 해주세요</p>
-						<form id="register-form" name="register-form" method="post" action="/user/register">
+						<form id="register_form" name="register_form" method="post" action="/user/register">
 						<div class="form-group">
 							<ul>
 								<li>
@@ -145,8 +145,8 @@
 	
 	
 	<script>
-	
-	
+		
+		var register_form = document.register_form;
 		var btn_check = document.getElementById('checkId');
 		var check_id_flag = 0;
 		var btn_register = document.getElementById('btn_register');
@@ -157,9 +157,9 @@
 			if(check_id_flag == 0 )
 				alert("중복체크 해주세욧!");
 			else
-				document.getElementByid('register-form').sumbmit();
+				register_form.submit();
 				
-		});
+		});1
 		
 		
 		btn_check.addEventListener('click', function(){
