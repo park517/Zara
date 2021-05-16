@@ -93,7 +93,12 @@
 								
 								<li>
 									<label>비밀번호</label>
-									<input placeholder="비밀번호를 입력해주세요" required="required" name="password">
+									<input type="password" id="password" placeholder="비밀번호를 입력해주세요" required="required" name="password">
+								</li>
+								
+								<li>
+									<label>비밀번호 재입력</label>
+									<input type="password" id="password2" placeholder="비밀번호를 입력해주세요" required="required" name="password">
 								</li>
 								
 								<li>
@@ -145,7 +150,8 @@
 	
 	
 	<script>
-		
+		var passwordInput = document.getElementById('password');
+		var passwordInput2 = document.getElementById('password2');
 		var register_form = document.register_form;
 		var btn_check = document.getElementById('checkId');
 		var check_id_flag = 0;
@@ -153,13 +159,27 @@
 		
 		btn_register.addEventListener('click',function() {
 			
+			var password = passwordInput.value;
+			var password2 = passwordInput2.value;
+	
+			if(password !== password2) {
+				alert("비밀번호가 일치하지 않습니다.");
+				passwordInput.value = "";
+				passwordInput2.value = "";
+				passwordInput.focus();
+			}
 			
-			if(check_id_flag == 0 )
-				alert("중복체크 해주세욧!");
-			else
-				register_form.submit();
+			else {
 				
-		});1
+				if(check_id_flag == 0 )
+					alert("중복체크 해주세욧!");
+				else
+					register_form.submit();
+			}
+			
+
+				
+		});
 		
 		
 		btn_check.addEventListener('click', function(){
@@ -196,7 +216,22 @@
 	            });
             
 	    });
+	
+		
+// 		function checkPassword() {
+// 			var password = passwordInput.value;
+// 			var password2 = passwordInput2.value;
 
+// 			if(password !== password2) {
+// 				alert("비밀번호가 일치하지 않습니다.");
+// 				passwordInput.value = "";
+// 				passwordInput2.value = "";
+// 				passwordInput.focus();
+// 			}
+				
+			
+// 		}
+		
 	</script>
 </body>
 
