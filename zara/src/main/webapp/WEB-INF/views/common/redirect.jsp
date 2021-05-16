@@ -4,11 +4,16 @@
 
 	let msg = '${msg}';
 	let url = '${url}';
+	let back = '${back}';
 
 	if (msg) {
 		alert(msg);
 	}
 	if ( url ) {
 		location.replace(url);
+	}
+	
+	if ( back ) {
+		location.href = document.referrer;
 	}
 </script> 

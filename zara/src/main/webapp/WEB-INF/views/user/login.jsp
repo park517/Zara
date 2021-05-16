@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,8 +24,8 @@
 		}
 		
 		.btn-user {
-			margin-left : 900px;
-			width: 300px;
+			margin-left : 850px;
+			width: 500px;
 		}
 		
 		.card {
@@ -108,7 +109,7 @@
 				
 
 				$.ajax({
-					url : "/user/do-login",
+					url : "/user/login",
 					type : "post",
 					dataType : 'text',
 					data : {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.zara.mapper.MemberMapper">
+
+	<select id="getMember" parameterType="Map" resultType="com.project.zara.model.MemberVO">
+		select * from member where mem_id=#{mem_id} AND mem_password = #{mem_password}
+	</select>
+	
+	<insert id="doRegister" parameterType="map" useGeneratedKeys="true" keyProperty="mem_id">
+	
+		insert into member VALUES(
+		#{id},
+		#{password},
+		#{name},
+		#{tel},
+		#{email},
+		#{address},
+		#{gender},
+		sysdate,
+		null,
+		null,
+		'N',
+		null,
+		0
+		)
+	
+	</insert>
+	
+	<select id="checkId" parameterType="String" resultType="String">
+		select count(*) from member where mem_id = #{id}
+	</select>
+</mapper>

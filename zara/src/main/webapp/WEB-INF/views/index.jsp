@@ -22,8 +22,8 @@
 		}
 		
 		.btn-user {
-			margin-left : 900px;
-			width: 300px;
+			margin-left : 850px;
+			width: 500px;
 		}
 		
 	</style>

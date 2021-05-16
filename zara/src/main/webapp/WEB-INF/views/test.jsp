@@ -8,11 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>스프링 기본 설정 완료!!</h1>
-	<c:forEach var="test" items="${testList}">
-			${test.name}<br>
-			${test.age}<br>
-	
-	</c:forEach>
+ <h1>카테고리 제목 ${board.catero }</h1>
 </body>
 </html>
