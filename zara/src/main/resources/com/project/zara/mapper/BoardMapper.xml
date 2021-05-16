@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.zara.mapper.BoardMapper">
 
-	<select id="getList" resultType="com.project.zara.model.BoardVO">
+	<select id="getList" resultType="BoardVO">
 		select * from board
 		ORDER BY bno DESC
 	</select>

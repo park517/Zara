@@ -5,6 +5,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.project.zara.model.MemberVO" alias="MemberVO"/>
+		<typeAlias type="com.project.zara.model.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 	
 	

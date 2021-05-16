@@ -85,7 +85,7 @@
 	            			<tbody> 
 	            				<c:forEach var="board" items="${list}" varStatus="status"> 
 	            				<tr> 
-	            					<td>${board.bno}</td> 
+	            					<td>${status.count}</td> 
 	            					<td id="title">	${board.title} </td> 
 	            					<td>${board.mem_id}</td> 
 	            					<td>${board.create_at}</td> 
@@ -99,7 +99,12 @@
 	            		</div>
 	            		
 	            		<div align="center">
-							<input type="text" class="" name="search" id="search">
+	            			<select class="selectpicker" name="type">
+	            			    <option value="" selected="selected">분류를 선택해주세요</option>
+							    <option value="title">제목</option>
+							    <option value="mem_id">작성자</option>
+	            			</select>
+							<input type="text" class="" name="keyword" id="search">
 							<button class="btn btn-primary" name="btnSearch" id="btnSearch">검색</button>
 						</div>
 
