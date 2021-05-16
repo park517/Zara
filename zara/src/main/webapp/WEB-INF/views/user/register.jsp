@@ -28,7 +28,7 @@
 		.card {
 
 			margin : auto;
-			width: 500px;
+			width: 600px;
 		}
 		
 		.card-body {
@@ -38,7 +38,7 @@
 		.form-group label {
 			font-size : 15px;
 			margin-right: 20px;
-			width: 100px;
+			width: 110px;
 			margin-bottom: 25px;
 			
 		}				
