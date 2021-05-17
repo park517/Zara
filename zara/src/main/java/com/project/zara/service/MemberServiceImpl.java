@@ -33,4 +33,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.checkId(id);
 	}
 
+	@Override
+	public void doUpdate(Map<String, Object> param) {
+		
+		memberMapper.doUpdate(param);
+		
+	}
+
 }

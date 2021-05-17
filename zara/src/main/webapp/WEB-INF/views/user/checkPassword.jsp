@@ -62,7 +62,7 @@
 							 </div>
 						    <input id="password" class="form-control" name="password" placeholder="비밀번호를 입력해주세요" type="password">
 						</div> <!-- input-group.// -->
-						<button type="button" class="btn btn-primary btn-block" >확인</button>
+						<button id="btn_check" type="button" class="btn btn-primary btn-block">확인</button>
 		
 					</article>
 				</div> <!-- card.// -->
@@ -75,6 +75,47 @@
 	
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
+	
+	<script>
+		var passwordInput = document.getElementById('password');
+		var btn_check = document.getElementById('btn_check');
+		
+		
+		btn_check.addEventListener('click', function(){
+			
+			
+	        var password =  passwordInput.value;
+				
+
+            $.ajax({
+                url : "/user/checkPassword",
+                type : "post",
+                dataType : 'text',
+                data : {
+                    password : password
+                },
+                success : function(result) {
+                
+                    console.log("결과  :" +result);
+                    if(result == 'good'){
+                        alert("비밀번호가 일치 합니다.");
+                     	location.href = "/user/update"
+                    }
+                    else if(result =="error") {
+                        alert("비밀번호가 일치하지 않습니다.");
+                        passwordInput.value = "";
+                    }
+                },
+                error : function(xhr,status,error) {
+                    console.log(error);
+                    console.log(xhr);
+                    console.log(status);
+                }
+            });
+        
+    });
+	
+	</script>
 
 </body>
 

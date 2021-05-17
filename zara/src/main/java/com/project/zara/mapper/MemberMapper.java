@@ -11,5 +11,6 @@ import com.project.zara.model.MemberVO;
 public interface MemberMapper {
 	public MemberVO getMember(@Param("mem_id") String mem_id ,@Param("mem_password") String mem_password);
 	public void doRegister(Map<String, Object> param);
+	public void doUpdate(Map<String,Object> param);
 	public String checkId(@Param("id") String id);
 }

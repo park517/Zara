@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     	<style>
 			.user-item a{
 	            color: rgba(255,255,255,.8);
 	            margin-left: 20px;
 	            font-size: 15px;
         	}
+        	
 		</style>
         <!-- 좌측 메뉴바 -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -116,11 +117,21 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">회원기능</h6>
-                        <a class="collapse-item" href="/user/login">로그인</a>
-                        <a class="collapse-item" href="/user/register">회원가입</a>
-                        <a class="collapse-item" href="404.html">정보수정</a>
-                        <a class="collapse-item" href="blank.html">내 정보 보기</a>
+                    	<h6 class="collapse-header">회원기능</h6>
+                    	
+                        <c:if test="${empty loginMember }">
+	                        <a class="collapse-item" href="/user/login">로그인</a>
+	                        <a class="collapse-item" href="/user/register">회원가입</a>
+           				</c:if>
+           				
+                    	<c:if test="${not empty loginMember }">
+                    		<a class="collapse-item" href="/user/logout">로그아웃</a>
+	                        <a class="collapse-item" href="/user/checkPassword">정보수정</a>
+	                        <a class="collapse-item" href="/user/">내 정보 보기</a>
+           				</c:if>
+
+
+
                     </div>
                 </div>
             </li>
@@ -130,10 +141,20 @@
             <hr class="sidebar-divider d-none d-md-block">
             
             <!-- 하단 -->
-            <div class="user-item">
-                <a href="/user/login">로그인</a> 
-                <a href="/user/register">회원가입</a>
-            </div>
+           
+           	<c:if test="${empty loginMember }">
+	            <div class="user-item">
+	                <a href="/user/login">로그인</a> 
+	                <a href="/user/register">회원가입</a>
+	            </div>
+            </c:if>
+            
+            <c:if test="${not empty loginMember }">
+	            <div class="user-item">
+	                <a href="/user/logout">Mypage</a> 
+	                <a href="/user/register">로그아웃</a>
+	            </div>
+            </c:if>
             <!-- Sidebar Toggler (Sidebar) -->
             <p></p>
             

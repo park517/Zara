@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.zara.mapper.MemberMapper;
 import com.project.zara.model.MemberVO;
 import com.project.zara.service.MemberService;
 
@@ -88,9 +89,46 @@ public class MemberController {
 	}
 	
 	
-	
-	@RequestMapping(path = "/check", method=RequestMethod.GET)
+	// 정보 수정 시 비밀번호 체크 페이지 보여주기
+	@RequestMapping(path = "/checkPassword", method=RequestMethod.GET)
 	public String checkPassword() {
 		return "user/checkPassword";
+	}
+	
+	// ajax로 비밀번호 받아서 맞는지 비교하기 
+	
+	@RequestMapping(path = "/checkPassword", method=RequestMethod.POST)
+	@ResponseBody
+	public String checkPassword(@RequestParam("password") String password, HttpSession session ) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		String current_password = member.getMem_password();
+		if(password.equals(current_password)) {
+			return "good";
+		}
+		
+		return "error";
+	}
+	
+	// 업데이트 페이지 보여주기
+	
+	@RequestMapping(path = "/update", method=RequestMethod.GET)
+	public String showUpdate() {
+		return "user/updateMember";
+	}
+	
+	// 업데이트 시도 
+	
+	@RequestMapping(path = "/update", method=RequestMethod.POST)
+	public String doUpdate(@RequestParam Map<String,Object> param ,Model model) {
+		
+		String msg = "정보 수정에 성공하셨습니다.";
+		String url = "/";
+		memberService.doUpdate(param);
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		return "common/redirect";
+		
+ 
+        
 	}
 }
