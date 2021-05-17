@@ -40,4 +40,16 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public void doDelete(String id) {
+		
+		memberMapper.doDelete(id);
+		
+	}
+
+	@Override
+	public void updateLoginDate(String mem_id) {
+		memberMapper.updateLoginDate(mem_id);
+	}
+
 }

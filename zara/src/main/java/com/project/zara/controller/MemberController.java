@@ -38,19 +38,22 @@ public class MemberController {
 		return "user/login";
 	}
 	
+	
 	// 로그인 시도
 	@RequestMapping(path = "/login", method=RequestMethod.POST)
 	@ResponseBody
 	public String doLogin(HttpSession session, Model model ,@RequestParam("id") String id ,@RequestParam("password") String password ) {
 		
 		MemberVO member = memberService.getMember(id, password);
+		
 		if(member !=null) {
+			memberService.updateLoginDate(id);
 			session.setAttribute("loginMember",member);
 			return "good";
 		}
 		return "error";
-		 
 	}
+	
 	// 로그아웃 
 	@RequestMapping(path = "/logout", method=RequestMethod.GET) 
 	public String logout(HttpSession session, Model model) {
@@ -61,7 +64,6 @@ public class MemberController {
 		model.addAttribute("back",back);
 		return "common/redirect";
 	}
-	
 	
 	// 회원가입 페이지 보여주기
 	@RequestMapping(path = "/register", method=RequestMethod.GET)
@@ -96,7 +98,6 @@ public class MemberController {
 	}
 	
 	// ajax로 비밀번호 받아서 맞는지 비교하기 
-	
 	@RequestMapping(path = "/checkPassword", method=RequestMethod.POST)
 	@ResponseBody
 	public String checkPassword(@RequestParam("password") String password, HttpSession session ) {
@@ -110,14 +111,12 @@ public class MemberController {
 	}
 	
 	// 업데이트 페이지 보여주기
-	
 	@RequestMapping(path = "/update", method=RequestMethod.GET)
 	public String showUpdate() {
 		return "user/updateMember";
 	}
 	
 	// 업데이트 시도 
-	
 	@RequestMapping(path = "/update", method=RequestMethod.POST)
 	public String doUpdate(@RequestParam Map<String,Object> param ,Model model) {
 		
@@ -127,8 +126,27 @@ public class MemberController {
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		return "common/redirect";
-		
- 
-        
 	}
+	
+	// 계정 삭제 구현 
+	@RequestMapping(path = "/delete", method=RequestMethod.GET)
+	public String doDelete(HttpSession session ,Model model) {
+		MemberVO member = (MemberVO) session.getAttribute("loginMember");
+		String mem_id = member.getMem_id();
+		String msg = mem_id+" 계정이 삭제 되었습니다.";
+		String url = "/";
+		
+		
+		memberService.doDelete(mem_id);
+		
+		session.removeAttribute("loginMember");
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/redirect";
+	}
+	
+	
+	
+	
 }

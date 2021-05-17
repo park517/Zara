@@ -9,6 +9,14 @@
 		select * from member where mem_id=#{mem_id} AND mem_password = #{mem_password}
 	</select>
 	
+	<update id="updateLoginDate" parameterType="string">
+		update member 
+		set	
+			last_login = sysdate
+	    where 
+		    mem_id=#{mem_id} 
+	</update>
+	
 	<!--  회원가입  -->
 	
 	<insert id="doRegister" parameterType="map" useGeneratedKeys="true" keyProperty="mem_id">
@@ -50,4 +58,12 @@
 		where 
 			mem_id = #{id}
 	</update>
+	
+	<delete id= "doDelete" parameterType = "String">
+	
+		DELETE FROM member
+		WHERE
+		mem_id = #{id}
+	
+	</delete>
 </mapper>

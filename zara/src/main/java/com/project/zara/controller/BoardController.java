@@ -37,7 +37,8 @@ public class BoardController {
 	public com.project.zara.model.BoardVO initCommand() {
 		return new com.project.zara.model.BoardVO();
 	}
-
+	
+	
 	//게시판 목록
 	@RequestMapping(value="/getlist", method=RequestMethod.GET)
 	public String process(Model model) {
@@ -46,10 +47,9 @@ public class BoardController {
 		list = boardService.getList();
 		model.addAttribute("list",list);
 		
-		
-		
 		return "board/getlist";
 	}
+	
 	
 	//게시판 글 작성하기
 	@GetMapping("/write")
@@ -57,13 +57,11 @@ public class BoardController {
 		return "board/write";
 	}
 	
+	
 	//게시판 글 작성처리 전송하기
 	@RequestMapping(value="/board/write", method=RequestMethod.POST)
 	public String doWrite(@RequestParam Map<String, Object> param, BindingResult result, HttpServletRequest request, HttpSession session ) {
-		
-		
-		
-		
+	
 		return "board/list";
 	}
 	
