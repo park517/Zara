@@ -86,4 +86,11 @@ public class MemberController {
 		model.addAttribute("url",url);
 		return "common/redirect";
 	}
+	
+	
+	
+	@RequestMapping(path = "/check", method=RequestMethod.GET)
+	public String checkPassword() {
+		return "user/checkPassword";
+	}
 }
