@@ -85,7 +85,7 @@
 	            			<tbody> 
 	            				<c:forEach var="board" items="${list}" varStatus="status"> 
 	            				<tr> 
-	            					<td>${status.count}</td> 
+	            					<td>${board.bno}</td> 
 	            					<td id="title">	${board.title} </td> 
 	            					<td>${board.mem_id}</td> 
 	            					<td>${board.create_at}</td> 

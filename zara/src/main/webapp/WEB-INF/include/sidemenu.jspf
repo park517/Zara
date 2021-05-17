@@ -24,14 +24,18 @@
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Za(자전거)ra(라이딩)</span></a>
+                    <span>
+                    	ZARA <br>
+                  		자전거라이딩
+                  	</span>
+                </a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
             <!-- Heading -->
             <div class="sidebar-heading">
-                메뉴
+              	  메뉴
             </div>
 
             <!-- 안내 메뉴부분 -->
@@ -69,6 +73,40 @@
                 </div>
             </li>
 
+			<!-- 코스추천 메뉴 부분 -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCourse"
+                    aria-expanded="true" aria-controls="collapseCourse">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>코스추천</span>
+                </a>
+                <div id="collapseCourse" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">코스추천</h6>
+                        <a class="collapse-item" href="#">수도권</a>
+                        <a class="collapse-item" href="#">제주</a>
+                        <a class="collapse-item" href="#">전국일주</a>
+                    </div>
+                </div>
+            </li>
+            
+            <!-- 커뮤니티 메뉴 부분 -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCommunity"
+                    aria-expanded="true" aria-controls="collapseCommunity">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>커뮤니티</span>
+                </a>
+                <div id="collapseCommunity" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">커뮤니티</h6>
+                        <a class="collapse-item" href="/board/getlist">와글와글</a>
+                        <a class="collapse-item" href="#">Q&A</a>
+                        <a class="collapse-item" href="#">함께 탈 사람 구해요</a>
+                    </div>
+                </div>
+            </li>
+            
             <!-- 회원 메뉴 부분 -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -86,9 +124,12 @@
                     </div>
                 </div>
             </li>
+            
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             
+            <!-- 하단 -->
             <div class="user-item">
                 <a href="/user/login">로그인</a> 
                 <a href="/user/register">회원가입</a>
