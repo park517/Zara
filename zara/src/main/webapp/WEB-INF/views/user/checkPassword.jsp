@@ -77,6 +77,10 @@
 	<%@include file="../../include/boot-footer.jspf" %>
 	
 	<script>
+		var url = new URL(window.location.href);
+		var params = url.searchParams;
+		var job = params.get('job');
+	
 		var passwordInput = document.getElementById('password');
 		var btn_check = document.getElementById('btn_check');
 		
@@ -99,7 +103,14 @@
                     console.log("결과  :" +result);
                     if(result == 'good'){
                         alert("비밀번호가 일치 합니다.");
-                     	location.href = "/user/update"
+                        
+                        if(job == 'update') {
+                     		location.href = "/user/update"
+          			    }
+                        
+                        else if(job == 'delete') {
+                        	location.href = "/user/delete"
+                        }
                     }
                     else if(result =="error") {
                         alert("비밀번호가 일치하지 않습니다.");

@@ -126,8 +126,8 @@
            				
                     	<c:if test="${not empty loginMember }">
                     		<a class="collapse-item" href="/user/logout">로그아웃</a>
-	                        <a class="collapse-item" href="/user/checkPassword">정보수정</a>
-	                        <a class="collapse-item" href="/user/">내 정보 보기</a>
+	                        <a class="collapse-item" href="/user/checkPassword?job=update">정보수정</a>
+	                        <a class="collapse-item" href="/user/myPage">내 정보 보기</a>
            				</c:if>
 
 
@@ -151,8 +151,8 @@
             
             <c:if test="${not empty loginMember }">
 	            <div class="user-item">
-	                <a href="/user/logout">Mypage</a> 
-	                <a href="/user/register">로그아웃</a>
+	                <a href="/user/myPage">Mypage</a> 
+	                <a href="/user/logout">로그아웃</a>
 	            </div>
             </c:if>
             <!-- Sidebar Toggler (Sidebar) -->

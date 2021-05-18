@@ -81,7 +81,7 @@
 						<button type="button" class="btn btn-primary btn-block" onclick='doLogin()'> 로그인  </button>
 						<button type="button" class="btn btn-primary btn-block" onclick="location.href='/user/register'"> 회원가입</button>
 						</div> <!-- form-group// -->
-						<p class="text-center"><a href="#" class="btn">아이디 및 비밀번호를 잊어버리셨나요?</a></p>
+						<p class="text-center"><a href="/user/find" class="btn">아이디 및 비밀번호를 잊어버리셨나요?</a></p>
 						</form>
 					</article>
 				</div> <!-- card.// -->

@@ -17,7 +17,9 @@ public class MemberVO {
 	private String mem_name; // 회원 이름
 	private String mem_tel; // 전화번호
 	private String mem_email; // 이메일
-	private String mem_address; // 주소
+	private String mem_zip; // 우편번호
+	private String mem_road; // 도로명 주소
+	private String mem_adrdetail; // 상세 주소
 	private String gender; // 성별
 	private Date create_at; // 생성일자
 	private Date update_at; // 수정일자

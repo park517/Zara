@@ -6,7 +6,7 @@
                         <c:if test="${not empty loginMember }">
                        	${loginMember.mem_id}님 환영합니다! 
                        	&nbsp&nbsp&nbsp 
-                       	<a href="/user/checkPassword">MyPage</a> 
+                       	<a href="/user/myPage">MyPage</a> 
                         &nbsp&nbsp&nbsp
                         <a href="/user/logout">로그아웃</a> 
                         </c:if>

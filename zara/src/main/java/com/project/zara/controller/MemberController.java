@@ -110,6 +110,12 @@ public class MemberController {
 		return "error";
 	}
 	
+	// Mypage 이동
+	@RequestMapping(path = "/myPage", method=RequestMethod.GET)
+	public String myPage() {
+		return "user/mypage";
+	}
+	
 	// 업데이트 페이지 보여주기
 	@RequestMapping(path = "/update", method=RequestMethod.GET)
 	public String showUpdate() {
@@ -146,6 +152,13 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
+	
+	// ID 및 Password 찾는 페이지 보여주기
+	@RequestMapping(path = "/find", method=RequestMethod.GET)
+	public String findAccount() {
+			
+		return "user/findAccount";
+	}
 	
 	
 	
