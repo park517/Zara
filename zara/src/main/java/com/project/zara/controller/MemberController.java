@@ -160,6 +160,22 @@ public class MemberController {
 		return "user/findAccount";
 	}
 	
+	// ID 찾기
+	@RequestMapping(path = "/findId", method=RequestMethod.POST)
+	@ResponseBody
+	public String findId(@RequestParam Map<String,Object> param) {
+		return memberService.findId(param);
+	}
+	
+	// 비밀번호 찾기
+	@RequestMapping(path = "/findPassword", method=RequestMethod.POST)
+	@ResponseBody
+	public String findPassword(@RequestParam Map<String,Object> param) {
+		return memberService.findPassword(param);
+	}
+	
+	
+	
 	
 	
 }

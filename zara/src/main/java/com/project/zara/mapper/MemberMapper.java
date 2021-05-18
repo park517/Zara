@@ -16,5 +16,7 @@ public interface MemberMapper {
 	public void doUpdate(Map<String,Object> param);
 	public String checkId(@Param("id") String id);
 	public void doDelete(@Param("id") String id);
-
+	public String findId(Map<String,Object> param);
+	public String findPassword(Map<String,Object> param);
+	
 }

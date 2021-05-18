@@ -71,4 +71,14 @@
 		mem_id = #{id}
 	
 	</delete>
+	
+	<!--  아이디 찾기 -->
+	<select id="findId" parameterType="map" resultType="String">
+		select mem_id from member where mem_name =#{name} and mem_tel = #{tel}
+	
+	</select>
+	
+	<select id="findPassword" parameterType="map" resultType="String">
+		select mem_password from member where mem_id =#{id} and mem_name = #{name} and mem_tel = #{tel} 
+	</select>
 </mapper>

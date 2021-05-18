@@ -52,4 +52,16 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.updateLoginDate(mem_id);
 	}
 
+	@Override
+	public String findId(Map<String, Object> param) {
+		
+		return memberMapper.findId(param);
+	}
+
+	@Override
+	public String findPassword(Map<String, Object> param) {
+		// TODO Auto-generated method stub
+		return memberMapper.findPassword(param);
+	}
+
 }

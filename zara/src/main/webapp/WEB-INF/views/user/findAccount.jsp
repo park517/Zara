@@ -72,47 +72,47 @@
        				
        				<div class="find_form">
        				
-       					<form action="">
+       					<form action="" method="Post">
        						<ul>
        							<li>
        								<h3>ID 찾기</h3>
        							</li>
        							<li>
        								<label>이름</label>
-       								<input  required="required" name="name" placeholder="이름을 입력해주세요.">
+       								<input id="id_name" required="required" name="name" placeholder="이름을 입력해주세요.">
        							</li>
        							<li>
-       								<label>이름</label>
-       								<input  required="required" name="tel" type="tel" placeholder="전화번호를 입력해주세요.">
+       								<label>전화번호</label>
+       								<input id="id_tel"  required="required" name="tel" type="tel" placeholder="전화번호를 입력해주세요.">
        							</li>
        							<li>	
-       								<button class="btn btn-info">찾기</button>
+       								<button id="findId" type="button" class="btn btn-info">찾기</button>
        							</li>
        						</ul>
        					</form>
        					
-       					<form action="">
+       					<form action="/user/findPassword" method="Post">
        						<ul>
        							<li>
        								<h3>비밀번호 찾기</h3>
        							</li>
        							<li>
        								<label>아이디</label>
-       								<input  required="required" name="id" placeholder="아이디를 입력해주세요.">
+       								<input id="pass_id" required="required" name="id" placeholder="아이디를 입력해주세요.">
        							</li>
        							
        							<li>
-       								<label>전화번호</label>
-       								<input  required="required" name="name" type="text" placeholder="이름를 입력해주세요.">
+       								<label>이름</label>
+       								<input id="pass_name" required="required" name="name" type="text" placeholder="이름를 입력해주세요.">
        							</li>
        							
        							<li>	
        								<label>전화번호</label>
-       								<input  required="required" name="tel" type="tel" placeholder="전화번호를 입력해주세요.">
+       								<input id="pass_tel"  required="required" name="tel" type="tel" placeholder="전화번호를 입력해주세요.">
        							</li>
        							
        							<li>	
-       								<button class="btn btn-info">찾기</button>
+       								<button id="findPassword" type="button" class="btn btn-info">찾기</button>
        							</li>
        						</ul>
        					</form>
@@ -129,7 +129,81 @@
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
 	
+	<script>
+	var btn_findId = document.getElementById('findId');
+	var btn_findPassword = document.getElementById('findPassword');
 
+	btn_findId.addEventListener('click',function() {
+		
+        $.ajax({
+            url : "/user/findId",
+            type : "post",
+            dataType : 'text',
+            data : {
+                name : $('#id_name').val() ,
+               	tel : $('#id_tel').val()
+            },
+            success : function(result) {
+            
+    			if(result =="") {
+    				alert("정보를 다시 입력해주세요!");
+    				location.reload();
+    			}
+    			
+    			else {
+                    alert("아이디는 : "+result+" 입니다");
+                    location.reload();
+    			}
+
+
+            },
+            error : function(xhr,status,error) {
+                console.log(error);
+                console.log(xhr);
+                console.log(status);
+            }
+        });	
+	});
+	
+	
+	btn_findPassword.addEventListener('click',function() {
+		
+        $.ajax({
+            url : "/user/findPassword",
+            type : "post",
+            dataType : 'text',
+            data : {
+            	id : $('#pass_id').val(),
+                name : $('#pass_name').val() ,
+               	tel : $('#pass_tel').val()
+            },
+            success : function(result) {
+            	
+    			if(result =="") {
+    				alert("정보를 다시 입력해주세요!");
+    				location.reload();
+    			}
+    			
+    			else {
+                    alert("비밀번호는 : "+result+" 입니다");
+                    location.reload();
+    			}
+
+	
+            },
+            error : function(xhr,status,error) {
+                console.log(error);
+                console.log(xhr);
+                console.log(status);
+            }
+        });	
+	});
+	
+	
+	
+	
+	
+	</script>
 
 </body>
 
