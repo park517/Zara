@@ -61,6 +61,10 @@
 		#woman {
             margin-left: 10px;
         }
+        .address_form input {
+        	margin-bottom: 10px;
+        	margin-right: 10px;
+        }
         
 	</style>
 </head>
@@ -118,7 +122,13 @@
 								
 								<li>
 									<label>주소</label>
-									<input value="${loginMember.mem_address}" required="required" name="address">
+									<div class="address_form">
+										<input name="mem_zip" type="text" id="sample4_postcode" placeholder="우편번호" value="${loginMember.mem_zip}">
+										<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+										<input name="mem_road" type="text" id="sample4_roadAddress" placeholder="도로명주소" value="${loginMember.mem_road}">
+										<span id="guide" style="color:#999;display:none"></span>
+										<input name="mem_adrdetail" type="text" id="sample4_detailAddress" placeholder="상세주소" value="${loginMember.mem_adrdetail}">
+									</div>
 								</li>
 								
 								<li>
@@ -189,9 +199,44 @@
 				
 		});
 		
+	</script>
+	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+		function sample4_execDaumPostcode() {
+			
+		    new daum.Postcode({
+		        oncomplete: function(data) {
+		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+	                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var roadAddr = data.roadAddress; // 도로명 주소 변수
 
-		
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample4_postcode').value = data.zonecode;
+	                document.getElementById("sample4_roadAddress").value = roadAddr;
+
+	                var guideTextBox = document.getElementById("guide");
+	                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+	                if(data.autoRoadAddress) {
+	                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+	                    guideTextBox.innerHTML = '(도로명 주소 : ' + expRoadAddr + ')';
+	                    guideTextBox.style.display = 'block';
+
+	                } else if(data.autoJibunAddress) {
+	                    var expJibunAddr = data.autoJibunAddress;
+	                    guideTextBox.innerHTML = '(지번 주소 : ' + expJibunAddr + ')';
+	                    guideTextBox.style.display = 'block';
+	                } else {
+	                    guideTextBox.innerHTML = '';
+	                    guideTextBox.style.display = 'none';
+	                }
+	            }
+		    }).open();
+		}
 	</script>
 </body>
 

@@ -56,7 +56,9 @@
 			mem_name = #{name},
 			mem_tel = #{tel},
 			mem_email = #{email},
-			mem_address = #{address},
+			mem_zip = #{mem_zip},
+			mem_road = #{mem_road},
+			mem_adrdetail = #{mem_adrdetail}, 
 			gender = #{gender},
 			update_at = sysdate
 		where 

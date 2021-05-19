@@ -40,6 +40,14 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>	
 		
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		
+		
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -117,7 +125,6 @@
 			<scope>test</scope>
 		</dependency> 
 		
-				<!--  커넥션 풀 이용 -->
 	
 
 		<!--sql 로그 -->
@@ -126,18 +133,6 @@
 			<artifactId>log4jdbc-log4j2-jdbc4</artifactId>
 			<version>1.16</version>
 		</dependency>
-		
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.apache.logging.log4j</groupId> -->
-<!-- 		    <artifactId>log4j-api</artifactId> -->
-<!-- 		    <version>2.0.1</version> -->
-<!-- 		</dependency> -->
-		
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.apache.logging.log4j</groupId> -->
-<!-- 		    <artifactId>log4j-core</artifactId> -->
-<!-- 		    <version>2.0.1</version> -->
-<!-- 		</dependency> -->
 				
 		<!-- 스프링 JDBC -->
 
@@ -171,10 +166,13 @@
 		</dependency>
 		
 		<dependency>
-		   <groupId>com.oracle.database.jdbc</groupId>
-		   <artifactId>ojdbc6</artifactId>
-		   <version>11.2.0.4</version>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc8</artifactId>
+		    <version>21.1.0.0</version>
+
+
 		</dependency>
+
 
 		<!-- getter, setter, 생성자 등을 자동으로 생성해주는 -->
 
