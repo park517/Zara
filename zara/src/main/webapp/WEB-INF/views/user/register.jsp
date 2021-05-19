@@ -102,7 +102,7 @@
 								
 								<li>
 									<label>비밀번호 재입력</label>
-									<input type="password" id="password2" placeholder="비밀번호를 입력해주세요" required="required" name="password">
+									<input type="password" id="password2" placeholder="비밀번호를 입력해주세요" required="required" name="password2">
 								</li>
 								
 								<li>
@@ -167,29 +167,64 @@
 		var check_id_flag = 0;
 		var btn_register = document.getElementById('btn_register');
 		
-		btn_register.addEventListener('click',function() {
-			
-			var password = passwordInput.value;
-			var password2 = passwordInput2.value;
 	
-			if(password !== password2) {
-				alert("비밀번호가 일치하지 않습니다.");
-				passwordInput.value = "";
-				passwordInput2.value = "";
-				passwordInput.focus();
-			}
+		
+	
 			
-			else {
+		
+			btn_register.addEventListener('click',function() {
 				
-				if(check_id_flag == 0 )
-					alert("중복체크 해주세욧!");
-				else
-					register_form.submit();
-			}
-			
+				if(document.register_form.id.value ==""){
+					alert("아이디를 입력해주세요!");
+				}
+				
+				else if(document.register_form.password.value =="") {
+					alert("비밀번호를 입력해주세요!");
+				}
+				
+				else if(document.register_form.name.value =="") {
+					alert("이름을 입력해주세요!");
+				}
+				
+				else if(document.register_form.tel.value =="") {
+					alert("전화번호를 입력해주세요!");
+				}
+				
+				else if(document.register_form.email.value =="") {
+					alert("이메일 입력해주세요!");
+				}
+				
+				else if(document.register_form.mem_adrdetail.value =="") {
+					alert("상세주소를 입력해주세요!");
+				}
+				
+				else if(document.register_form.gender.value =="") {
+					alert("성별을 입력해주세요!");
+				}
 
-				
-		});
+				else {
+					
+					var password = passwordInput.value;
+					var password2 = passwordInput2.value;
+					
+					if(password !== password2) {
+						alert("비밀번호가 일치하지 않습니다.");
+						passwordInput.value = "";
+						passwordInput2.value = "";
+						passwordInput.focus();
+					}
+					
+					else {
+						
+						if(check_id_flag == 0 )
+							alert("중복체크 해주세욧!");
+						else
+							register_form.submit();
+					}
+				}
+			});
+			
+		
 		
 		
 		btn_check.addEventListener('click', function(){
@@ -198,7 +233,7 @@
          
 	            var idInput =document.getElementById('id');
 	            var id =idInput.value;				
-	
+				
 	            $.ajax({
 	                url : "/user/checkId",
 	                type : "post",

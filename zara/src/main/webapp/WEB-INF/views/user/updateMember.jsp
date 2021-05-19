@@ -166,37 +166,73 @@
 		var btn_update = document.getElementById('btn_update');
 		
 		
+		
+		
+		
 		btn_update.addEventListener('click',function() {
-	        var password =  current_passwordInput.value;
-	        
-            $.ajax({
-                url : "/user/checkPassword",
-                type : "post",
-                dataType : 'text',
-                data : {
-                    password : password
-                },
-                success : function(result) {
-                
-                    console.log("결과  :" +result);
-                    if(result == 'good'){
-                        alert("비밀번호가 일치 합니다.");
-                        update_form.submit();
-                    }
-                    else if(result =="error") {
-                        alert("비밀번호가 일치하지 않습니다.");
-                        passwordInput.value = "";
-                        passwordInput.focus();
-                        
-                    }
-                },
-                error : function(xhr,status,error) {
-                    console.log(error);
-                    console.log(xhr);
-                    console.log(status);
-                }
-            });
-				
+			
+			if(document.update_form.id.value ==""){
+				alert("아이디를 입력해주세요!");
+			}
+			else if(document.update_form.password.value =="") {
+				alert("현재 비밀번호를 입력해주세요!");
+			}
+			else if(document.update_form.change_password.value =="") {
+				alert("변경할 비밀번호를 입력해주세요!");
+			}
+			
+			else if(document.update_form.name.value =="") {
+				alert("이름을 입력해주세요!");
+			}
+			
+			else if(document.update_form.tel.value =="") {
+				alert("전화번호를 입력해주세요!");
+			}
+			
+			else if(document.update_form.email.value =="") {
+				alert("이메일 입력해주세요!");
+			}
+			
+			else if(document.update_form.mem_adrdetail.value =="") {
+				alert("상세주소를 입력해주세요!");
+			}
+			
+			else if(document.update_form.gender.value =="") {
+				alert("성별을 입력해주세요!");
+			}
+			
+			else {
+		        var password =  current_passwordInput.value;
+		        
+	            $.ajax({
+	                url : "/user/checkPassword",
+	                type : "post",
+	                dataType : 'text',
+	                data : {
+	                    password : password
+	                },
+	                success : function(result) {
+	                
+	                    console.log("결과  :" +result);
+	                    if(result == 'good'){
+	                        alert("비밀번호가 일치 합니다.");
+	                        update_form.submit();
+	                    }
+	                    else if(result =="error") {
+	                        alert("비밀번호가 일치하지 않습니다.");
+	                        passwordInput.value = "";
+	                        passwordInput.focus();
+	                        
+	                    }
+	                },
+	                error : function(xhr,status,error) {
+	                    console.log(error);
+	                    console.log(xhr);
+	                    console.log(status);
+	                }
+	            });		
+			}
+	
 		});
 		
 	</script>

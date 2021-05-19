@@ -124,9 +124,9 @@ public class MemberController {
 	
 	// 업데이트 시도 
 	@RequestMapping(path = "/update", method=RequestMethod.POST)
-	public String doUpdate(@RequestParam Map<String,Object> param ,Model model) {
-		
-		String msg = "정보 수정에 성공하셨습니다.";
+	public String doUpdate(@RequestParam Map<String,Object> param ,Model model , HttpSession session) {
+		session.removeAttribute("loginMember");
+		String msg = "정보 수정에 성공하셨습니다. 다시 로그인 부탁드립니다욧!";
 		String url = "/";
 		memberService.doUpdate(param);
 		model.addAttribute("msg",msg);
