@@ -1,8 +1,5 @@
-.classpath
-/pom.xml
-/target/
+*/target/**
 */.git/*
 .settings/
-target/
 .class
-/src/
+/target/
