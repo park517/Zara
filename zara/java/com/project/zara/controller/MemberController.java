@@ -1,5 +1,6 @@
 package com.project.zara.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -163,7 +164,7 @@ public class MemberController {
 	// ID 찾기
 	@RequestMapping(path = "/findId", method=RequestMethod.POST)
 	@ResponseBody
-	public String findId(@RequestParam Map<String,Object> param) {
+	public List<String> findId(@RequestParam Map<String,Object> param) {
 		return memberService.findId(param);
 	}
 	

@@ -1,5 +1,6 @@
 package com.project.zara.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,7 +17,7 @@ public interface MemberMapper {
 	public void doUpdate(Map<String,Object> param);
 	public String checkId(@Param("id") String id);
 	public void doDelete(@Param("id") String id);
-	public String findId(Map<String,Object> param);
+	public List<String> findId(Map<String,Object> param);
 	public String findPassword(Map<String,Object> param);
 	
 }

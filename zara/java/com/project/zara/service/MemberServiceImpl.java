@@ -1,5 +1,6 @@
 package com.project.zara.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String findId(Map<String, Object> param) {
+	public List<String> findId(Map<String, Object> param) {
 		
 		return memberMapper.findId(param);
 	}

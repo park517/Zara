@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,42 +113,46 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-		<%@include file="../../include/sidemenu.jspf" %>
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
-     				<div class="mem_info">
-     				
-     					<ul>
-     						<li>	<h1>회원정보</h1> </li>
-     						<li><label>아이디</label>${loginMember.mem_id}</li>
-     						<li><label>이름</label>${loginMember.mem_name}</li>
-     						<li><label>연락처</label>${loginMember.mem_tel}</li>
-     						<li><label>이메일</label>${loginMember.mem_email}</li>
-     						<li><label>포인트</label>${loginMember.mem_point}</li>
-     						<li><label>가입일</label>${loginMember.create_at}</li>
-     						<li><label>최근로그인 일자</label>${loginMember.last_login}</li>
-     						<li>
-     							<div class="btn_group">
-     								<button type="button" class="btn btn-info">내가 쓴글</button>
-     								<button type="button" class="btn btn-info" onclick="location.href='/user/checkPassword?job=update'" >정보수정</button>
-     								<button id="btn_delete" type="button" class="btn btn-danger">탈퇴</button>
-     							</div>
-     						</li>
-     					</ul>
-     				</div>
-            </div>
-     
-        </div> 
-            
-              <!-- End of Toolbar -->
-    </div>
+	<c:if test="${not empty loginMember}">
+	    <!-- Page Wrapper -->
+	    <div id="wrapper">
+			<%@include file="../../include/sidemenu.jspf" %>
+	        <!-- Content Wrapper -->
+	        <div id="content-wrapper" class="d-flex flex-column">
+	
+	            <!-- Main Content -->
+	            <div id="content">
+	                <!-- Toolbar -->
+					<%@include file="../../include/toolbar.jspf" %>
+	     				<div class="mem_info">
+	     				
+	     					<ul>
+	     						<li>	<h1>회원정보</h1> </li>
+	     						<li><label>아이디</label>${loginMember.mem_id}</li>
+	     						<li><label>이름</label>${loginMember.mem_name}</li>
+	     						<li><label>연락처</label>${loginMember.mem_tel}</li>
+	     						<li><label>이메일</label>${loginMember.mem_email}</li>
+	     						<li><label>포인트</label>${loginMember.mem_point}</li>
+	     						<li><label>가입일</label>${loginMember.create_at}</li>
+	     						<li><label>최근로그인 일자</label>${loginMember.last_login}</li>
+	     						<li>
+	     							<div class="btn_group">
+	     								<button type="button" class="btn btn-info">내가 쓴글</button>
+	     								<button type="button" class="btn btn-info" onclick="location.href='/user/checkPassword?job=update'" >정보수정</button>
+	     								<button id="btn_delete" type="button" class="btn btn-danger">탈퇴</button>
+	     							</div>
+	     						</li>
+	     					</ul>
+	     				</div>
+	            </div>
+	     
+	        </div> 
+	    </div>
+    </c:if>
+    
+    <c:if test="${empty loginMember}">
+		<%@include file="../../include/noLogin.jspf" %>
+    </c:if>
     <!-- End of Page Wrapper -->
 	
 	<!-- 부트스트랩 js 부분 -->
@@ -160,8 +165,6 @@
 				location.href="/user/checkPassword?job=delete"
 			}
 		});
-	
-	
 	</script>
 </body>
 

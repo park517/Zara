@@ -145,15 +145,18 @@
             },
             success : function(result) {
             
-    			if(result =="") {
+    			console.log(result);
+            	
+            	if(result =="") {
     				alert("정보를 다시 입력해주세요!");
     				location.reload();
     			}
     			
-    			else {
+ 				else {
                     alert("아이디는 : "+result+" 입니다");
                     location.reload();
-    			}
+    			} 
+    			
 
 
             },
