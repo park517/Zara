@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,90 +72,95 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-		<%@include file="../../include/sidemenu.jspf" %>
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-                <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
-            	<div class="card">
-					<article class="card-body">
-						<h4 class="card-title text-center mb-4 mt-1">정보 수정하기</h4>
-						<hr>
-						<p class="text-success text-center"> 수정하실 정보를 입력해주세요!</p>
-						<form id="update_form" name="update_form" method="post" action="/user/update">
-						<div class="form-group">
-							<ul>
-								<li>
-									<label>아이디</label> 
-									<input id="id" value="${loginMember.mem_id}" readonly="readonly" name="id">
-					
-								</li>
+	<c:if test="${not empty loginMember}">
+	    <!-- Page Wrapper -->
+	    <div id="wrapper">
+			<%@include file="../../include/sidemenu.jspf" %>
+	        <!-- Content Wrapper -->
+	        <div id="content-wrapper" class="d-flex flex-column">
+	
+	            <!-- Main Content -->
+	            <div id="content">
+	                <!-- Toolbar -->
+					<%@include file="../../include/toolbar.jspf" %>
+	            	<div class="card">
+						<article class="card-body">
+							<h4 class="card-title text-center mb-4 mt-1">정보 수정하기</h4>
+							<hr>
+							<p class="text-success text-center"> 수정하실 정보를 입력해주세요!</p>
+							<form id="update_form" name="update_form" method="post" action="/user/update">
+							<div class="form-group">
+								<ul>
+									<li>
+										<label>아이디</label> 
+										<input id="id" value="${loginMember.mem_id}" readonly="readonly" name="id">
+						
+									</li>
+									
+									<li>
+										<label>현재 비밀번호</label>
+										<input type="password" id="current_password" placeholder="현재 비밀번호를 입력해주세요" required="required" name="password">
+									</li>
+									
+									<li>
+										<label>변경할 비밀번호 </label>
+										<input type="password" id="change_password" placeholder="변경할 비밀번호를 입력해주세요" required="required" name="change_password">
+									</li>
+									
+									<li>
+										<label>이름</label>
+										<input value="${loginMember.mem_name}" required="required" name="name">
+									</li>
+									
+									<li>
+										<label>전화번호</label>
+										<input value="${loginMember.mem_tel}" required="required" name="tel">
+									</li>
+									
+									<li>
+										<label>이메일</label>
+										<input value="${loginMember.mem_email}" required="required" name="email">
+									</li>
+									
+									<li>
+										<label>주소</label>
+										<div class="address_form">
+											<input name="mem_zip" type="text" id="sample4_postcode" placeholder="우편번호" value="${loginMember.mem_zip}">
+											<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+											<input name="mem_road" type="text" id="sample4_roadAddress" placeholder="도로명주소" value="${loginMember.mem_road}">
+											<span id="guide" style="color:#999;display:none"></span>
+											<input name="mem_adrdetail" type="text" id="sample4_detailAddress" placeholder="상세주소" value="${loginMember.mem_adrdetail}">
+										</div>
+									</li>
+									
+									<li>
+										<label>성별</label>
+										<input type="radio" placeholder="성별을 입력해주세요" required="required" name="gender" value="남">남
+										<input id="woman" type="radio" placeholder="내용을 입력해주세요" required="required" name="gender" value="여">여
+									</li>
 								
-								<li>
-									<label>현재 비밀번호</label>
-									<input type="password" id="current_password" placeholder="현재 비밀번호를 입력해주세요" required="required" name="password">
-								</li>
 								
-								<li>
-									<label>변경할 비밀번호 </label>
-									<input type="password" id="change_password" placeholder="변경할 비밀번호를 입력해주세요" required="required" name="change_password">
-								</li>
-								
-								<li>
-									<label>이름</label>
-									<input value="${loginMember.mem_name}" required="required" name="name">
-								</li>
-								
-								<li>
-									<label>전화번호</label>
-									<input value="${loginMember.mem_tel}" required="required" name="tel">
-								</li>
-								
-								<li>
-									<label>이메일</label>
-									<input value="${loginMember.mem_email}" required="required" name="email">
-								</li>
-								
-								<li>
-									<label>주소</label>
-									<div class="address_form">
-										<input name="mem_zip" type="text" id="sample4_postcode" placeholder="우편번호" value="${loginMember.mem_zip}">
-										<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input name="mem_road" type="text" id="sample4_roadAddress" placeholder="도로명주소" value="${loginMember.mem_road}">
-										<span id="guide" style="color:#999;display:none"></span>
-										<input name="mem_adrdetail" type="text" id="sample4_detailAddress" placeholder="상세주소" value="${loginMember.mem_adrdetail}">
-									</div>
-								</li>
-								
-								<li>
-									<label>성별</label>
-									<input type="radio" placeholder="성별을 입력해주세요" required="required" name="gender" value="남">남
-									<input id="woman" type="radio" placeholder="내용을 입력해주세요" required="required" name="gender" value="여">여
-								</li>
-							
-							
-							</ul>
-						</div> <!-- form-group// -->
-						<div class="form-group">
-						<button id="btn_update" type="button" class="btn btn-primary btn-block">정보 수정하기</button>
-						</div> <!-- form-group// -->
-						</form>
-					</article>
-				</div> <!-- card.// -->
-       
-            </div>
-     
-        </div> 
-            
-              <!-- End of Toolbar -->
-    </div>
+								</ul>
+							</div> <!-- form-group// -->
+							<div class="form-group">
+							<button id="btn_update" type="button" class="btn btn-primary btn-block">정보 수정하기</button>
+							</div> <!-- form-group// -->
+							</form>
+						</article>
+					</div> <!-- card.// -->
+	       
+	            </div>
+	     
+	        </div> 
+	            
+	              <!-- End of Toolbar -->
+	    </div>
+    </c:if>
     <!-- End of Page Wrapper -->
 	
+	<c:if test="${empty loginMember}">
+		<%@include file="../../include/noLogin.jspf" %>
+    </c:if>
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
 	
