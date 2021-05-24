@@ -49,7 +49,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">안내</h6>
-                        <a class="collapse-item" href="buttons.html">공지사항</a>
+                        <a class="collapse-item" href="/board/notice">공지사항</a>
                         <a class="collapse-item" href="cards.html">사이트소개</a>
                         <a class="collapse-item" href="buttons.html">행사안내</a>
                     </div>
@@ -101,9 +101,9 @@
                 <div id="collapseCommunity" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">커뮤니티</h6>
-                        <a class="collapse-item" href="/board/getlist">와글와글</a>
-                        <a class="collapse-item" href="#">Q&A</a>
-                        <a class="collapse-item" href="#">함께 탈 사람 구해요</a>
+                        <a class="collapse-item" href="/board/getCategoryList?category=와글와글">와글와글</a>
+                        <a class="collapse-item" href="/board/getCategoryList?category=질문 게시판">질문 게시판</a>
+                        <a class="collapse-item" href="/board/getCategoryList?category=함께 탈 사람 구해요">함께 탈 사람 구해요</a>
                     </div>
                 </div>
             </li>
