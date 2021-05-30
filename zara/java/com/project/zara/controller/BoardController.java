@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.zara.model.BoardVO;
 import com.project.zara.model.PagingUtil;
 import com.project.zara.service.BoardService;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import lombok.extern.log4j.Log4j;
 
@@ -149,23 +150,34 @@ public class BoardController {
 	//수정폼 호출
 	@RequestMapping(value="/update", method=RequestMethod.GET)
 	public String formUpdate(@RequestParam int bno, Model model) {
-		BoardVO boardVO = boardService.selectBoard(bno);
-		model.addAttribute("boardVO", boardVO);
+		BoardVO board = boardService.selectBoard(bno);
+		model.addAttribute("boardVO", board); // 넘겨줄때 boardVO로 했네ㅐ..
+		System.out.println("이얏! 나와라 " +board);
 		return "board/boardModify";
 	}
+	
 	//수정폼에서 전송된 데이터 처리
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String submitUpdate(BoardVO boardVO) {
+	public String submitUpdate(BoardVO boardVO ,Model model) {
 		boardService.updateBoard(boardVO);
-		return "redirect:/board/getList";
+		String url = "/board/getCategoryList?category=와글와글";
+		String msg = "수정 되었습니다;;;;;;;;";
+		model.addAttribute("url",url);
+		model.addAttribute("msg",msg);
+		
+		return "common/redirect";
 	}
 	
 	//글 삭제
 	@RequestMapping("/delete")
-	public String submitDelete(@RequestParam int bno) {
+	public String submitDelete(@RequestParam int bno, Model model) {
 		boardService.deleteBoard(bno);
+		String url = "/board/getCategoryList?category=와글와글";
+		String msg = "삭제 되었습니다.";
+		model.addAttribute("url",url);
+		model.addAttribute("msg",msg);
 		
-		return "redirect:/board/getList";
+		return "common/redirect";
 	}
 	
 	

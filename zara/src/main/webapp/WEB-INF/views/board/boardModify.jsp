@@ -73,16 +73,16 @@
 	            		<br><br><br>
 	            		<!-- 글 정보 입력 -->
 	            		<form id="updateForm" name="updateForm" method="post" action="/board/update">
-	            			<input type="hidden" name="bno" value="${param.bno}">
+	            			<input type="hidden" name="bno" value="${boardVO.bno}">
 	            			<ul>
 	            				<li>
 	            					<label for="title">제목</label> 
-	            					<input type="text" id="title" name="title" value="${board.title}">	            				
+	            					<input type="text" id="title" name="title" value="${boardVO.title}">	            				
 	            				</li>
 	            				<li>
 	            					<label for="category">카테고리</label>
 	            					<select name='category'>
-	            						<option value='${board.category}' selected></option>
+	            						<option value="${boardVO.category}" selected>${boardVO.category}</option>
 	            						 <option value='와글와글'>와글와글</option>
 										 <option value='질문 게시판'>질문 게시판</option>
 										 <option value='함께 탈 사람 구해요'>함께 탈 사람 구해요</option>
@@ -90,7 +90,7 @@
 	            				</li>
 	            				<li>
 	            					<label for="content">내용</label>
-	            					<textarea rows="10" cols="50" id="content" name="content" value="${board.content}"></textarea>
+	            					<textarea rows="10" cols="50" id="content" name="content" >${boardVO.content}</textarea>
 	            				</li> 
 	            			</ul>
 	            			<div align="center">

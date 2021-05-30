@@ -68,8 +68,6 @@
 </head>
 
 <body id="page-top">
-	<c:if test="${not empty loginMember}">
-
 	    <!-- Page Wrapper -->
 	    <div id="wrapper">
 			<%@include file="../../include/sidemenu.jspf" %>
@@ -109,12 +107,10 @@
 	            
 	              <!-- End of Toolbar -->
 	    </div>
-    </c:if>
+
     <!-- End of Page Wrapper -->
     
-    <c:if test="${empty loginMember}">
-		<%@include file="../../include/noLogin.jspf" %>
-    </c:if>
+
 	
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>

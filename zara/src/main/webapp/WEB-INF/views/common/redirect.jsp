@@ -16,4 +16,4 @@
 	if ( back ) {
 		location.href = document.referrer;
 	}
-</script> 
+</script>
