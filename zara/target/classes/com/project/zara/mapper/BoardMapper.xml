@@ -21,7 +21,7 @@
 	</select>
 	
 	<!-- 페이징 처리 후 게시글 조회 -->
-	<select id="selectBoard" resultType="BoardVO" parameterType="map">
+	<select id="selectList" resultType="BoardVO" parameterType="map">
 		SELECT *
 		FROM (SELECT ROWNUM RN, A.*
 				FROM (SELECT * FROM board
@@ -48,8 +48,38 @@
 	<insert id="insertBoard">
 		insert into board
 		 		(bno, mem_id, title, content, category, create_at, update_at, hit)
-		 VALUES (seq_board.nextval, #{mem_id}, #{title}, #{content}, #{category}, sysdate , null,0)		
+		 VALUES (seq_board.nextval, #{mem_id}, #{title}, #{content}, #{category}, SYSDATE , null,0)		
 	</insert>
 
+	<!-- 글 상세 조회 -->
+	<select id="selectBoard" resultType="BoardVO" parameterType="map">
+		SELECT 
+			* 
+		FROM board
+		WHERE bno = #{bno}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateBoard" parameterType="boardVO">
+		UPDATE board SET
+			title = #{title},
+			category = #{category},
+			content = #{content},
+			update_at = SYSDATE
+		WHERE bno = #{bno}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteBoard">
+		DELETE FROM board
+		WHERE bno = #{bno}
+	</delete>
+	
+	<!-- 글 조회수 증가 -->
+	<update id="updateHit" parameterType="boardVO">
+		UPDATE board 
+		SET hit=hit+1 
+		WHERE bno=#{bno}
+	</update>
 
 </mapper>

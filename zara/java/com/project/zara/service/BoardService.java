@@ -14,7 +14,7 @@ public interface BoardService {
 	public int CategoryRowCount(String category);
 	
 	// 페이징 처리 게시글 조회
-	List<BoardVO> selectBoard(Map<String, Object> map);
+	List<BoardVO> selectList(Map<String, Object> map);
 	
 	
 	// 카테고리 별 페이징 처리 게시글 조회
@@ -22,7 +22,15 @@ public interface BoardService {
 	//글쓰기
 	public void insertBoard(BoardVO board);
 	
+	//글 상세 조회
+	public BoardVO selectBoard(Integer bno);
 	
+	//글 수정
+	public void updateBoard(BoardVO board);
+		
+	//글 삭제
+	public void deleteBoard(Integer bno);
 	
-	
+	//글 조회수 증가
+	public void updateHit(Integer bno);
 }

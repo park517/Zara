@@ -100,7 +100,7 @@
                               <tr> 
                                  <td>${board.bno}</td> 
                                  <td>${board.category}</td> 
-                                 <td id="title"><a href="#">   ${board.title} </a></td> 
+                                 <td id="title"><a href="detail?bno=${board.bno}">   ${board.title} </a></td> 
                                  <td>${board.mem_id}</td> 
                                  <td>${board.create_at}</td> 
                                  <td>${board.hit}</td> 

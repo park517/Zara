@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
     
+    
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,6 +52,19 @@
 			font-size: 15px;
 		}
 	</style>
+ <script type="text/javascript">
+	window.onload = function(){
+		var delete_btn = document.getElementById('delete_btn');
+		//이벤트 연결
+		delete_btn.onclick=function(){
+			var choice = window.confirm('삭제하시겠습니까?');
+			if(choice){
+				location.replace('delete.do?bno=${board.bno}');
+			}
+		};
+	};
+</script>
+	
 </head>
 
 <body id="page-top">
@@ -69,42 +83,24 @@
 					
 					
 	            	<div id="boardMain">
-	            		<h2>글쓰기</h2>
+	            		<h2>글 상세 보기</h2>
 	            		<br><br><br>
-	            		<!-- 글쓰기 폼 작성 -->
-	            		<form id="write_form" value="write_form" method="post" action="/board/write" >
-	            		<div class="form-group">
-	            		<input type="hidden" value="${loginMember.mem_id}" name="mem_id">
+	            		<input type="button" value="수정" class ="btn btn-primary" onclick="location.href='update?bno=${board.bno}'" >
+	            		<input type="button" value="삭제" class ="btn btn-primary" id="delete_btn">
+	            		<!-- 글 정보 입력 -->
 	            		<ul>
-	            			<li>
-	            				<label for="title">제목</label>
-	            				<input type="text" id="title" name="title" required="required" >
-	            			</li>
-	            			
-	            			<li>
-	            				<label for="title">카테고리</label>
-	            				<select name='category'>
-								    <option value='' selected>-- 선택 --</option>
-								    <option value='와글와글'>와글와글</option>
-								    <option value='질문 게시판'>질문 게시판</option>
-								    <option value='함께 탈 사람 구해요'>함께 탈 사람 구해요</option>
-								</select>
-	            			</li>
-	            			<li>
-	            				<label for="content">내용</label>
-	            				<textarea rows="10" cols="50" id="content" name="content"></textarea>
-	            			</li>
-	            			<!-- <li>
-	            				<label for="upload">이미지 첨부</label>
-	            				<input type="file" name="upload" id="upload" accept="image/gif, image/png, image/jpeg">
-	            			</li> -->
+	            			<li>작성자 : ${board.mem_id}</li>
+	            			<li>카테고리 : ${board.category }</li>
+	            			<li>제목 : ${board.title }</li>
+	            			<li>작성일 : ${board.create_at}</li>
 	            		</ul>
-	            		<div align="center">
-	            			<input type="submit" class ="btn btn-primary" value="작성하기">
-	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/board/getlist'">
+	            		<hr>
+	            		<div>
+	            			내용 : <br>
+	            			${board.content}
 	            		</div>
-	            		</div>
-	            		</form>
+	            		
+	            		<input type="button" value="목록" class ="btn btn-primary" onclick="location.href='getCategoryList?category=와글와글'">
 	            	</div>
 	           
 	            </div>

@@ -59,7 +59,7 @@ public class BoardController {
 			Map<String,Object> map = new HashMap<String, Object>();
 			map.put("start", page.getStartCount());
 			map.put("end", page.getEndCount());
-			list = boardService.selectBoard(map);
+			list = boardService.selectList(map);
 		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/getlist");
@@ -133,8 +133,40 @@ public class BoardController {
 	
 	}
 	
+	//글 상세페이지
+	@RequestMapping("/detail")
+	public ModelAndView detail(@RequestParam int bno) {
+		
+		//조회수 증가
+		boardService.updateHit(bno);
+		
+		BoardVO board = boardService.selectBoard(bno);
+
+		return new ModelAndView("board/boardView", "board", board);
+	}
 	
+	//글 수정
+	//수정폼 호출
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String formUpdate(@RequestParam int bno, Model model) {
+		BoardVO boardVO = boardService.selectBoard(bno);
+		model.addAttribute("boardVO", boardVO);
+		return "board/boardModify";
+	}
+	//수정폼에서 전송된 데이터 처리
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String submitUpdate(BoardVO boardVO) {
+		boardService.updateBoard(boardVO);
+		return "redirect:/board/getList";
+	}
 	
+	//글 삭제
+	@RequestMapping("/delete")
+	public String submitDelete(@RequestParam int bno) {
+		boardService.deleteBoard(bno);
+		
+		return "redirect:/board/getList";
+	}
 	
 	
 	

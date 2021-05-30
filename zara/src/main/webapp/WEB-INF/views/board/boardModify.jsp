@@ -69,43 +69,39 @@
 					
 					
 	            	<div id="boardMain">
-	            		<h2>글쓰기</h2>
+	            		<h2>글 수정하기</h2>
 	            		<br><br><br>
-	            		<!-- 글쓰기 폼 작성 -->
-	            		<form id="write_form" value="write_form" method="post" action="/board/write" >
-	            		<div class="form-group">
-	            		<input type="hidden" value="${loginMember.mem_id}" name="mem_id">
-	            		<ul>
-	            			<li>
-	            				<label for="title">제목</label>
-	            				<input type="text" id="title" name="title" required="required" >
-	            			</li>
-	            			
-	            			<li>
-	            				<label for="title">카테고리</label>
-	            				<select name='category'>
-								    <option value='' selected>-- 선택 --</option>
-								    <option value='와글와글'>와글와글</option>
-								    <option value='질문 게시판'>질문 게시판</option>
-								    <option value='함께 탈 사람 구해요'>함께 탈 사람 구해요</option>
-								</select>
-	            			</li>
-	            			<li>
-	            				<label for="content">내용</label>
-	            				<textarea rows="10" cols="50" id="content" name="content"></textarea>
-	            			</li>
-	            			<!-- <li>
-	            				<label for="upload">이미지 첨부</label>
-	            				<input type="file" name="upload" id="upload" accept="image/gif, image/png, image/jpeg">
-	            			</li> -->
-	            		</ul>
-	            		<div align="center">
-	            			<input type="submit" class ="btn btn-primary" value="작성하기">
-	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/board/getlist'">
-	            		</div>
-	            		</div>
+	            		<!-- 글 정보 입력 -->
+	            		<form id="updateForm" name="updateForm" method="post" action="/board/update">
+	            			<input type="hidden" name="bno" value="${param.bno}">
+	            			<ul>
+	            				<li>
+	            					<label for="title">제목</label> 
+	            					<input type="text" id="title" name="title" value="${board.title}">	            				
+	            				</li>
+	            				<li>
+	            					<label for="category">카테고리</label>
+	            					<select name='category'>
+	            						<option value='${board.category}' selected></option>
+	            						 <option value='와글와글'>와글와글</option>
+										 <option value='질문 게시판'>질문 게시판</option>
+										 <option value='함께 탈 사람 구해요'>함께 탈 사람 구해요</option>
+	            					</select>
+	            				</li>
+	            				<li>
+	            					<label for="content">내용</label>
+	            					<textarea rows="10" cols="50" id="content" name="content" value="${board.content}"></textarea>
+	            				</li> 
+	            			</ul>
+	            			<div align="center">
+	            				<input type="submit" value="수정">
+	            				<input type="button" value="목록" class ="btn btn-primary" onclick="location.href='getCategoryList?category=와글와글'">
+	            			</div>
 	            		</form>
-	            	</div>
+	            		
+	            		
+	            		
+	            		     	</div>
 	           
 	            </div>
 	     

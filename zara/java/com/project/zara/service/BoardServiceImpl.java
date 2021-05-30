@@ -37,8 +37,8 @@ public class BoardServiceImpl implements BoardService {
 
 	//글목록
 	@Override
-	public List<BoardVO> selectBoard(Map<String,Object> map) {
-		return boardMapper.selectBoard(map);
+	public List<BoardVO> selectList(Map<String,Object> map) {
+		return boardMapper.selectList(map);
 	}
 
 	@Override
@@ -46,6 +46,28 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.selectCategoryBoard(map);
 	}
 
+	//글 상세 조회
+	public BoardVO selectBoard(Integer bno) {
+		return boardMapper.selectBoard(bno);
+	}
 
+	//글 수정
+	@Override
+	public void updateBoard(BoardVO board) {
+		boardMapper.updateBoard(board);
+		
+	}
+
+	//글 삭제
+	@Override
+	public void deleteBoard(Integer bno) {
+		boardMapper.deleteBoard(bno);
+		
+	}
+	//조회수 증가
+	public void updateHit(Integer bno) {
+		boardMapper.updateHit(bno);
+	}
+	
 	
 }
