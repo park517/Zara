@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.zara.mapper.BoardMapper;
+import com.project.zara.model.BoardReplyVO;
 import com.project.zara.model.BoardVO;
 
 @Service("boardService")
@@ -61,6 +62,7 @@ public class BoardServiceImpl implements BoardService {
 	//글 삭제
 	@Override
 	public void deleteBoard(Integer bno) {
+		boardMapper.deleteReplyByBoardNum(bno);
 		boardMapper.deleteBoard(bno);
 		
 	}
@@ -68,6 +70,33 @@ public class BoardServiceImpl implements BoardService {
 	public void updateHit(Integer bno) {
 		boardMapper.updateHit(bno);
 	}
+
 	
+	//=====댓글=====//
+	@Override
+	public List<BoardReplyVO> selectListReply(Map<String, Object> map) {
+		return boardMapper.selectListReply(map);
+	}
+
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		return boardMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public void insertReply(BoardReplyVO boardReply) {
+		boardMapper.insertReply(boardReply);
+	}
+
+	@Override
+	public void updateReply(BoardReplyVO boardReply) {
+		boardMapper.updateReply(boardReply);
+	}
+
+	@Override
+	public void deleteReply(Integer cno) {
+		boardMapper.deleteReply(cno);
+	}
+
 	
 }

@@ -82,4 +82,26 @@
 		WHERE bno=#{bno}
 	</update>
 
+	<!-- ===========댓글============== -->
+	<!-- 댓글 목록 -->
+ 	<select id="selectListReply" parameterType="map" resultType="com.project.zara.model.BoardReplyVO">
+ 		SELECT
+ 		   cno,
+ 		   bno,
+ 		   writer,
+ 		   content,
+ 		   TO_CHAR(create_at,'YYYY-MM-DD HH24:MI:SS') create_at
+ 		FROM (SELECT 
+ 		        a.*,
+ 		        rownum rnum
+ 		      FROM (SELECT
+ 		              *
+ 		            FROM comments
+ 		            WHERE bno = #{bno}
+ 		            ORDER BY cno DESC)a)
+ 		<![CDATA[
+ 		WHERE rnum >= #{start} AND rnum <= #{end}
+ 		]]>                                 
+ 	</select>
+	
 </mapper>

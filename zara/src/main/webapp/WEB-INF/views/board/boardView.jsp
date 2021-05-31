@@ -97,6 +97,36 @@
 	            			내용 : <br>
 	            			${board.content}
 	            		</div>
+	            		<hr>
+	            				
+	            		<div> <!-- 댓글 달기 -->
+	            			댓글 : <br>
+	            			<c:forEach items="${getList}" var="getList">
+	            				<li>
+	            					<div>
+	            						<p> ${getList.mem_id} / ${getList.create_at}</p>
+	            						<p>${getList.content}</p>
+	            					</div>
+	            				</li>
+	            			</c:forEach>
+	            			
+	            			<form id="writeReply">
+	            				<input type="hidden" name="bno" value="${board.bno}" id="bno">
+	            				<input type="hidden" name="mem_id" value="${member.mem_id}" id="mem_id">
+	            				
+	            				<!-- 로그인 체크 필욯 -->
+	            				<textarea rows = "3" cols = "50" name="reply" id="reply">
+	            					
+	            				</textarea>
+	            				
+	            				<div id="comment_submit" align="right">
+	            					<input type="submit" value="전송">
+	            				</div>
+	            			
+	            			</form>
+	            		
+	            		</div>
+	            		
 	            		
 	            		<input type="button" value="목록" class ="btn btn-primary" onclick="location.href='getCategoryList?category=와글와글'">
 	            	</div>

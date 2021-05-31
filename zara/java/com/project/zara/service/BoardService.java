@@ -3,6 +3,7 @@ package com.project.zara.service;
 import java.util.List;
 import java.util.Map;
 
+import com.project.zara.model.BoardReplyVO;
 import com.project.zara.model.BoardVO;
 
 public interface BoardService {
@@ -33,4 +34,17 @@ public interface BoardService {
 	
 	//글 조회수 증가
 	public void updateHit(Integer bno);
+	
+	//=======댓글=======//
+	//댓글목록
+	public List<BoardReplyVO> selectListReply(Map<String,Object> map);
+	//댓글 카운트
+	public int selectRowCountReply(Map<String,Object> map);
+	//댓글 등록
+	public void insertReply(BoardReplyVO boardReply);
+	//댓글 수정
+	public void updateReply(BoardReplyVO boardReply);
+	//댓글 삭제
+	public void deleteReply(Integer re_num);
+	
 }
