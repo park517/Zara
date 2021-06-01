@@ -84,13 +84,13 @@
 
 	<!-- ===========댓글============== -->
 	<!-- 댓글 목록 -->
- 	<select id="selectListReply" parameterType="map" resultType="com.project.zara.model.BoardReplyVO">
+ 	<select id="selectListReply" parameterType="map" resultType="BoardReplyVO">
  		SELECT
  		   cno,
  		   bno,
- 		   writer,
+ 		   mem_id,
  		   content,
- 		   TO_CHAR(create_at,'YYYY-MM-DD HH24:MI:SS') create_at
+ 		   create_at
  		FROM (SELECT 
  		        a.*,
  		        rownum rnum
@@ -103,5 +103,11 @@
  		WHERE rnum >= #{start} AND rnum <= #{end}
  		]]>                                 
  	</select>
+ 	
+
+
+
+ 	
+
 	
 </mapper>

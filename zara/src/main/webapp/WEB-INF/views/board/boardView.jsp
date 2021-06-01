@@ -94,7 +94,7 @@
 		            			<c:forEach items="${boardReply}" var="getList">
 		            				<li>
 		            					<div>
-		            						<p> ${getList.mem_id} / ${getList.create_at}</p>
+		            						<p>${getList.mem_id} / ${getList.create_at}</p>
 		            						<p>${getList.content}</p>
 		            					</div>
 		            				</li>

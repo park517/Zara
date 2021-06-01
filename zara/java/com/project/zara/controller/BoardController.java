@@ -189,7 +189,13 @@ public class BoardController {
 	}
 	
 	
+	//사이트소개
+	@RequestMapping(value="/hello", method=RequestMethod.GET)
+	public String showHello() {
 	
+		return "board/hello";
+	
+	}
 	
 	
 //=================================댓글=================================//
