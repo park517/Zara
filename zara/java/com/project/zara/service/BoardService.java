@@ -39,11 +39,11 @@ public interface BoardService {
 	//댓글목록
 	public List<BoardReplyVO> selectListReply(Map<String,Object> map);
 	//댓글 카운트
-	public int selectRowCountReply(Map<String,Object> map);
+	public int selectRowCountReply(int bno);
 	//댓글 등록
 	public void insertReply(BoardReplyVO boardReply);
 	//댓글 수정
-	public void updateReply(BoardReplyVO boardReply);
+	public void updateReply(int cno, String content);
 	//댓글 삭제
 	public void deleteReply(Integer re_num);
 	

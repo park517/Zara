@@ -73,26 +73,32 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	//=====댓글=====//
+	
+	// 댓글 리스트 가져오기
 	@Override
 	public List<BoardReplyVO> selectListReply(Map<String, Object> map) {
 		return boardMapper.selectListReply(map);
 	}
 
+	// 댓글 갯수 
 	@Override
-	public int selectRowCountReply(Map<String, Object> map) {
-		return boardMapper.selectRowCountReply(map);
+	public int selectRowCountReply(int bno) {
+		return boardMapper.selectRowCountReply(bno);
 	}
 
+	// 댓글 등록
 	@Override
 	public void insertReply(BoardReplyVO boardReply) {
 		boardMapper.insertReply(boardReply);
 	}
 
+	// 댓글 수정
 	@Override
-	public void updateReply(BoardReplyVO boardReply) {
-		boardMapper.updateReply(boardReply);
+	public void updateReply(int cno, String content) {
+		boardMapper.updateReply(cno,content);
 	}
 
+	// 댓글 삭제
 	@Override
 	public void deleteReply(Integer cno) {
 		boardMapper.deleteReply(cno);

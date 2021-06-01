@@ -42,22 +42,22 @@ public interface BoardMapper {
 	public void updateHit(Integer bno);
 	
 	
-	//=======댓글======//
+	//=================댓글==================================//
 	
 	//댓글 목록
 	public List<BoardReplyVO> selectListReply(Map<String,Object> map);
 
 	//댓글 수 카운트
 	@Select("SELECT COUNT(*) FROM comments WHERE bno=#{bno}")
-	public int selectRowCountReply(Map<String,Object> map);
+	public int selectRowCountReply(@Param("bno") int bno);
 
 	//댓글 작성
-	@Insert("INSERT INTO comments (cno, bno, writer, content, create_at, update_at) VALUES (seq_comment.nextval,#{bno},#{mem_id},#{content},SYSDATE, null)")
+	@Insert("INSERT INTO comments (cno, bno, mem_id, content, create_at, update_at) VALUES (seq_comment.nextval,#{bno},#{mem_id},#{content},SYSDATE, null)")
 	public void insertReply(BoardReplyVO boardReply);
 
 	//댓글 수정
 	@Update("UPDATE comments SET content=#{content}, update_at=SYSDATE WHERE cno=#{cno}")
-	public void updateReply(BoardReplyVO boardReply);
+	public void updateReply(@Param("cno")int cno, @Param("content")String content);
 
 	//댓글 삭제
 	@Delete("DELETE FROM comments WHERE cno=#{cno}")

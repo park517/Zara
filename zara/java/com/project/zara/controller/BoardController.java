@@ -117,7 +117,7 @@ public class BoardController {
 		
 		boardService.insertBoard(board);
 		String msg  = "글이 작성되었습니다";
-		String url = "/board/getlist";
+		String url = "/board/getCategoryList?category="+board.getCategory();
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		
@@ -147,6 +147,11 @@ public class BoardController {
 		BoardVO board = boardService.selectBoard(bno);
 		mav.addObject("board", board);
 		
+		//댓글 가져오깅
+		List<BoardReplyVO> boardReplyList = (List<BoardReplyVO>)getList(1,bno).get("list");
+		int totalReplyPageNum = (int)getList(1,bno).get("totalPageNum");
+		mav.addObject("totalPageNum",totalReplyPageNum);
+		mav.addObject("boardReply",boardReplyList);
 		return mav;
 	}
 	
@@ -187,31 +192,22 @@ public class BoardController {
 	
 	
 	
-	//==================댓글====================//
+//=================================댓글=================================//
+	
+	
+	//댓글 작성하기
 	@RequestMapping("/detail/writeReply")
 	@ResponseBody
-	public Map<String,String> writeReply(
+	public void writeReply(
 									BoardReplyVO boardReplyVO,
 									HttpSession session,
 									HttpServletRequest request){
 
-		if(log.isDebugEnabled()) {
-			log.debug("<<boardReplyVO>> : " + boardReplyVO);
-		}
-
-		Map<String,String> map = new HashMap<String,String>();
 		
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user==null) {
-			//로그인 안 됨
-			map.put("result", "logout");
-		}else {
-			//댓글 등록
-			boardService.insertReply(boardReplyVO);
-			map.put("result", "success");
-		}
-
-		return map;
+		System.out.println("댓글 : "+boardReplyVO);
+		boardService.insertReply(boardReplyVO);
+		
+		
 	}
 	
 	//댓글 목록
@@ -220,8 +216,8 @@ public class BoardController {
 	public Map<String,Object> getList(
 									@RequestParam(value="pageNum",defaultValue="1")
 									int currentPage,
-									@RequestParam("bno") int bno,
-									HttpSession session){
+									@RequestParam("bno") int bno
+									){
 		//(******주의)댓글 좋아요 처리시만 HttpSession 넣을 것
 		if(log.isDebugEnabled()) {
 			log.debug("<<currentPage>> : " + currentPage);
@@ -232,7 +228,10 @@ public class BoardController {
 		map.put("bno", bno);
 
 		//총 글의 갯수
-		int count = boardService.selectRowCountReply(map);
+		int count = boardService.selectRowCountReply(bno);
+		
+		// 총 글 갯수로 부터 총 페이지 갯수 구하기
+		int totalPageNum = (count+4)/5;
 
 		PagingUtil page = new PagingUtil(currentPage,count, 5, 5,null);
 		map.put("start", page.getStartCount());
@@ -246,7 +245,9 @@ public class BoardController {
 				new HashMap<String,Object>();
 		mapJson.put("count", count);
 		mapJson.put("rowCount", 5);
+		mapJson.put("totalPageNum", totalPageNum);
 		mapJson.put("list", list);
+		
 
 		return mapJson;
 	}
@@ -254,62 +255,25 @@ public class BoardController {
 	//댓글 삭제
 	@RequestMapping("/detail/deleteReply")
 	@ResponseBody
-	public Map<String,String> deleteReply(
+	public String deleteReply(
 							@RequestParam("cno") int cno,
-							@RequestParam("mem_id") String mem_id,
 							HttpSession session){
-   
-		if(log.isDebugEnabled()) {
-			log.debug("<<cno>> : " + cno);
-			log.debug("<<mem_id>> : " + mem_id);
-		}
-
-		Map<String,String> map = new HashMap<String,String>();
-
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user==null) {
-			//로그인이 되어있지 않음
-			map.put("result", "logout");
-		}else if(user!=null && user.getMem_id()==mem_id) {
-			//로그인 되어 있고 로그인한 아이디와 작성자 아이디 일치
-			boardService.deleteReply(cno);
-			map.put("result", "success");
-		}else {
-			//로그인 아이디와 작성자 아이디 불일치
-			map.put("result", "wrongAccess");
-		}		
-		return map;
+		boardService.deleteReply(cno);
+		String msg = "댓글이 삭제되었습니다!";
+		return msg;
 	}
 	
 	//댓글 수정
 	@RequestMapping("/detail/updateReply")
 	@ResponseBody
-	public Map<String,String> modifyReply(
-								BoardReplyVO boardReplyVO,
+	public String modifyReply(
+								@RequestParam("cno") int cno,
+								@RequestParam("content") String content,
 								HttpSession session,
 								HttpServletRequest request){
 
-		if(log.isDebugEnabled()) {
-			log.debug("<<boardReplyVO>> : " + boardReplyVO);
-		}
-
-		Map<String,String> map = new HashMap<String,String>();
-
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user==null) {
-			//로그인이 안 되어있는 경우
-			map.put("result", "logout");
-		}else if(user!=null && user.getMem_id()==boardReplyVO.getMem_id()){
-			//로그인 회원 번호와 작성자 회원번호 일치
-			//댓글 수정
-			boardService.updateReply(boardReplyVO);
-			map.put("result", "success");
-		}else {
-			//로그인 아이디와 작성자 아이디 불일치
-			map.put("result", "wrongAccess");
-		}
-
-		return map;
+		boardService.updateReply(cno,content);
+		return "댓글 수정완료";
 	}
 
 }
