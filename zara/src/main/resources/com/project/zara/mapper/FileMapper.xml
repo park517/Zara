@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.zara.mapper.FileMapper">
+
+	<insert id="fileUpload" parameterType="list">
+	    INSERT into board_file
+	    (
+	      fid,
+	      bno,
+	      file_name,
+	      file_real_name,
+	      file_path 
+	    )
+	      
+	    SELECT seq_board_file.NEXTVAL, A.* FROM(
+	    <foreach item="item" collection="list" separator="UNION ALL " >
+	        select
+	        		#{item.bno} as bno,
+					#{item.file_name} as file_name,
+					#{item.file_real_name} as file_real_name,
+					#{item.file_path} as file_path
+					from dual
+	    </foreach>) A
+	</insert>
+
+	<select id="getFile" parameterType="int" resultType="FileVO">
+		SELECT * FROM BOARD_FILE
+		WHERE BNO = ${bno}
+	</select>
+</mapper>

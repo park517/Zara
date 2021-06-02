@@ -21,7 +21,7 @@ public interface BoardService {
 	// 카테고리 별 페이징 처리 게시글 조회
 	List<BoardVO> selectCategoryBoard(Map<String, Object> map);
 	//글쓰기
-	public void insertBoard(BoardVO board);
+	public int insertBoard(BoardVO board);
 	
 	//글 상세 조회
 	public BoardVO selectBoard(Integer bno);

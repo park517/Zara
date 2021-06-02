@@ -1,5 +1,7 @@
 package com.project.zara.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,13 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.zara.model.BoardReplyVO;
 import com.project.zara.model.BoardVO;
+import com.project.zara.model.FileVO;
 import com.project.zara.model.MemberVO;
 import com.project.zara.model.PagingUtil;
 import com.project.zara.service.BoardService;
+import com.project.zara.service.FileService;
+import com.project.zara.util.FileUtil;
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,7 +39,9 @@ public class BoardController {
 	
 	@Autowired
 	BoardService boardService;
-		
+	
+	@Autowired
+	FileService fileService;
 	
 	//자바빈(VO) 초기화
 	@ModelAttribute("boardVO")
@@ -110,12 +118,22 @@ public class BoardController {
 		return "board/write";
 	}
 	
+	
 	//게시판 글 작성처리 전송하기
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String doWrite(BoardVO board , Model model) {
+	public String doWrite(@RequestParam("files") MultipartFile files[],BoardVO board , Model model) throws IllegalStateException, IOException {
 		
+		List<FileVO> file_list = new ArrayList<>();
 		
-		boardService.insertBoard(board);
+		// 글 insert 후 생성된 글 번호 가져오기
+		int bno = boardService.insertBoard(board);
+		
+		if(files != null) {
+			FileUtil fileUtil = new FileUtil();
+			file_list = fileUtil.setFiles(files, bno);
+		}
+		fileService.fileUpload(file_list);
+	
 		String msg  = "글이 작성되었습니다";
 		String url = "/board/getCategoryList?category="+board.getCategory();
 		model.addAttribute("msg", msg);
@@ -126,6 +144,7 @@ public class BoardController {
 	}
 	
 	
+	
 	// 공지사항 페이지 보여주기
 	@RequestMapping(value="/notice", method=RequestMethod.GET)
 	public String showNotice() {
@@ -133,6 +152,7 @@ public class BoardController {
 		return "board/notice";
 	
 	}
+	
 	
 	//글 상세페이지
 	@RequestMapping("/detail")
@@ -152,8 +172,13 @@ public class BoardController {
 		int totalReplyPageNum = (int)getList(1,bno).get("totalPageNum");
 		mav.addObject("totalPageNum",totalReplyPageNum);
 		mav.addObject("boardReply",boardReplyList);
+		
+		// 파일 가져오기
+		List<FileVO> fileList = fileService.getFile(bno);
+		mav.addObject("fileList",fileList);
 		return mav;
 	}
+	
 	
 	//글 수정
 	//수정폼 호출
@@ -163,6 +188,7 @@ public class BoardController {
 		model.addAttribute("boardVO", board);
 		return "board/boardModify";
 	}
+	
 	
 	//수정폼에서 전송된 데이터 처리
 	@RequestMapping(value="/update", method=RequestMethod.POST)
@@ -176,10 +202,12 @@ public class BoardController {
 		return "common/redirect";
 	}
 	
+	
 	//글 삭제
 	@RequestMapping("/delete")
 	public String submitDelete(@RequestParam int bno, Model model) {
 		boardService.deleteBoard(bno);
+		
 		String url = "/board/getCategoryList?category=와글와글";
 		String msg = "삭제 되었습니다.";
 		model.addAttribute("url",url);
@@ -187,6 +215,7 @@ public class BoardController {
 		
 		return "common/redirect";
 	}
+	
 	
 	
 	//사이트소개
@@ -204,26 +233,24 @@ public class BoardController {
 	//댓글 작성하기
 	@RequestMapping("/detail/writeReply")
 	@ResponseBody
-	public void writeReply(
-									BoardReplyVO boardReplyVO,
-									HttpSession session,
-									HttpServletRequest request){
+	public void writeReply( BoardReplyVO boardReplyVO, HttpSession session,
+							HttpServletRequest request)
+	{
 
-		
 		System.out.println("댓글 : "+boardReplyVO);
 		boardService.insertReply(boardReplyVO);
-		
-		
+
 	}
 	
 	//댓글 목록
 	@RequestMapping("/detail/listReply")
 	@ResponseBody
 	public Map<String,Object> getList(
-									@RequestParam(value="pageNum",defaultValue="1")
-									int currentPage,
-									@RequestParam("bno") int bno
-									){
+									   @RequestParam(value="pageNum",defaultValue="1")
+									   int currentPage,
+									   @RequestParam("bno") int bno
+									 )
+	{
 		//(******주의)댓글 좋아요 처리시만 HttpSession 넣을 것
 		if(log.isDebugEnabled()) {
 			log.debug("<<currentPage>> : " + currentPage);

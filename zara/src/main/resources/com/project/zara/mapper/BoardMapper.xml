@@ -45,7 +45,7 @@
 	
 
 	<!-- 글쓰기 -->
-	<insert id="insertBoard">
+	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bno" keyColumn="bno">
 		insert into board
 		 		(bno, mem_id, title, content, category, create_at, update_at, hit)
 		 VALUES (seq_board.nextval, #{mem_id}, #{title}, #{content}, #{category}, SYSDATE , null,0)		

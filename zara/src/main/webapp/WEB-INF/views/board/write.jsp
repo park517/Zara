@@ -50,6 +50,40 @@
 		.form-group input {
 			font-size: 15px;
 		}
+		
+		.imgs_wrap {
+	        overflow: scroll;
+	        width: 500px;
+	        border: 1px solid gray;
+	        padding: 10px;
+	        height: 170px;
+	        box-sizing: content-box;
+	        margin-bottom: 20px;
+	    }
+	
+	    .imgs_wrap .img_item {
+	        width: 150px;
+	        padding: 5px;
+	
+	        border: 1px solid black;
+	        margin-right: 10px;
+	    }
+	
+	    .imgs_wrap img {
+	        width : 150px;
+	        height: 150px;
+	        margin-right: 15px;
+	    }
+	    .imgs_list {
+	        width: 500px;
+	        list-style: none;
+	        padding: 0px;
+	    }
+	    .img_li {
+	        float: left;
+	
+	    }
+		
 	</style>
 </head>
 
@@ -72,7 +106,7 @@
 	            		<h2>글쓰기</h2>
 	            		<br><br><br>
 	            		<!-- 글쓰기 폼 작성 -->
-	            		<form id="write_form" value="write_form" method="post" action="/board/write" >
+	            		<form id="write_form" value="write_form" method="post" action="/board/write" enctype="multipart/form-data">
 	            		<div class="form-group">
 	            		<input type="hidden" value="${loginMember.mem_id}" name="mem_id">
 	            		<ul>
@@ -90,6 +124,23 @@
 								    <option value='함께 탈 사람 구해요'>함께 탈 사람 구해요</option>
 								</select>
 	            			</li>
+	            			
+                                <li>
+                                    <div>
+                                        <h4><b>이미지 미리보기</b></h4>
+                                        <div class="input_wrap">
+                                            <input name="files" type="file" id="input_imgs" multiple accept=".gif,.jpg,.png"/>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="imgs_wrap">
+                                            <ul class="imgs_list">
+                                             <img id="img" alt="640x640 이미지를 넣어주세요!"/>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
 	            			<li>
 	            				<label for="content">내용</label>
 	            				<textarea rows="10" cols="50" id="content" name="content"></textarea>
@@ -122,6 +173,66 @@
 	
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
+	
+	<script>
+
+    
+
+        var sel_files = [];
+
+
+        $(document).ready(function() {
+            $("#input_imgs").on("change", handleImgFileSelect);
+        }); 
+
+        function fileUploadAction() {
+            console.log("fileUploadAction");
+            $("#input_imgs").trigger('click');
+        }
+
+        function handleImgFileSelect(e) {
+
+            // 이미지 정보들을 초기화
+            sel_files = [];
+            $(".imgs_list").empty();
+
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+
+            var index = 0;
+            filesArr.forEach(function(f) {
+                if(!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+
+                sel_files.push(f);
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+
+                     var html = "<li class='img_li'><a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a></li>";
+
+                    $(".imgs_list").append(html);
+                    index++;
+
+                }
+                reader.readAsDataURL(f);
+                
+            });
+        }
+
+        function deleteImageAction(index) {            
+        console.log("index : "+index);
+        sel_files.splice(index, 1);
+
+        var img_id = "#img_id_"+index;
+        $(img_id).remove();
+
+        console.log(sel_files);
+    }
+
+	</script>
 
 </body>
 

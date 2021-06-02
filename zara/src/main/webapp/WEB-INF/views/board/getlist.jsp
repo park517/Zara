@@ -68,7 +68,7 @@
                 <!-- Toolbar -->
             <%@include file="../../include/toolbar.jspf" %>
                <div id="boardMain">
-                  <h2>${list[0].category}</h2>
+                  <h2>전체게시판!</h2>
                   <br><br><br>
                 	
                	  <c:if test="${not empty loginMember}">

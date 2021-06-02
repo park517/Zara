@@ -18,8 +18,9 @@ public class BoardServiceImpl implements BoardService {
 	BoardMapper boardMapper;
 
 	//글쓰기
-	public void insertBoard(BoardVO board) {
+	public int insertBoard(BoardVO board) {
 		boardMapper.insertBoard(board);
+		return board.getBno();
 	}
 	
 	//총레코드수

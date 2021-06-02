@@ -80,6 +80,17 @@
 	            			<li>카테고리 : ${board.category }</li>
 	            			<li>제목 : ${board.title }</li>
 	            			<li>작성일 : ${board.create_at}</li>
+	            			<li>
+	            				첨부 파일
+	            				<c:forEach items="${fileList}" var="fileList" varStatus="stats">
+	            					<br>
+	            					<a href="/file/down/${fileList.bno}/${stats.index}">${fileList.file_real_name}</a>
+	            				</c:forEach>
+	            				<br>
+	            				사진 미리보기(1개만 대표로)
+	            				<br>
+	            				<img alt="대표사진" src="/resources/upload/${fileList[0].file_name}">
+	            			</li>
 	            		</ul>
 	            		<hr>
 	            		<div>

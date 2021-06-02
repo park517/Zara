@@ -15,7 +15,6 @@
 	<!-- resources 파일 위치 명시  -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<!-- view 파일 확장자 및 위치 명시 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -26,6 +25,15 @@
 	<!--  컨트롤러들의 위치 명시 보통 controller는 servlet-context.xml에 정의한다. -->
 	
 	<context:component-scan base-package="com.project.zara.controller" />
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- max upload size in bytes -->
+        <beans:property name="maxUploadSize" value="5242880" /> <!-- 5MB -->
+        <!-- max size of file in memory (in bytes) -->
+        <beans:property name="maxInMemorySize" value="1048576" /> <!-- 1MB -->
+    </beans:bean>
+
+
 	
 	
 	
