@@ -21,7 +21,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/new", method=RequestMethod.GET)
 	public String showInserView() {
-		return "product/new";
+		return "product/newProduct";
 	}
 	
 	@RequestMapping(value="/new", method=RequestMethod.POST)

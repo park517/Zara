@@ -1,4 +1,4 @@
-package com.project.zara.model;
+package com.project.zara.util;
 
 public class PagingUtil {
 	private int startCount;	 // 한 페이지에서 보여줄 게시글의 시작 번호
@@ -15,19 +15,23 @@ public class PagingUtil {
 	 * */
 	public PagingUtil(int currentPage, int totalCount, int rowCount,
 			int pageCount, String pageUrl) {
-		this(null,null,currentPage,totalCount,rowCount,pageCount,pageUrl,null);
+		this(null,null,null,currentPage,totalCount,rowCount,pageCount,pageUrl,null);
+	}
+	public PagingUtil(String category,int currentPage, int totalCount, int rowCount,
+			int pageCount, String pageUrl) {
+		this(null,null,category,currentPage,totalCount,rowCount,pageCount,pageUrl,null);
 	}
 	public PagingUtil(int currentPage, int totalCount, int rowCount,
 			int pageCount, String pageUrl, String addKey) {
-		this(null,null,currentPage,totalCount,rowCount,pageCount,pageUrl,addKey);
+		this(null,null,null,currentPage,totalCount,rowCount,pageCount,pageUrl,addKey);
 	}
 	public PagingUtil(String keyfield, String keyword, int currentPage, int totalCount, int rowCount,
 			int pageCount,String pageUrl) {
-		this(keyfield,keyword,currentPage,totalCount,rowCount,pageCount,pageUrl,null);
+		this(null,keyfield,keyword,currentPage,totalCount,rowCount,pageCount,pageUrl,null);
 	}
-	public PagingUtil(String keyfield, String keyword, int currentPage, int totalCount, int rowCount,
+	public PagingUtil(String keyfield, String keyword,String category, int currentPage, int totalCount, int rowCount,
 			int pageCount,String pageUrl,String addKey) {
-		
+		System.out.println("페이징 카테고리 : "+category);
 		if(addKey == null) addKey = ""; //부가키가 null 일때 ""처리
 		
 		// 전체 페이지 수
@@ -52,9 +56,14 @@ public class PagingUtil {
 		// 이전 block 페이지
 		pagingHtml = new StringBuffer();
 		if (currentPage > pageCount) {
-			if(keyword==null){//검색 미사용시
+			if(keyword==null && category ==null){//검색 미사용시
 				pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + addKey +">");
-			}else{
+			}
+			else if(category != null ) {
+				pagingHtml.append("<a href="+pageUrl+"?category="+category+"&pageNum="+ (startPage - 1) + addKey +">");
+			}
+			
+			else if(keyword !=null){
 				pagingHtml.append("<a href="+pageUrl+"?keyfield="+keyfield+"&keyword="+keyword+"&pageNum="+ (startPage - 1) + addKey +">");
 			}
 			pagingHtml.append("이전");
@@ -71,9 +80,15 @@ public class PagingUtil {
 				pagingHtml.append(i);
 				pagingHtml.append("</font></b>");
 			} else {
-				if(keyword==null){//검색 미사용시
+				if(keyword==null && category ==null){//검색 미사용시
+					
 					pagingHtml.append("&nbsp;<a href='"+pageUrl+"?pageNum=");
-				}else{
+				}
+				else if(category != null) {
+					pagingHtml.append("&nbsp;<a href='"+pageUrl+"?category="+category+"&pageNum=");
+				}
+				
+				else if(keyword!=null){
 					pagingHtml.append("&nbsp;<a href='"+pageUrl+"?keyfield="+keyfield+"&keyword="+keyword+"&pageNum=");
 				}
 				pagingHtml.append(i);
@@ -86,9 +101,13 @@ public class PagingUtil {
 		pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
 		// 다음 block 페이지
 		if (totalPage - startPage >= pageCount) {
-			if(keyword==null){//검색 미사용시
+			if(keyword==null && category ==null){//검색 미사용시
 				pagingHtml.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + addKey +">");
-			}else{
+			}
+			else if(category != null ) {
+				pagingHtml.append("<a href="+pageUrl+"?category"+category+"&pageNum="+ (endPage + 1) + addKey +">");
+			}
+			else if(keyword !=null){
 				pagingHtml.append("<a href="+pageUrl+"?keyfield="+keyfield+"&keyword="+keyword+"&pageNum="+ (endPage + 1) + addKey +">");
 			}
 			pagingHtml.append("다음");

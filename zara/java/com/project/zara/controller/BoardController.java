@@ -24,10 +24,10 @@ import com.project.zara.model.BoardReplyVO;
 import com.project.zara.model.BoardVO;
 import com.project.zara.model.FileVO;
 import com.project.zara.model.MemberVO;
-import com.project.zara.model.PagingUtil;
 import com.project.zara.service.BoardService;
 import com.project.zara.service.FileService;
 import com.project.zara.util.FileUtil;
+import com.project.zara.util.PagingUtil;
 
 import lombok.extern.log4j.Log4j;
 
@@ -86,14 +86,14 @@ public class BoardController {
 	public ModelAndView getCategoryList(
 			Model model,
 			@RequestParam(value="pageNum", defaultValue="1")int currentPage ,
-			String category
+			@RequestParam(value="category") String category
 			){
 		
 		System.out.println("카테고리 : "+category);
 		
 		int total = boardService.CategoryRowCount(category);
 		
-		PagingUtil page = new PagingUtil(currentPage, total, 10, 10, "getCategoryList");
+		PagingUtil page = new PagingUtil(category,currentPage, total, 10, 10, "getCategoryList");
 		
 		List<BoardVO> list = null;
 		if(total >0) {
@@ -128,11 +128,12 @@ public class BoardController {
 		// 글 insert 후 생성된 글 번호 가져오기
 		int bno = boardService.insertBoard(board);
 		
-		if(files != null) {
+		if(files != null && files.length ==0) {
 			FileUtil fileUtil = new FileUtil();
 			file_list = fileUtil.setFiles(files, bno);
+			fileService.fileUpload(file_list);
 		}
-		fileService.fileUpload(file_list);
+		
 	
 		String msg  = "글이 작성되었습니다";
 		String url = "/board/getCategoryList?category="+board.getCategory();
