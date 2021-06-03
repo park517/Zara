@@ -148,6 +148,9 @@ public class ProductController {
 		System.out.println("파일의 길이"+files.length);
 		System.out.println("파일 "+files.toString());
 		map.put("table_name", "product");
+		
+		// 파일 수정이 있을 때만 기존 파일 삭제하고 다시 넣기
+		
 		if(!files[0].isEmpty()) {
 			fileService.deleteFile(map);
 			FileUtil fileUtil = new FileUtil();
