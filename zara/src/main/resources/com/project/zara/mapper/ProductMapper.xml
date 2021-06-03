@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.zara.mapper.ProductMapper">
+
+	<!--   판매글 등록 -->
+	<insert id="insertProduct" parameterType="ProductVO" keyColumn="pno" keyProperty="pno" useGeneratedKeys="true">
+		insert into
+		product (
+			pno,
+			mem_id,
+			pro_category,
+			pro_name,
+			pro_price,
+			pro_info,
+			pro_point,
+			pro_stock,
+			pro_weight,
+			pro_com,
+			pro_status,
+			pro_date,
+			pro_sum
+		)
+		values (
+			seq_product.nextval,
+			#{mem_id},
+			#{pro_category},
+			#{pro_name},
+			#{pro_price},
+			#{pro_info},
+			#{pro_point},
+			#{pro_stock},
+			#{pro_weight},
+			#{pro_com},
+			#{pro_status},
+			sysdate,
+			#{pro_sum}
+		)
+	</insert>
+	
+	<!--  판매글 전체 갯수 -->
+	<select id="selectRowCount" resultType="int">
+		select count(*) from product
+	</select>
+	
+	<!--  판매글 가져오기 (페이징) -->
+	<select id="getProductList" resultType="ProductVO" parameterType="map">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+				FROM (SELECT * FROM product
+					  ORDER BY pno DESC) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!--  판매글 상세조회  -->
+	<select id="getProduct" parameterType="int" resultType="ProductVO">
+		select * 
+		from product
+		where pno = #{pno}
+	</select>
+	
+	<!--  조회 수 증가 -->
+	<update id="hitUp" parameterType="int" >
+		UPDATE product 
+		SET pro_hit=pro_hit+1 
+		WHERE pno=#{pno}
+	</update>
+	
+	<!--  정보 수정 -->
+	<update id="updateProduct" parameterType="ProductVO">
+		UPDATE product
+		SET
+			pro_category = #{pro_category},
+			pro_name = #{pro_name},
+			pro_price = #{pro_price},
+			pro_info = #{pro_info},
+			pro_stock = #{pro_stock},
+			pro_weight = #{pro_weight},
+			pro_com = #{pro_com},
+			update_at = sysdate
+			
+		WHERE pno = #{pno}	
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteProduct" parameterType="int">
+		delete from product
+		where pno = #{pno}
+	</delete>
+	
+
+</mapper>

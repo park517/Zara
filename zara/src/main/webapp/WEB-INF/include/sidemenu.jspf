@@ -7,7 +7,7 @@
 	            margin-left: 20px;
 	            font-size: 15px;
         	}
-        	
+        	 
 		</style>
         <!-- 좌측 메뉴바 -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -68,7 +68,7 @@
                         <h6 class="collapse-header">자전거</h6>
                         <a class="collapse-item" href="utilities-color.html">자전거 정보</a>
                         <a class="collapse-item" href="utilities-border.html">자전거 중고장터</a>
-                        <a class="collapse-item" href="utilities-animation.html">자전거 판매</a>
+                        <a class="collapse-item" href="/product/getlist">자전거 판매</a>
                     </div>
                 </div>
             </li>

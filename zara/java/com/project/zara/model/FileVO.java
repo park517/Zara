@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class FileVO {
 	
 	private int fid;
-	private int bno;
+	private int no;
+	private String table_name;
 	private String file_name;
 	private String file_real_name;
 	private String file_path;

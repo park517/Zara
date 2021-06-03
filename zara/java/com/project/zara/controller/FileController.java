@@ -6,7 +6,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,11 +29,16 @@ public class FileController {
 	@Autowired
 	FileService fileService;
 	
-	@RequestMapping("/down/{bno}/{index}")
-    private void fileDown(@PathVariable int bno, @PathVariable int index, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping("/down/{no}/{index}/{table_name}")
+    private void fileDown(@PathVariable int no, @PathVariable int index, 
+    		 @PathVariable String table_name,
+    		HttpServletRequest request, HttpServletResponse response) throws Exception{
         
         request.setCharacterEncoding("UTF-8");
-        List<FileVO> fileVO = fileService.getFile(bno);
+        Map<String,Object> map = new HashMap<>();
+        map.put("no", no);
+        map.put("table_name", table_name);
+        List<FileVO> fileVO = fileService.getFile(map);
         
         //파일 업로드된 경로 
         try{

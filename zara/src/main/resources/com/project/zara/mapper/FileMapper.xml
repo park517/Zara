@@ -4,20 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.zara.mapper.FileMapper">
 
+ 	<!--  파일 업로드 -->
 	<insert id="fileUpload" parameterType="list">
-	    INSERT into board_file
+	    INSERT into files
 	    (
 	      fid,
-	      bno,
+	      no,
+	      table_name,
 	      file_name,
 	      file_real_name,
-	      file_path 
+	      file_path
 	    )
 	      
-	    SELECT seq_board_file.NEXTVAL, A.* FROM(
+	    SELECT seq_file.NEXTVAL, A.* FROM(
 	    <foreach item="item" collection="list" separator="UNION ALL " >
 	        select
-	        		#{item.bno} as bno,
+	        		#{item.no} as no,
+	        		#{item.table_name} as table_name,
 					#{item.file_name} as file_name,
 					#{item.file_real_name} as file_real_name,
 					#{item.file_path} as file_path
@@ -25,8 +28,15 @@
 	    </foreach>) A
 	</insert>
 
-	<select id="getFile" parameterType="int" resultType="FileVO">
-		SELECT * FROM BOARD_FILE
-		WHERE BNO = ${bno}
+	<!--  파일 가져오기 -->
+	<select id="getFile" parameterType="map" resultType="FileVO">
+		SELECT * FROM files
+		WHERE NO = #{no} AND table_name=#{table_name}
 	</select>
+	
+	<!--  파일 삭제 -->
+	<delete id ="deleteFile" parameterType="map">
+		delete from files
+		where no = #{no} and table_name=#{table_name}
+	</delete>
 </mapper>

@@ -1,6 +1,7 @@
 package com.project.zara.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,17 @@ public class FileServiceImpl implements FileService {
 
 
 	@Override
-	public List<FileVO> getFile(int bno) {
+	public List<FileVO> getFile(Map<String,Object> map) {
 	
-		return fileMapper.getFile(bno);
+		return fileMapper.getFile(map);
+	}
+
+
+	@Override
+	public void deleteFile(Map<String, Object> map) {
+		
+		fileMapper.deleteFile(map);
+		
 	}
 
 

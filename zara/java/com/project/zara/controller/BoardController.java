@@ -127,10 +127,11 @@ public class BoardController {
 		
 		// 글 insert 후 생성된 글 번호 가져오기
 		int bno = boardService.insertBoard(board);
-		
-		if(files != null && files.length ==0) {
+		System.out.println("파일목록 : "+files);
+		if(files != null && files.length !=0) {
 			FileUtil fileUtil = new FileUtil();
-			file_list = fileUtil.setFiles(files, bno);
+			file_list = fileUtil.setFiles(files, bno ,"board");
+			System.out.println("파일들 : "+file_list);
 			fileService.fileUpload(file_list);
 		}
 		
@@ -175,7 +176,10 @@ public class BoardController {
 		mav.addObject("boardReply",boardReplyList);
 		
 		// 파일 가져오기
-		List<FileVO> fileList = fileService.getFile(bno);
+        Map<String,Object> map = new HashMap<>();
+        map.put("no", bno);
+        map.put("table_name", "board");
+		List<FileVO> fileList = fileService.getFile(map);
 		mav.addObject("fileList",fileList);
 		return mav;
 	}

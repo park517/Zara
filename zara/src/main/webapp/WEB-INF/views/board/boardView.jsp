@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head>  
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,6 +50,10 @@
 		.form-group input {
 			font-size: 15px;
 		}
+		#img_preview {
+			width: 200px;
+			height: 200px;
+		}
 		</style>
 		
 	</head>
@@ -84,12 +88,12 @@
 	            				첨부 파일
 	            				<c:forEach items="${fileList}" var="fileList" varStatus="stats">
 	            					<br>
-	            					<a href="/file/down/${fileList.bno}/${stats.index}">${fileList.file_real_name}</a>
+	            					<a href="/file/down/${fileList.no}/${stats.index}/board">${fileList.file_real_name}</a>
 	            				</c:forEach>
 	            				<br>
 	            				사진 미리보기(1개만 대표로)
 	            				<br>
-	            				<img alt="대표사진" src="/resources/upload/${fileList[0].file_name}">
+	            				<img id="img_preview" alt="대표사진" src="/resources/upload//board/${fileList[0].file_name}">
 	            			</li>
 	            		</ul>
 	            		<hr>

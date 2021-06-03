@@ -7,7 +7,8 @@
 		<typeAlias type="com.project.zara.model.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.project.zara.model.BoardVO" alias="BoardVO"/>
 		<typeAlias type="com.project.zara.model.BoardReplyVO" alias="BoardReplyVO"/>
-		<typeAlias type="com.project.zara.model.FileVO" alias="FileVO"/>
+		<typeAlias type="com.project.zara.model.FileVO" alias="FileVO"/> 
+		<typeAlias type="com.project.zara.model.ProductVO" alias="ProductVO"/> 
 	</typeAliases>
 	
 	
