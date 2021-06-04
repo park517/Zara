@@ -16,44 +16,44 @@ public class CourseServiceImpl implements CourseService {
 	
 	//레코드 수
 	@Override
-	public int selectRowCount(Integer category) {
-		return courseMapper.selectRowCount(category);
+	public int selectCosRowCount(Integer category) {
+		return courseMapper.selectCosRowCount(category);
 	}
 
 	//글 목록
 	@Override
-	public List<CourseVO> selectList(Map<String, Object> map) {
-		return courseMapper.selectList(map);
+	public List<CourseVO> selectCosList(Map<String, Object> map) {
+		return courseMapper.selectCosList(map);
 	}
 
 	//글쓰기
 	@Override
-	public void insertBoard(CourseVO course) {
-		courseMapper.insertBoard(course);
+	public void insertCosBoard(CourseVO course) {
+		courseMapper.insertCosBoard(course);
 	}
 
 	//글 상세 조회
 	@Override
-	public CourseVO selectBoard(Integer cos_num) {
-		return courseMapper.selectBoard(cos_num);
+	public CourseVO selectCosBoard(Integer cos_num) {
+		return courseMapper.selectCosBoard(cos_num);
 	}
 
 	//글 수정
 	@Override
-	public void updateBoard(CourseVO course) {
-		courseMapper.updateBoard(course);
+	public void updateCosBoard(CourseVO course) {
+		courseMapper.updateCosBoard(course);
 	}
 
 	//글 삭제
 	@Override
-	public void deleteBoard(Integer cos_num) {
-		courseMapper.deleteBoard(cos_num);
+	public void deleteCosBoard(Integer cos_num) {
+		courseMapper.deleteCosBoard(cos_num);
 	}
 
 	//조회수 증가
 	@Override
-	public void updateHit(Integer cos_num) {
-		courseMapper.updateHit(cos_num);
+	public void updateCosHit(Integer cos_num) {
+		courseMapper.updateCosHit(cos_num);
 	}
 
 }

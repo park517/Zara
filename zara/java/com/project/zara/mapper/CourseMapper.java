@@ -12,24 +12,24 @@ import com.project.zara.model.CourseVO;
 public interface CourseMapper {
 
 	//카테고리 별 레코드 수
-	public int selectRowCount(@Param("category") int category);
+	public int selectCosRowCount(@Param("category") int category);
 	
 	//게시글 조회
-	public List<CourseVO> selectList(Map<String, Object> map);
+	public List<CourseVO> selectCosList(Map<String, Object> map);
 	
 	//글쓰기
-	public void insertBoard(CourseVO course);
+	public void insertCosBoard(CourseVO course);
 	
 	//글 상세보기
-	public CourseVO selectBoard(Integer cos_num);
+	public CourseVO selectCosBoard(Integer cos_num);
 	
 	//글 수정
-	public void updateBoard(CourseVO course);
+	public void updateCosBoard(CourseVO course);
 	
 	//글 삭제
-	public void deleteBoard(Integer cos_num);
+	public void deleteCosBoard(Integer cos_num);
 	
 	//글 조회수 증가
-	public void updateHit(Integer cos_num);
+	public void updateCosHit(Integer cos_num);
 	
 }
