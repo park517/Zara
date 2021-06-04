@@ -18,8 +18,8 @@ public class CourseServiceImpl implements CourseService {
 	
 	//레코드 수
 	@Override
-	public int selectCosRowCount(Integer category) {
-		return courseMapper.selectCosRowCount(category);
+	public int selectCosRowCount(Integer cos_category) {
+		return courseMapper.selectCosRowCount(cos_category);
 	}
 
 	//글 목록

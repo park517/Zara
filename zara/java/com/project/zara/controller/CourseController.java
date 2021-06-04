@@ -36,26 +36,26 @@ public class CourseController {
 	
 	//카테고리별 게시글 조회
 	
-	@RequestMapping(value="/categoryList", method=RequestMethod.GET)
+	@RequestMapping(value="/getCategoryList", method=RequestMethod.GET)
 	public ModelAndView getCategoryList(@RequestParam(value="pageNum", defaultValue="1")int currentPage,
-										@RequestParam(value="category")int category) {
+										@RequestParam(value="cos_category")int cos_category) {
 		
-		System.out.println("<<카테고리>> : " + category);
+		System.out.println("<<카테고리>> : " + cos_category);
 		
-		int total = courseService.selectCosRowCount(category);
-		PagingUtil page = new PagingUtil(currentPage, total, 6, 6, "getCategoryList", "&category=" + category);
+		int total = courseService.selectCosRowCount(cos_category);
+		PagingUtil page = new PagingUtil(currentPage, total, 6, 6, "getCategoryList", "&cos_category=" + cos_category);
 		
 		List<CourseVO> list = null;
 		if(total > 0) {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("start", page.getStartCount());
 			map.put("end", page.getEndCount());
-			map.put("category", category);
+			map.put("cos_category", cos_category);
 			list = courseService.selectCosList(map);
 		}		
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("course/categoryList");
+		mav.setViewName("course/getCategoryList");
 		mav.addObject("total", total);
 		mav.addObject("list", list);
 		mav.addObject("pagingHtml", page.getPagingHtml());
@@ -73,18 +73,15 @@ public class CourseController {
 	//전송된 데이터 처리
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String submit(CourseVO course,
-						 Model model,
-						 String mem_id, 
-						 HttpSession session) {
+						 Model model) {
 		
-		course.setMem_id(session.getId());
 		
 		//글쓰기
 		courseService.insertCosBoard(course);
 		
 		
 		String msg  = "글이 작성되었습니다";
-		String url = "/course/categoryList?category="+course.getCos_category();
+		String url = "/course/getCategoryList?cos_category="+course.getCos_category();
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", url);
 		

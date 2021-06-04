@@ -111,13 +111,13 @@
 	            		<input type="hidden" value="${loginMember.mem_id}" name="mem_id">
 	            		<ul>
 	            			<li>
-	            				<label for="title">제목</label>
-	            				<input type="text" id="title" name="title" required="required" >
+	            				<label for="cos_title">제목</label>
+	            				<input type="text" id="cos_title" name="cos_title" required="required" >
 	            			</li>
 	            			
 	            			<li>
-	            				<label for="title">카테고리</label>
-	            				<select name='category'>
+	            				<label for="cos_category">카테고리</label>
+	            				<select name='cos_category'>
 								    <option value='' selected>-- 선택 --</option>
 								    <option value="1">수도권</option>
 								    <option value="2">제주</option>
@@ -125,14 +125,14 @@
 								</select>
 	            			</li>
 	            			<li>
-	            				<label for="content">내용</label>
-	            				<textarea rows="10" cols="50" id="content" name="content"></textarea>
+	            				<label for="cos_content">내용</label>
+	            				<textarea rows="10" cols="50" id="cos_content" name="cos_content"></textarea>
 	            			</li>
 	            			
 	            		</ul>
 	            		<div align="center">
 	            			<input type="submit" class ="btn btn-primary" value="작성하기">
-	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/course/categoryList'">
+	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/course/getCategoryList'">
 	            		</div>
 	            		</div>
 	            		</form>

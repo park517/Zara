@@ -14,8 +14,8 @@ import com.project.zara.model.CourseVO;
 public interface CourseMapper {
 
 	//카테고리 별 레코드 수
-	@Select("SELECT COUNT(*) FROM course WHERE category = #{category}")
-	public int selectCosRowCount(@Param("category") int category);
+	@Select("SELECT COUNT(*) FROM course WHERE cos_category = #{cos_category}")
+	public int selectCosRowCount(@Param("cos_category") int cos_category);
 	
 	//게시글 조회
 	

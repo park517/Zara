@@ -68,7 +68,17 @@
                 <!-- Toolbar -->
             <%@include file="../../include/toolbar.jspf" %>
                <div id="boardMain">
-                  <h2>${list[0].category}</h2>
+                  <h2>
+                  	<c:if test="${list[0].cos_category} eq 1">
+                  		수도권
+                  	</c:if>
+                  	<c:if test="${list[0].cos_category} eq 2">
+                  		제주도
+                  	</c:if>
+                  	<c:if test="${list[0].cos_category} eq 3">
+                  		전국일주
+                  	</c:if>
+                  </h2>
                   <br><br><br>
                 	
                	  <c:if test="${not empty loginMember}">
@@ -88,7 +98,6 @@
                            <thead> 
                               <tr> 
                                  <th width="10%">번호</th> 
-                                 <th width="20%">카테고리</th> 
                                  <th width="40%">제목</th> 
                                  <th width="10%">작성자</th> 
                                  <th width="20%">작성일</th> 
@@ -99,8 +108,7 @@
                               <c:forEach var="course" items="${list}" varStatus="status"> 
                               <tr> 
                                  <td>${course.cos_num}</td> 
-                                 <td>${course.category}</td> 
-                                 <td id="title"><a href="#">   ${course.title} </a></td> 
+                                 <td id="cos_title"><a href="#">   ${course.cos_title} </a></td> 
                                  <td>${course.mem_id}</td> 
                                  <td>${course.create_at}</td> 
                                  <td>${course.hit}</td> 

@@ -6,6 +6,7 @@
 		SELECT *
 		FROM (SELECT rownum rnum, a.*
 			  FROM (SELECT * FROM course
+			  		WHERE cos_category=#{cos_category}
 			  		ORDER BY cos_num DESC)A)
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>

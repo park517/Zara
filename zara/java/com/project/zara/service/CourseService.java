@@ -11,7 +11,7 @@ import com.project.zara.model.CourseVO;
 public interface CourseService {
 	
 	//게시글 수
-	public int selectCosRowCount(Integer category);
+	public int selectCosRowCount(Integer cos_category);
 	
 	//게시글 조회
 	List<CourseVO> selectCosList(Map<String, Object> map);
