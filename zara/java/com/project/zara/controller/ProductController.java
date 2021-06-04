@@ -21,8 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.project.zara.model.BoardVO;
 import com.project.zara.model.FileVO;
 import com.project.zara.model.ProductVO;
+import com.project.zara.model.ReplyVO;
 import com.project.zara.service.FileService;
 import com.project.zara.service.ProductService;
+import com.project.zara.service.ReplyService;
 import com.project.zara.util.FileUtil;
 import com.project.zara.util.PagingUtil;
 
@@ -38,6 +40,12 @@ public class ProductController {
 	
 	@Autowired
 	FileService fileService;
+	
+	@Autowired
+	ReplyService replyService;
+	
+	@Autowired
+	ReplyController replyController;
 	
 	// 상품 게시물 목록 불러오기 (페이징)
 	@RequestMapping(value="/getlist", method=RequestMethod.GET)
@@ -121,6 +129,10 @@ public class ProductController {
 		map.put("table_name","product");
 		List<FileVO> fileList = fileService.getFile(map);
 	
+		//댓글 가져오기
+		Map<String,Object> replyList = replyController.getReplyList(pno, 1);
+		
+		model.addAttribute("reply",replyList);
 		model.addAttribute("files",fileList);
 		model.addAttribute("product" ,product);
 		return "product/detail";

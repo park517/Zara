@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.zara.mapper.ReplyMapper">
+
+	<select id="getReplyList" parameterType="Map" resultType="ReplyVO">
+			SELECT *
+			FROM (SELECT ROWNUM RN, A.*
+			        FROM 
+			        (
+			        SELECT * 
+			        FROM pro_comments WHERE pno = #{pno}
+			        START WITH depth = 0
+			        CONNECT BY PRIOR cno = parent_no 
+			        )A
+			      )
+			WHERE RN BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<insert id="writeReply" parameterType="ReplyVO">
+		insert into 
+		pro_comments 
+		(cno,pno,writer,content,create_at,depth,parent_no)
+		values (
+			 seq_pro_reply.nextval,
+			 #{pno},
+			 #{writer},
+			 #{content},
+			 sysdate,
+			 #{depth},
+			 #{parent_no}
+		)
+	
+	</insert>
+	
+	<!--  댓글 수정 -->
+	<update id="updateReply" parameterType="ReplyVO">
+		update pro_comments
+		set
+			content =#{content},
+			update_at = sysdate
+		where 
+			cno = #{cno}
+	</update>
+	
+	
+	<!--  댓글 삭제 , 댓글 삭제시 하위 댓글도 모두 삭제 -->
+	<delete id="deleteReply" parameterType="int" >
+		delete from pro_comments where cno =#{cno} or parent_no =#{cno}
+	</delete>
+
+	<select id="replyCount" parameterType="int" resultType="int">
+		select count(*) from pro_comments where pno = #{pno}
+	</select>
+</mapper>

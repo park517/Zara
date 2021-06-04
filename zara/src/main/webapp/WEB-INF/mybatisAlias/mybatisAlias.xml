@@ -9,6 +9,7 @@
 		<typeAlias type="com.project.zara.model.BoardReplyVO" alias="BoardReplyVO"/>
 		<typeAlias type="com.project.zara.model.FileVO" alias="FileVO"/> 
 		<typeAlias type="com.project.zara.model.ProductVO" alias="ProductVO"/> 
+		<typeAlias type="com.project.zara.model.ReplyVO" alias="ReplyVO"/> 
 	</typeAliases>
 	
 	
