@@ -108,7 +108,7 @@
                               <c:forEach var="course" items="${list}" varStatus="status"> 
                               <tr> 
                                  <td>${course.cos_num}</td> 
-                                 <td id="cos_title"><a href="#">   ${course.cos_title} </a></td> 
+                                 <td id="cos_title"><a href="/course/detail?cos_num=${course.cos_num}">   ${course.cos_title} </a></td> 
                                  <td>${course.mem_id}</td> 
                                  <td>${course.create_at}</td> 
                                  <td>${course.hit}</td> 

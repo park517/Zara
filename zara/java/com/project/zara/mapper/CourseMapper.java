@@ -3,10 +3,12 @@ package com.project.zara.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.project.zara.model.CourseVO;
 
@@ -26,15 +28,19 @@ public interface CourseMapper {
 	public void insertCosBoard(CourseVO course);
 	
 	//글 상세보기
+	@Select("SELECT * FROM course WHERE cos_num = #{cos_num}")
 	public CourseVO selectCosBoard(Integer cos_num);
 	
 	//글 수정
+	@Update("UPDATE course SET cos_title=#{cos_title}, cos_content=#{cos_content}, cos_category=#{cos_category}, update_at = SYSDATE WHERE cos_num = #{cos_num}")
 	public void updateCosBoard(CourseVO course);
 	
 	//글 삭제
-	public void deleteCosBoard(Integer cos_num);
+	@Delete("DELETE FROM course WHERE cos_num = #{cos_num}")
+	public void deleteCosBoard(Integer cos_num, Integer cos_category);
 	
 	//글 조회수 증가
+	@Update("UPDATE course SET hit = hit + 1 WHERE cos_num = #{cos_num}")
 	public void updateCosHit(Integer cos_num);
 	
 }

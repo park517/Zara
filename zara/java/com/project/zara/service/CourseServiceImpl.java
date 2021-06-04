@@ -48,8 +48,8 @@ public class CourseServiceImpl implements CourseService {
 
 	//글 삭제
 	@Override
-	public void deleteCosBoard(Integer cos_num) {
-		courseMapper.deleteCosBoard(cos_num);
+	public void deleteCosBoard(Integer cos_num, Integer cos_category) {
+		courseMapper.deleteCosBoard(cos_num, cos_category);
 	}
 
 	//조회수 증가

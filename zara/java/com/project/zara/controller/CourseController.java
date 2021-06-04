@@ -20,6 +20,7 @@ import com.project.zara.service.CourseService;
 import com.project.zara.util.PagingUtil;
 
 import lombok.extern.log4j.Log4j;
+import sun.nio.cs.HistoricallyNamedCharset;
 
 @Controller
 @RequestMapping("/course")
@@ -88,6 +89,44 @@ public class CourseController {
 		return "common/redirect";
 	}
 	
+	//글 읽기
+	@RequestMapping("/detail")
+	public ModelAndView detail(@RequestParam int cos_num) {
+		CourseVO course = courseService.selectCosBoard(cos_num);
+		//조회수 증가
+		courseService.updateCosHit(cos_num);
+		return new ModelAndView("/course/courseView", "course", course);
+	}
 	
+	//글 수정
+	//수정 폼 호출
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String formUpdate(@RequestParam int cos_num, Model model) {
+		CourseVO course = courseService.selectCosBoard(cos_num);
+		model.addAttribute("courseVO", course);
+		
+		return "course/courseModify";
+	}
+	//수정폼에서 전송된 데이터 처리
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String submitUpdate(CourseVO courseVO, Model model) {
+		courseService.updateCosBoard(courseVO);
+		
+		String url = "/course/getCategoryList?cos_category=" + courseVO.getCos_category();
+		String msg = "수정 되었습니다";
+		model.addAttribute("url",url);
+		model.addAttribute("msg",msg);
+		
+		return "common/redirect";
+	}
+	
+	//글 삭제
+	@RequestMapping("/delete")
+	public String submitDelete(@RequestParam int cos_num, 
+								@RequestParam int cos_category) {
+		
+		courseService.deleteCosBoard(cos_num, cos_category);
+		return "/course/getCategoryList?cos_category="+cos_category;
+	}
 	
 }
