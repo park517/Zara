@@ -3,8 +3,11 @@ package com.project.zara.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.project.zara.model.CourseVO;
 
+@Service
 public interface CourseService {
 	
 	//게시글 수

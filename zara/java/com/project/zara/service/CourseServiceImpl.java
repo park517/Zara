@@ -4,14 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.project.zara.mapper.CourseMapper;
 import com.project.zara.model.CourseVO;
 
+@Service
 public class CourseServiceImpl implements CourseService {
 
 	//의존관계
-	@Autowired
+	@Autowired(required=true)
 	CourseMapper courseMapper;
 	
 	//레코드 수
