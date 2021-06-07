@@ -26,7 +26,7 @@ public interface CourseService {
 	public void updateCosBoard(CourseVO course);
 	
 	//글 삭제
-	public void deleteCosBoard(Integer cos_num, Integer cos_category);
+	public void deleteCosBoard(Integer cos_num);
 	
 	//글 조회수 증가
 	public void updateCosHit(Integer cos_num);

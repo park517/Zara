@@ -122,11 +122,15 @@ public class CourseController {
 	
 	//글 삭제
 	@RequestMapping("/delete")
-	public String submitDelete(@RequestParam int cos_num, 
-								@RequestParam int cos_category) {
+	public String submitDelete(@RequestParam int cos_num) {
 		
-		courseService.deleteCosBoard(cos_num, cos_category);
-		return "/course/getCategoryList?cos_category="+cos_category;
+		CourseVO course = new CourseVO();
+		int cat = course.getCos_category();
+		System.out.println("제발제발 출력되라 <<categer>> : "+cat);
+		
+		courseService.deleteCosBoard(cos_num);
+		
+		return "";
 	}
 	
 }

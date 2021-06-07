@@ -37,7 +37,7 @@ public interface CourseMapper {
 	
 	//글 삭제
 	@Delete("DELETE FROM course WHERE cos_num = #{cos_num}")
-	public void deleteCosBoard(Integer cos_num, Integer cos_category);
+	public void deleteCosBoard(Integer cos_num);
 	
 	//글 조회수 증가
 	@Update("UPDATE course SET hit = hit + 1 WHERE cos_num = #{cos_num}")
