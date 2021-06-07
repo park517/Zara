@@ -49,7 +49,7 @@ public class ReplyController {
 		// 총 글 갯수로 부터 총 페이지 갯수 구하기
 		int totalPageNum = (count+4)/5;
 		System.out.println("페이지수는>!?!?!?1 : "+ totalPageNum);
-		PagingUtil page = new PagingUtil(currentPage,count, 10, 5,null);
+		PagingUtil page = new PagingUtil(currentPage,count, 5, 5,null);
 		map.put("pno", pno);
 		map.put("start", page.getStartCount());
 		map.put("end", page.getEndCount());

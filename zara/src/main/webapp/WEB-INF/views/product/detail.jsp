@@ -384,6 +384,8 @@
             function writeView(currentPage) {
             	console.log("뷰 뿌리깅!");
             	$('.reply_wrap').html('');
+            	$('.pagination').html('');
+            	var html1="";
             	var html ="";
             	
 	           	 $.ajax({
@@ -397,6 +399,8 @@
 	    	         success : function(result) {
 	    	        	 var resultJson = JSON.parse(result);
 	    	        	 var list = resultJson.list;
+	    	        	 var pageNum = resultJson.totalPageNum;
+	    	        	 
 	    	        	 console.log("리스트 길이 " +list.length);
 	    	        	 console.log("리스트 depth" +list[0].depth);
 	    	        	 for(var i = 0 ; i< list.length ; i++) {
@@ -431,8 +435,17 @@
 
 	    
 	    	        	 }
+	    	        	 
+	    	        	 html1 += "<li class='disabled'> <a href='#'> <span>«</span> </a> </li> ";
+	    	        	 for(var i =1 ;i<=pageNum ; i++) {
+	    	        		 html1 += "<li id='"+i+"'>"; 
+	    	        		 html1 += "<a href='javascript:writeView("+i+")' >"+i+"</a></li>";
+	    	        	 }
+	    	        	 html1 += "<li><a href='#'> <span>»</span> </a> </li> ";
+	    	  
 	        		 	 console.log("html : "+html);
 	        		 	 $('.reply_wrap').html(html);
+	        		 	 $('.pagination').html(html1);
 	
 	    	        	 
 	    	         },
