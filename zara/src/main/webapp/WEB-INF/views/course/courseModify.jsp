@@ -53,6 +53,11 @@
 	</style>
 </head>
 
+<!-- ckeditor -->
+<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
+
+
+
 <body id="page-top">
 	<c:if test="${not empty loginMember}">
 
@@ -100,9 +105,20 @@
 	            				</li>
 	            				<li>
 	            					<label for="cos_content">내용</label>
-	            				
 	            					<textarea rows="10" cols="50" id="cos_content" name="cos_content" >${courseVO.cos_content}</textarea>
+	            				<script>
+	            				ClassicEditor 
+	            			    .create( document.querySelector('#cos_content')) 
+	            			    .then( editor => { 
+	            			        console.log( editor ); 
+	            			    } ) 
+	            			    .catch( error => { 
+	            			        console.error( error ); 
+	            			    } );
+	            				</script>
 	            				</li> 
+	            			
+	            			
 	            			</ul>
 	            			<div align="center">
 	            				<input type="submit" value="수정" >
