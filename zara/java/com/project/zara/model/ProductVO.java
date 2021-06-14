@@ -2,6 +2,8 @@ package com.project.zara.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +24,10 @@ public class ProductVO {
 	private Double pro_weight;
 	private String pro_com;
 	private String pro_status;
-	private Date pro_date;
+	
+	private String pro_date;
+	
 	private int pro_sum;
 	private int pro_hit;
+	private String update_at;
 }

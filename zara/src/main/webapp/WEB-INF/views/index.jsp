@@ -135,7 +135,7 @@
 			                            <th>제목</th>
 			                            <th>등록일</th>
 			                        </thead>
-			
+										
 			                        <tbody>
 			                            <tr>
 			                                <td>1</td>
@@ -169,17 +169,13 @@
 			                        </thead>
 			
 			                        <tbody>
+			                        <c:forEach items="${productList}" var="list" varStatus="status">
 			                            <tr>
-			                                <td>1</td>
-			                                <td>테스트</td>
-			                                <td>2021-05-17</td>
+			                                <td>${status.count}</td>
+			                                <td>${list.pro_name}</td>
+			                                <td>${list.pro_date}</td>
 			                            </tr>
-			
-			                            <tr>
-			                                <td>2</td>
-			                                <td>테스트</td>
-			                                <td>2021-05-17</td>
-			                            </tr>
+			                        </c:forEach>
 			                        </tbody>
 			                    </table>
 			                </div>
@@ -189,7 +185,7 @@
 			            <div class="talk">
 			
 			                <div class="top">
-			                    <h2> 와글와글 </h2>
+			                    <h2> 커뮤니티 게시판 </h2>
 			                    <a href="#">더보기</a>
 			                </div>
 			
@@ -202,17 +198,13 @@
 			                        </thead>
 			
 			                        <tbody>
+			                        <c:forEach items="${boardList}" var="list" varStatus="status">
 			                            <tr>
-			                                <td>1</td>
-			                                <td>테스트</td>
-			                                <td>2021-05-17</td>
+			                                <td>${status.count}</td>
+			                                <td>${list.title}</td>
+			                                <td>${list.create_at}</td>
 			                            </tr>
-			
-			                            <tr>
-			                                <td>2</td>
-			                                <td>테스트</td>
-			                                <td>2021-05-17</td>
-			                            </tr>
+			                        </c:forEach>
 			                        </tbody>
 			                    </table>
 			                </div>
