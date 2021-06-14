@@ -130,7 +130,7 @@ public class CourseController {
 		
 		courseService.deleteCosBoard(cos_num);
 		
-		return "";
+		return "/";
 	}
 	
 }
