@@ -16,13 +16,26 @@ public class CourseServiceImpl implements CourseService {
 	@Autowired(required=true)
 	CourseMapper courseMapper;
 	
-	//레코드 수
+	//카체고리 별 레코드 수
 	@Override
 	public int selectCosRowCount(Integer cos_category) {
 		return courseMapper.selectCosRowCount(cos_category);
 	}
+	
+	//총 레코드 수
+	@Override
+	public int selectRowCount() {
+		return courseMapper.selectRowCount();
+	}
+	
+	//전체 글 목록
+	@Override
+	public List<CourseVO> selectList(Map<String, Object> map) {
+		return courseMapper.selectList(map);
+	}
 
-	//글 목록
+
+	//카체고리 별 글 목록
 	@Override
 	public List<CourseVO> selectCosList(Map<String, Object> map) {
 		return courseMapper.selectCosList(map);
@@ -58,4 +71,7 @@ public class CourseServiceImpl implements CourseService {
 		courseMapper.updateCosHit(cos_num);
 	}
 
+
+
+	
 }

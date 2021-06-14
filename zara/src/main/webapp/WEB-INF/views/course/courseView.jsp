@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% String time = request.getParameter("cos_time"); %>
     
     
 
@@ -57,6 +59,8 @@
 		</style>
 		
 	</head>
+<script src="${pageContext.request.contextPath}/resources/js/videoAdapter.js"></script>
+	
 <script type="text/javascript">
 	window.onload = function(){
 		var delete_btn = document.getElementById('delete_btn');
@@ -99,12 +103,23 @@
 	            		<hr>
 	            		<div>
 	            			내용 : <br>
-	            			${course.cos_content}
+	            			<%-- <c:if test="${fn:endsWith(course.cos_filename,'.jpg') ||
+										  fn:endsWith(course.cos_filename,'.JPG') ||
+										  fn:endsWith(course.cos_filename,'.gif') ||
+										  fn:endsWith(course.cos_filename,'.GIF') ||
+										  fn:endsWith(course.cos_filename,'.png') ||
+										  fn:endsWith(course.cos_filename,'.PNG')}">
+							 --%>	<div>    
+									<img src="imageView?cos_num=${course.cos_num}" style="max-width:500px" id="imgsize">
+								</div>
+								${course.cos_content}
+				<%-- 		  </c:if> --%>
+	            			
 	            		</div>
 	            		<hr>
 	            	
 		            		
-		            		<input type="button" value="목록" class ="btn btn-primary" onclick="location.href='getCategoryList?cos_category=${course.cos_category}'">
+		            		<input type="button" value="목록" class ="btn btn-primary" onclick="location.href='/course/getList'">
 	            		
 	            	</div>
 	           

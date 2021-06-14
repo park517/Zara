@@ -1,6 +1,9 @@
 package com.project.zara.model;
 
+import java.io.IOException;
 import java.sql.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +21,13 @@ public class CourseVO {
 	private int hit; //조회수
 	private Date create_at; //생성일
 	private Date update_at;//수정일
+
+	private byte[] cos_uploadfile; //사진 파일
+	private String cos_filename; //파일이름
+	
+	//업로드 파일 처리
+	public void setNot_upload(MultipartFile cos_upload)throws IOException{
+		setCos_uploadfile(cos_upload.getBytes());
+		setCos_filename(cos_upload.getOriginalFilename());
+	}
 }

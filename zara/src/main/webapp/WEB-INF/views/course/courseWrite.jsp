@@ -88,8 +88,9 @@
 </head>
 
 <!-- ckeditor -->
-<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
 
 <body id="page-top">
 	<c:if test="${not empty loginMember}">
@@ -133,22 +134,30 @@
 	            				<textarea rows="10" cols="50" id="cos_content" name="cos_content"></textarea>
 	            				
 	            				<script>
-	            				ClassicEditor 
-	            			    .create( document.querySelector('#cos_content')) 
-	            			    .then( editor => { 
-	            			        console.log( editor ); 
-	            			    } ) 
-	            			    .catch( error => { 
-	            			        console.error( error ); 
-	            			    } );
-	            				</script>
-	            			
+									function MyCustomUploadAdapterPlugin(editor){
+										editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+											return new UploadAdapter(loader);
+										}
+									}
+									
+									ClassicEditor
+										.create( document.querySelector('#cos_content'), {
+											extraPlugins : [MyCustomUploadAdapterPlugin]
+										})
+										.then( editor => {
+											window.editor = editor;
+										})
+										.catch( error => {
+											console.error( error );
+										});
+									</script>   
+						            			
 	            			</li>
 	            			
 	            		</ul>
 	            		<div align="center">
 	            			<input type="submit" class ="btn btn-primary" value="작성하기">
-	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/course/getCategoryList'">
+	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/course/getList'">
 	            		</div>
 	            		</div>
 	            		</form>

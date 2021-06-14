@@ -19,8 +19,14 @@ public interface CourseMapper {
 	@Select("SELECT COUNT(*) FROM course WHERE cos_category = #{cos_category}")
 	public int selectCosRowCount(@Param("cos_category") int cos_category);
 	
-	//게시글 조회
+	//총 레코드 수
+	@Select("SELECT COUNT(*) FROM course")
+	public int selectRowCount();
 	
+	//전체 게시글 조회
+	public List<CourseVO> selectList(Map<String, Object> map);
+	
+	//카테고리 별 게시글 조회
 	public List<CourseVO> selectCosList(Map<String, Object> map);
 	
 	//글쓰기

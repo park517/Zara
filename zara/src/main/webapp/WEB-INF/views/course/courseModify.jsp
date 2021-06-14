@@ -54,8 +54,9 @@
 </head>
 
 <!-- ckeditor -->
-<script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/classic/ckeditor.js"></script>
 
+<script src="${pageContext.request.contextPath}/resources/js/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
 
 
 <body id="page-top">
@@ -106,23 +107,31 @@
 	            				<li>
 	            					<label for="cos_content">내용</label>
 	            					<textarea rows="10" cols="50" id="cos_content" name="cos_content" >${courseVO.cos_content}</textarea>
-	            				<script>
-	            				ClassicEditor 
-	            			    .create( document.querySelector('#cos_content')) 
-	            			    .then( editor => { 
-	            			        console.log( editor ); 
-	            			    } ) 
-	            			    .catch( error => { 
-	            			        console.error( error ); 
-	            			    } );
-	            				</script>
+	            			<script>
+								function MyCustomUploadAdapterPlugin(editor){
+									editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+										return new UploadAdapter(loader);
+									}
+								}
+								
+								ClassicEditor
+									.create( document.querySelector( '#cos_content' ), {
+										extraPlugins : [MyCustomUploadAdapterPlugin]
+									})
+									.then( editor => {
+										window.editor = editor;
+									})
+									.catch( error => {
+										console.error( error );
+									});
+								</script>
 	            				</li> 
 	            			
 	            			
 	            			</ul>
 	            			<div align="center">
 	            				<input type="submit" value="수정" >
-	            				<input type="button" value="목록" class ="btn btn-primary">
+	            				<input type="button" value="목록" class ="btn btn-primary" onclick="location.href='/course/getList'">
 	            			</div>
 	            		</form>
 	            		

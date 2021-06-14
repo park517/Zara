@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.zara.model.BoardVO;
 import com.project.zara.model.CourseVO;
 import com.project.zara.service.CourseService;
 import com.project.zara.util.PagingUtil;
@@ -34,6 +35,33 @@ public class CourseController {
 	public CourseVO initcommand() {
 		return new CourseVO();
 	}
+	
+	//전체 게시판 목록 가져오기
+		@RequestMapping(value="/getList", method=RequestMethod.GET)
+		public ModelAndView process(
+				Model model,
+				@RequestParam(value="pageNum", defaultValue="1")int currentPage
+				){
+			int total = courseService.selectRowCount();
+			
+			PagingUtil page = new PagingUtil(currentPage, total, 10, 10, "getlist");
+			
+			List<CourseVO> list = null;
+			if(total >0) {
+				Map<String,Object> map = new HashMap<String, Object>();
+				map.put("start", page.getStartCount());
+				map.put("end", page.getEndCount());
+				list = courseService.selectList(map);
+			}
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("course/getList");
+			mav.addObject("total", total);
+			mav.addObject("list", list);
+			mav.addObject("pagingHtml", page.getPagingHtml());
+				
+			return mav;
+		}
+		
 	
 	//카테고리별 게시글 조회
 	
@@ -97,6 +125,18 @@ public class CourseController {
 		courseService.updateCosHit(cos_num);
 		return new ModelAndView("/course/courseView", "course", course);
 	}
+	//이미지 출력
+	@RequestMapping("/course/imageView")
+	public ModelAndView viewImage(@RequestParam int cos_num) {
+		CourseVO cos = courseService.selectCosBoard(cos_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("imageView");
+		mav.addObject("imageFile",cos.getCos_uploadfile());
+		mav.addObject("filename",cos.getCos_filename());
+
+		return mav;
+	}
 	
 	//글 수정
 	//수정 폼 호출
@@ -123,10 +163,6 @@ public class CourseController {
 	//글 삭제
 	@RequestMapping("/delete")
 	public String submitDelete(@RequestParam int cos_num) {
-		
-		CourseVO course = new CourseVO();
-		int cat = course.getCos_category();
-		System.out.println("제발제발 출력되라 <<categer>> : "+cat);
 		
 		courseService.deleteCosBoard(cos_num);
 		
