@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.zara.model.BoardVO;
 import com.project.zara.model.CourseVO;
 import com.project.zara.service.CourseService;
 import com.project.zara.util.PagingUtil;
+import com.project.zara.util.StringUtil;
 
-import lombok.extern.log4j.Log4j;
-import sun.nio.cs.HistoricallyNamedCharset;
 
 @Controller
 @RequestMapping("/course")
@@ -103,8 +100,6 @@ public class CourseController {
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String submit(CourseVO course,
 						 Model model) {
-		
-		
 		//글쓰기
 		courseService.insertCosBoard(course);
 		
@@ -123,20 +118,14 @@ public class CourseController {
 		CourseVO course = courseService.selectCosBoard(cos_num);
 		//조회수 증가
 		courseService.updateCosHit(cos_num);
+		
+		//html 태그 불허
+		course.setCos_title(StringUtil.useNoHtml(course.getCos_title()));
+		course.setCos_content(course.getCos_content());
+		
 		return new ModelAndView("/course/courseView", "course", course);
 	}
-	//이미지 출력
-	@RequestMapping("/course/imageView")
-	public ModelAndView viewImage(@RequestParam int cos_num) {
-		CourseVO cos = courseService.selectCosBoard(cos_num);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("imageView");
-		mav.addObject("imageFile",cos.getCos_uploadfile());
-		mav.addObject("filename",cos.getCos_filename());
 
-		return mav;
-	}
 	
 	//글 수정
 	//수정 폼 호출
@@ -168,5 +157,7 @@ public class CourseController {
 		
 		return "/";
 	}
+	
+	
 	
 }

@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<% String time = request.getParameter("cos_time"); %>
     
     
 
@@ -56,6 +55,9 @@
 			width: 200px;
 			height: 200px;
 		}
+		#imgsize{
+		margin: 30px;
+		}
 		</style>
 		
 	</head>
@@ -102,18 +104,17 @@
 	            		</ul>
 	            		<hr>
 	            		<div>
-	            			내용 : <br>
-	            			<%-- <c:if test="${fn:endsWith(course.cos_filename,'.jpg') ||
+	            			<c:if test="${fn:endsWith(course.cos_filename,'.jpg') ||
 										  fn:endsWith(course.cos_filename,'.JPG') ||
 										  fn:endsWith(course.cos_filename,'.gif') ||
 										  fn:endsWith(course.cos_filename,'.GIF') ||
 										  fn:endsWith(course.cos_filename,'.png') ||
 										  fn:endsWith(course.cos_filename,'.PNG')}">
-							 --%>	<div>    
+							 	<div>    
 									<img src="imageView?cos_num=${course.cos_num}" style="max-width:500px" id="imgsize">
 								</div>
+							 </c:if> 
 								${course.cos_content}
-				<%-- 		  </c:if> --%>
 	            			
 	            		</div>
 	            		<hr>

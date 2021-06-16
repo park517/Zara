@@ -26,7 +26,7 @@ public class CourseVO {
 	private String cos_filename; //파일이름
 	
 	//업로드 파일 처리
-	public void setNot_upload(MultipartFile cos_upload)throws IOException{
+	public void setCos_upload(MultipartFile cos_upload)throws IOException{
 		setCos_uploadfile(cos_upload.getBytes());
 		setCos_filename(cos_upload.getOriginalFilename());
 	}

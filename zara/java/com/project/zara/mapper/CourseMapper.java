@@ -30,7 +30,7 @@ public interface CourseMapper {
 	public List<CourseVO> selectCosList(Map<String, Object> map);
 	
 	//글쓰기
-	@Insert("INSERT into course (cos_num, mem_id, cos_category, cos_title, cos_content, hit, create_at, update_at) VALUES (seq_course.nextval, #{mem_id}, #{cos_category}, #{cos_title}, #{cos_content}, #{hit}, SYSDATE, null)")
+	@Insert("INSERT into course (cos_num, mem_id, cos_category, cos_title, cos_uploadfile, cos_filename, cos_content, hit, create_at, update_at) VALUES (seq_course.nextval, #{mem_id}, #{cos_category}, #{cos_title}, #{cos_uploadfile}, #{cos_filename}, #{cos_content}, #{hit}, SYSDATE, null)")
 	public void insertCosBoard(CourseVO course);
 	
 	//글 상세보기
@@ -38,7 +38,6 @@ public interface CourseMapper {
 	public CourseVO selectCosBoard(Integer cos_num);
 	
 	//글 수정
-	@Update("UPDATE course SET cos_title=#{cos_title}, cos_content=#{cos_content}, cos_category=#{cos_category}, update_at = SYSDATE WHERE cos_num = #{cos_num}")
 	public void updateCosBoard(CourseVO course);
 	
 	//글 삭제

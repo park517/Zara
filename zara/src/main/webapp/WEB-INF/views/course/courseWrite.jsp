@@ -87,10 +87,10 @@
 	</style>
 </head>
 
-<!-- ckeditor -->
-
-<script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/uploadAdapter.js"></script>
+<!-- 썸머노트 -->
+  <script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/summernote-lite.css">
 
 <body id="page-top">
 	<c:if test="${not empty loginMember}">
@@ -130,27 +130,27 @@
 								</select>
 	            			</li>
 	            			<li>
-	            				<label for="cos_content">내용</label>
-	            				<textarea rows="10" cols="50" id="cos_content" name="cos_content"></textarea>
-	            				
+	            				<label for="cos_upload">이미지 업로드</label>
+	            				<input type="file" name="cos_upload" id="cos_upload" accept="image/gif,image/png,image/jpeg">
+	            			</li>
+	            			<li>
+	            				<div class="container">
+	            					<label for="cos_content">내용</label>
+	            					<textarea rows="10" cols="50" id="cos_content" name="cos_content"></textarea>
+	            				</div>
 	            				<script>
-									function MyCustomUploadAdapterPlugin(editor){
-										editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
-											return new UploadAdapter(loader);
-										}
-									}
-									
-									ClassicEditor
-										.create( document.querySelector('#cos_content'), {
-											extraPlugins : [MyCustomUploadAdapterPlugin]
-										})
-										.then( editor => {
-											window.editor = editor;
-										})
-										.catch( error => {
-											console.error( error );
-										});
-									</script>   
+	            				$(document).ready(function(){
+	            					 $('#cos_content').summernote({
+            				             height: 300,                 // set editor height
+            				             minHeight: null,             // set minimum height of editor
+            				             maxHeight: null,             // set maximum height of editor
+            				             focus: true,                 // set focus to editable area after initializing summernote
+            				             lang: 'ko-KR'
+            				    	 });
+	            				});
+	            			
+
+	            				</script>
 						            			
 	            			</li>
 	            			
