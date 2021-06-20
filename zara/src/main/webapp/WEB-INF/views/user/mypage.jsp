@@ -137,7 +137,7 @@
 	     						<li><label>최근로그인 일자</label>${loginMember.last_login}</li>
 	     						<li>
 	     							<div class="btn_group">
-	     								<button type="button" class="btn btn-info">내가 쓴글</button>
+	     								<button id="btn_write" type="button" class="btn btn-info" >내가 쓴글</button>
 	     								<button type="button" class="btn btn-info" onclick="location.href='/user/checkPassword?job=update'" >정보수정</button>
 	     								<button id="btn_delete" type="button" class="btn btn-danger">탈퇴</button>
 	     							</div>
@@ -158,14 +158,13 @@
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
 	<script >
-		var btn_delete = document.getElementById('btn_delete');
+	// 
+		var btn_delete = document.getElementById('btn_write');
 		btn_delete.addEventListener('click', function(){
-			var delete_can = confirm("정말로 삭제하시겠습니까?");
-			if(delete_can) {
-				location.href="/user/checkPassword?job=delete"
-			}
+			location.href= '/user/writeList';
 		});
-	</script>
+		
+		</script>
 </body>
 
 </html>

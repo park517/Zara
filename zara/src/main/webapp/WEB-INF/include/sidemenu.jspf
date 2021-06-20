@@ -48,7 +48,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">안내</h6>
-                        <a class="collapse-item" href="/board/notice">공지사항</a>
+                        <a class="collapse-item" href="/notice">공지사항</a>
                         <a class="collapse-item" href="/board/hello">사이트소개</a>
                         <a class="collapse-item" href="/board/event">행사안내</a>
                     </div>

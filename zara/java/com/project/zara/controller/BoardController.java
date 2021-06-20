@@ -146,14 +146,7 @@ public class BoardController {
 	}
 	
 	
-	
-	// 공지사항 페이지 보여주기
-	@RequestMapping(value="/notice", method=RequestMethod.GET)
-	public String showNotice() {
-	
-		return "board/notice";
-	
-	}
+
 	
 	
 	//글 상세페이지
