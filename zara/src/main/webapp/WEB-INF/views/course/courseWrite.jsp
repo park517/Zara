@@ -199,9 +199,7 @@
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>
 	
-	<!-- 부트스트랩 js 부분 -->
-	<%@include file="../../include/boot-footer.jspf" %>
-
+	
 
 	
 

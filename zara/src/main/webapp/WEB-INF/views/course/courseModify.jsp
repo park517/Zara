@@ -124,38 +124,38 @@
 	            					<label for="cos_content">내용</label>
 	            					<textarea rows="10" cols="50" id="cos_content" name="cos_content" class="summernote">${courseVO.cos_content}</textarea>
 			            			<script>
-											$('.summernote').summernote({
-												height : 500, // 에디터 높이 
-												focus : true,
-												//콜백 함수
-												callbacks : {
-													onImageUpload : function(files, editor, welEditable) {
-														// 파일 업로드(다중업로드를 위해 반복문 사용)
-														for (var i = files.length - 1; i >= 0; i--) {
-															uploadSummernoteImageFile(files[i], this);
-														}
-													}
+									$('.summernote').summernote({
+										height : 500, // 에디터 높이 
+										focus : true,
+										//콜백 함수
+										callbacks : {
+											onImageUpload : function(files, editor, welEditable) {
+												// 파일 업로드(다중업로드를 위해 반복문 사용)
+												for (var i = files.length - 1; i >= 0; i--) {
+													uploadSummernoteImageFile(files[i], this);
 												}
-											});
-										/**
-										 * 이미지 파일 업로드
-										 */
-										function uploadSummernoteImageFile(file, editor) {
-											data = new FormData();
-											data.append("file", file);
-											$.ajax({
-												data : data,
-												type : "POST",
-												url : "uploadSummernoteImageFile",
-												contentType : false,
-												enctype : 'multipart/form-data',
-												processData : false,
-												success : function(data) {
-													$(editor).summernote('editor.insertImage', data.url);
-												}
-											});
+											}
 										}
-									</script>
+									});
+								/**
+								 * 이미지 파일 업로드
+								 */
+								function uploadSummernoteImageFile(file, editor) {
+									data = new FormData();
+									data.append("file", file);
+									$.ajax({
+										data : data,
+										type : "POST",
+										url : "uploadSummernoteImageFile",
+										contentType : false,
+										enctype : 'multipart/form-data',
+										processData : false,
+										success : function(data) {
+											$(editor).summernote('editor.insertImage', data.url);
+										}
+									});
+								}
+							</script>
 	            				</li> 
 	            			
 	            			
@@ -183,8 +183,6 @@
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>
 	
-	<!-- 부트스트랩 js 부분 -->
-	<%@include file="../../include/boot-footer.jspf" %>
 
 </body>
 

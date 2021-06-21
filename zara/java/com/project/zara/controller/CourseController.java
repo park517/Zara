@@ -2,6 +2,7 @@ package com.project.zara.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -142,11 +143,11 @@ public class CourseController {
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));   //파일 확장자
 		String savedFileName = UUID.randomUUID() + extension;   //저장될 파일 명
 
-		java.io.File targetFile = new java.io.File(fileRoot + savedFileName);   
+		File targetFile = new File(fileRoot + savedFileName);   
 		try {
 			InputStream fileStream = multipartFile.getInputStream();
 			FileUtils.copyInputStreamToFile(fileStream, targetFile);   //파일 저장
-			jsonObject.addProperty("url", "resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("url", "../resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
 			jsonObject.addProperty("responseCode", "success");
 		} catch (IOException e) {
 			FileUtils.deleteQuietly(targetFile);   //저장된 파일 삭제

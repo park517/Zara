@@ -24,10 +24,6 @@
 	<!-- 코스 글 수정 -->
 	<update id="updateCosBoard" parameterType="courseVO">
 		UPDATE course SET
-			<if test="cos_filename != ''">
-			cos_uploadfile = #{cos_uploadfile},
-			cos_filename = #{cos_filename},
-			</if>
 			cos_category = #{cos_category},
 			cos_title = #{cos_title},
 			cos_content = #{cos_content},
