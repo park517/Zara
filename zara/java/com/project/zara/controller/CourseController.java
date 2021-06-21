@@ -121,34 +121,41 @@ public class CourseController {
 		return "common/redirect";
 	}
 	
-	 //서머노트 이미지업로드부분
-	   @RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
-	   @ResponseBody
-	   public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request){
-	      JsonObject jsonObject = new JsonObject();
-	      
-	      // 내부경로로 저장
-	      String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-	      String fileRoot = contextRoot+"resources/fileupload/";
-	      
-	      String originalFileName = multipartFile.getOriginalFilename();   //오리지날 파일명
-	      String extension = originalFileName.substring(originalFileName.lastIndexOf("."));   //파일 확장자
-	      String savedFileName = UUID.randomUUID() + extension;   //저장될 파일 명
-	      
-	      java.io.File targetFile = new java.io.File(fileRoot + savedFileName);   
-	      try {
-	         InputStream fileStream = multipartFile.getInputStream();
-	         FileUtils.copyInputStreamToFile(fileStream, targetFile);   //파일 저장
-	         jsonObject.addProperty("url", "resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
-	         jsonObject.addProperty("responseCode", "success");
-	      } catch (IOException e) {
-	         FileUtils.deleteQuietly(targetFile);   //저장된 파일 삭제
-	         jsonObject.addProperty("responseCode", "error");
-	         e.printStackTrace();
-	      }
-	      String a = jsonObject.toString();
-	      return a;
-	   }
+	//서머노트
+	@RequestMapping("/summernote")
+	public String summernote() {
+		return "summernote";
+	}
+	
+	
+	//서머노트 이미지업로드부분
+	@RequestMapping(value="/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request){
+		JsonObject jsonObject = new JsonObject();
+
+		// 내부경로로 저장
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"resources/fileupload/";
+
+		String originalFileName = multipartFile.getOriginalFilename();   //오리지날 파일명
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));   //파일 확장자
+		String savedFileName = UUID.randomUUID() + extension;   //저장될 파일 명
+
+		java.io.File targetFile = new java.io.File(fileRoot + savedFileName);   
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);   //파일 저장
+			jsonObject.addProperty("url", "resources/fileupload/"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
+			jsonObject.addProperty("responseCode", "success");
+		} catch (IOException e) {
+			FileUtils.deleteQuietly(targetFile);   //저장된 파일 삭제
+			jsonObject.addProperty("responseCode", "error");
+			e.printStackTrace();
+		}
+		String a = jsonObject.toString();
+		return a;
+	}
 	
 	//글 읽기
 	@RequestMapping("/detail")
