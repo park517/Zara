@@ -197,11 +197,15 @@ public class CourseController {
 	
 	//글 삭제
 	@RequestMapping("/delete")
-	public String submitDelete(@RequestParam int cos_num) {
+	public String submitDelete(@RequestParam int cos_num,Model model) {
 		
+		String msg = "삭제되었습니다.";
+		String url ="/course/getList";
 		courseService.deleteCosBoard(cos_num);
+		model.addAttribute("url",url);
+		model.addAttribute("msg",msg);
 		
-		return "/";
+		return "common/redirect";
 	}
 	
 	
