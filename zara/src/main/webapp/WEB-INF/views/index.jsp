@@ -36,7 +36,6 @@
 	margin: 0px;
 	width: 80%;
 	height: 55%;
-	background-color: blue;
 	display: flex;
 	align-items: center;
 }
@@ -44,7 +43,6 @@
 .slide {
 	width: 90%;
 	height: 80%;
-	background-color: turquoise;
 	margin: auto;
 }
 
@@ -92,8 +90,32 @@
 	margin-left: auto;
 	margin-right: 20px;
 }
+.swiper-container {
+		width:80%;
+		height:300px;
+		border:5px solid silver;
+		border-radius:7px;
+	}
+	.swiper-slide {
+		text-align:center;
+		display:flex; /* 내용을 중앙정렬 하기위해 flex 사용 */
+		align-items:center; /* 위아래 기준 중앙정렬 */
+		justify-content:center; /* 좌우 기준 중앙정렬 */
+	}
+	.swiper-slide img {
+		box-shadow:0 0 5px #555;
+	}
+	.guide{
+		margin:0 auto;
+	}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+
+
 </head>
+
 
 <body id="page-top">
 
@@ -111,7 +133,21 @@
 				<div class="main">
 					<div class="recommend_banner">
 
-						<div class="slide"></div>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<img src="../../resources/helloZara.jpg" style="max-width:80%">
+							</div>
+							<div class="swiper-slide">
+								<img src="../../resources/helloZara.jpg" style="max-width:80%">
+							</div>
+				
+						</div>
+			
+						<!-- 네비게이션 -->
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+					</div>
 
 					</div>
 
@@ -219,7 +255,19 @@
 
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../include/boot-footer.jspf"%>
+<script>
+$(document).ready(function(){
+	new Swiper('.swiper-container', {
+		loop:true,
+		navigation : {
+			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+		},
+	})
+})
+	
 
+</script>
 </body>
 
 </html>
