@@ -107,16 +107,6 @@
 	            		</ul>
 	            		<hr>
 	            		<div>
-	            			<c:if test="${fn:endsWith(course.cos_filename,'.jpg') ||
-										  fn:endsWith(course.cos_filename,'.JPG') ||
-										  fn:endsWith(course.cos_filename,'.gif') ||
-										  fn:endsWith(course.cos_filename,'.GIF') ||
-										  fn:endsWith(course.cos_filename,'.png') ||
-										  fn:endsWith(course.cos_filename,'.PNG')}">
-							 	<div>    
-									<img src="imageView?cos_num=${course.cos_num}" style="max-width:500px" id="imgsize">
-								</div>
-							 </c:if> 
 								${course.cos_content}
 	            			
 	            		</div>

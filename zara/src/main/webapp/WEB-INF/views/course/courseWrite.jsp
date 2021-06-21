@@ -134,10 +134,7 @@
 								    <option value="3">전국일주</option>
 								</select>
 	            			</li>
-	            			<li>
-	            				<label for="cos_upload">이미지 업로드</label>
-	            				<input type="file" name="cos_upload" id="cos_upload" accept="image/gif,image/png,image/jpeg">
-	            			</li>
+	            			
 	            			<li>
 	            				<label for="cos_content">내용</label> 
 	            				<textarea id="cos_content" name="cos_content" class="summernote"></textarea>

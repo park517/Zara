@@ -110,15 +110,7 @@
 										 <option value="3">전국일주</option>
 	            					</select>
 	            				</li>
-	            				<li>
-									<label for="cos_upload">이미지 업로드</label>
-									<input type="file" name="cos_upload" id="cos_upload">
-									<c:if test="${!empty courseVO.cos_uploadfile}">
-									<br>
-									<span>(${courseVO.cos_filename})파일이 등록되어 있습니다.
-									다시 업로드하면 기존 파일은 삭제 됩니다.</span>
-									</c:if>
-								</li>
+	            				
 						            				
 	            				<li>
 	            					<label for="cos_content">내용</label>
