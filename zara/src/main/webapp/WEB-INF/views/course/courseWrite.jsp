@@ -2,9 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    
 
 <head>
 
@@ -87,10 +91,7 @@
 	</style>
 </head>
 
-<!-- 썸머노트 -->
-  <script src="${pageContext.request.contextPath}/resources/js/summernote-lite.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/summernote-ko-KR.js"></script>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/js/summernote-lite.css">
+
 
 <body id="page-top">
 	<c:if test="${not empty loginMember}">
@@ -134,24 +135,8 @@
 	            				<input type="file" name="cos_upload" id="cos_upload" accept="image/gif,image/png,image/jpeg">
 	            			</li>
 	            			<li>
-	            				<div class="container">
-	            					<label for="cos_content">내용</label>
-	            					<textarea rows="10" cols="50" id="cos_content" name="cos_content"></textarea>
-	            				</div>
-	            				<script>
-	            				$(document).ready(function(){
-	            					 $('#cos_content').summernote({
-            				             height: 300,                 // set editor height
-            				             minHeight: null,             // set minimum height of editor
-            				             maxHeight: null,             // set maximum height of editor
-            				             focus: true,                 // set focus to editable area after initializing summernote
-            				             lang: 'ko-KR'
-            				    	 });
-	            				});
-	            			
-
-	            				</script>
-						            			
+	            				<label for="cos_content">내용</label> 
+	            				<textarea id="cos_content" name="cos_content" class="summernote"></textarea>
 	            			</li>
 	            			
 	            		</ul>
@@ -178,65 +163,42 @@
 	
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
-	
+
+
 	<script>
-
-    
-
-        var sel_files = [];
-
-
-        $(document).ready(function() {
-            $("#input_imgs").on("change", handleImgFileSelect);
-        }); 
-
-        function fileUploadAction() {
-            console.log("fileUploadAction");
-            $("#input_imgs").trigger('click');
-        }
-
-        function handleImgFileSelect(e) {
-
-            // 이미지 정보들을 초기화
-            sel_files = [];
-            $(".imgs_list").empty();
-
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
-
-            var index = 0;
-            filesArr.forEach(function(f) {
-                if(!f.type.match("image.*")) {
-                    alert("확장자는 이미지 확장자만 가능합니다.");
-                    return;
-                }
-
-                sel_files.push(f);
-
-                var reader = new FileReader();
-                reader.onload = function(e) {
-
-                     var html = "<li class='img_li'><a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a></li>";
-
-                    $(".imgs_list").append(html);
-                    index++;
-
-                }
-                reader.readAsDataURL(f);
-                
-            });
-        }
-
-        function deleteImageAction(index) {            
-        console.log("index : "+index);
-        sel_files.splice(index, 1);
-
-        var img_id = "#img_id_"+index;
-        $(img_id).remove();
-
-        console.log(sel_files);
-    }
-
+		$(document).ready(function() {
+			$('.summernote').summernote({
+				height : 500, // 에디터 높이 
+				focus : true,
+				//콜백 함수
+				callbacks : {
+					onImageUpload : function(files, editor, welEditable) {
+						// 파일 업로드(다중업로드를 위해 반복문 사용)
+						for (var i = files.length - 1; i >= 0; i--) {
+							uploadSummernoteImageFile(files[i], this);
+						}
+					}
+				}
+			});
+		});
+		/**
+		 * 이미지 파일 업로드
+		 */
+		function uploadSummernoteImageFile(file, el) {
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data,
+				type : "POST",
+				url : "uploadSummernoteImageFile",
+				contentType : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				success : function(data) {
+					$(el).summernote('editor.insertImage', data.url);
+				}
+			});
+		}
 	</script>
 
 </body>

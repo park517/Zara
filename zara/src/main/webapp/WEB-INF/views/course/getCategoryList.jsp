@@ -69,13 +69,13 @@
             <%@include file="../../include/toolbar.jspf" %>
                <div id="boardMain">
                   <h2>
-                  	<c:if test="${list[0].cos_category} eq 1">
+                  	<c:if test="${list[0].cos_category eq 1}">
                   		수도권
                   	</c:if>
-                  	<c:if test="${list[0].cos_category} eq 2">
+                  	<c:if test="${list[0].cos_category eq 2}">
                   		제주도
                   	</c:if>
-                  	<c:if test="${list[0].cos_category} eq 3">
+                  	<c:if test="${list[0].cos_category eq 3}">
                   		전국일주
                   	</c:if>
                   </h2>

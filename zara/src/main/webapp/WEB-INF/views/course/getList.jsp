@@ -102,13 +102,13 @@
                               <tr> 
                                  <td>${course.cos_num}</td> 
                                  <td>
-                                 	<c:if test="${course.cos_category} == 1">
+                                 	<c:if test="${course.cos_category == 1}">
 				                  		수도권
 				                  	</c:if>
-				                  	<c:if test="${course.cos_category} == 2">
+				                  	<c:if test="${course.cos_category == 2}">
 				                  		제주도
 				                  	</c:if>
-				                  	<c:if test="${course.cos_category} == 3">
+				                  	<c:if test="${course.cos_category == 3}">
 				                  		전국일주
 				                  	</c:if>
                                  </td>
