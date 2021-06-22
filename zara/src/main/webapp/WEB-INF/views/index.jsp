@@ -50,7 +50,6 @@
 	margin: 0px;
 	width: 80%;
 	height: 55%;
-	background-color: blueviolet;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -91,8 +90,8 @@
 	margin-right: 20px;
 }
 .swiper-container {
-		width:80%;
-		height:300px;
+		width:90%;
+		height:350px;
 		border:5px solid silver;
 		border-radius:7px;
 	}
@@ -131,15 +130,31 @@
 				<%@include file="../include/toolbar.jspf"%>
 
 				<div class="main">
+				
+					<!-- 메인 배너 -->
 					<div class="recommend_banner">
 
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
 							<div class="swiper-slide">
-								<img src="../../resources/helloZara.jpg" style="max-width:80%">
+                         		<a href="/course/getList">
+									<img src="../../resources/ride-banner.jpg" style="max-width:100%">
+								</a>
 							</div>
 							<div class="swiper-slide">
-								<img src="../../resources/helloZara.jpg" style="max-width:80%">
+								<a href="/course/getCategoryList?cos_category=1">	
+									<img src="../../resources/seoul-banner.jpg" style="max-width:100%">
+                        		</a>
+							</div>
+							<div class="swiper-slide">
+								<a href="/course/getCategoryList?cos_category=2">
+									<img src="../../resources/jeju-banner.jpg" style="max-width:100%">
+                        		</a>
+							</div>
+							<div class="swiper-slide">
+								<a href="/course/getCategoryList?cos_category=3">
+									<img src="../../resources/all-banner.jpg" style="max-width:100%">
+                        		</a>
 							</div>
 				
 						</div>
@@ -151,8 +166,11 @@
 
 					</div>
 
+						<br><br><br>
 					<div class="board_wrap">
-
+	
+	
+						<!-- 공지사항 -->
 						<div class="notice">
 
 							<div class="top">
@@ -184,7 +202,9 @@
 								</table>
 							</div>
 						</div>
-
+						
+						<br><br><br>
+						<!-- 자전거 중고 -->
 						<div class="ride">
 
 							<div class="top">
@@ -215,6 +235,8 @@
 
 
 						</div>
+						<br><br><br>
+						<!-- 커뮤니티 -->
 						<div class="talk">
 
 							<div class="top">
