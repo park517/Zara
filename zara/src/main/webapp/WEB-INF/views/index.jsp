@@ -225,7 +225,7 @@
 											varStatus="status">
 											<tr>
 												<td>${status.count}</td>
-												<td>${list.pro_name}</td>
+												<td><a href="/product/detail?pno=${list.pno}">${list.pro_name}</a></td>
 												<td>${list.pro_date}</td>
 											</tr>
 										</c:forEach>
@@ -256,7 +256,7 @@
 										<c:forEach items="${boardList}" var="list" varStatus="status">
 											<tr>
 												<td>${status.count}</td>
-												<td>${list.title}</td>
+												<td><a href="/board/detail?bno=${list.bno}">${list.title}</a></td>
 												<td>${list.create_at}</td>
 											</tr>
 										</c:forEach>

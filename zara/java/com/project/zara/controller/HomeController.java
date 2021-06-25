@@ -26,6 +26,7 @@ import com.project.zara.service.ProductService;
 @Controller
 public class HomeController {
 	
+	
 	@Autowired
 	BoardService boardService;
 	
