@@ -137,7 +137,9 @@
 	     						<li><label>최근로그인 일자</label>${loginMember.last_login}</li>
 	     						<li>
 	     							<div class="btn_group">
-	     								<button id="btn_write" type="button" class="btn btn-info" >내가 쓴글</button>
+	     								<button id="btn_write" type="button" class="btn btn-info" 
+	     								onclick="location.href='/user/getProdutList/${loginMember.mem_id}'" 
+	     								>내가 쓴 글 </button>
 	     								<button type="button" class="btn btn-info" onclick="location.href='/user/checkPassword?job=update'" >정보수정</button>
 	     								<button id="btn_delete" type="button" class="btn btn-danger">탈퇴</button>
 	     							</div>
@@ -159,7 +161,7 @@
 	<%@include file="../../include/boot-footer.jspf" %>
 	<script >
 	// 
-		var btn_delete = document.getElementById('btn_write');
+		var btn_delete = document.getElementById('btn_delete');
 		btn_delete.addEventListener('click', function(){
 			location.href= '/user/writeList';
 		});

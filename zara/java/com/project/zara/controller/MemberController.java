@@ -1,5 +1,6 @@
 package com.project.zara.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,16 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.project.zara.mapper.MemberMapper;
+import com.project.zara.model.BoardVO;
+import com.project.zara.model.CourseVO;
 import com.project.zara.model.MemberVO;
+import com.project.zara.model.ProductVO;
+import com.project.zara.service.BoardService;
+import com.project.zara.service.CourseService;
 import com.project.zara.service.MemberService;
+import com.project.zara.service.ProductService;
+import com.project.zara.util.PagingUtil;
 
 import lombok.extern.log4j.Log4j;
 
@@ -31,6 +41,14 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	ProductService productSerivce;
+	
+	@Autowired
+	CourseService courseService;
+	
+	@Autowired
+	BoardService boardService;
 	
 	// 로그인 페이지 보여주기
 	@RequestMapping(path = "/login", method=RequestMethod.GET)
@@ -176,6 +194,32 @@ public class MemberController {
 	}
 	
 	
+	//내가 작성한 상품 글 가져오기 
+	@RequestMapping(value="/getProdutList/{mem_id}", method=RequestMethod.GET)
+	public String getProductList(
+			Model model,
+			@RequestParam(value="pageNum", defaultValue="1")int currentPage,
+			@PathVariable("mem_id") String mem_id
+			){
+		int total = productSerivce.UserProductCount(mem_id);
+		
+		PagingUtil page = new PagingUtil(currentPage, total, 10, 10, "getProdutList/"+mem_id);
+		
+		List<ProductVO> list = null;
+		if(total >0) {
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("start", page.getStartCount());
+			map.put("end", page.getEndCount());
+			map.put("mem_id", mem_id);
+			list = productSerivce.getProductList(map);
+		}
+		ModelAndView mav = new ModelAndView();
+		model.addAttribute("total", total);
+		model.addAttribute("list", list);
+		model.addAttribute("pagingHtml", page.getPagingHtml());
+
+		return "user/userWriteList";
+	}
 	
 	
 	

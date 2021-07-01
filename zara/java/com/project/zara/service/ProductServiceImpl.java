@@ -58,11 +58,27 @@ public class ProductServiceImpl implements ProductService{
 		productMapper.updateProduct(productVO);
 	}
 
-	// 선택 갯수
+	// 상품 갯수 
 	@Override
 	public int selectRowCount() {
 		// TODO Auto-generated method stub
 		return productMapper.selectRowCount();
+	}
+
+	
+	// 유저별 상품 갯수
+	@Override
+	public int UserProductCount(String mem_id) {
+		// TODO Auto-generated method stub
+		return productMapper.UserProductCount(mem_id);
+	}
+
+	
+	// 유저별 상품 조회 
+	@Override
+	public List<ProductVO> getUserProduct(Map<String,Object> map) {
+		// TODO Auto-generated method stub
+		return productMapper.getUserProduct(map);
 	}
 
 }

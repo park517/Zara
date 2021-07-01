@@ -90,5 +90,22 @@
 		where pno = #{pno}
 	</delete>
 	
+	<!--  유저별 상품 갯수 가져오기 -->
+	<select id="UserProductCount" resultType="int">
+		select count(*) from product
+		where mem_id = #{mem_id}
+	</select>
+	
+	<!--  유저별 상품 갯수 가져오기 -->
+	<select id="getUserProduct" resultType="ProductVO" parameterType="map">
+		SELECT *
+		FROM (SELECT ROWNUM RN, A.*
+				FROM (SELECT * FROM product
+					  where mem_id =#{mem_id}
+					  ORDER BY pno DESC) A
+				)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
 
 </mapper>
