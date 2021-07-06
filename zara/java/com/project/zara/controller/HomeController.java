@@ -39,7 +39,7 @@ public class HomeController {
 		// 게시판 글 가져오기
 		Map<String,Object> map = new HashMap<String, Object>();
 		map.put("start", 1);
-		map.put("end", 5);
+		map.put("end", 4);
 		List<BoardVO> boardList = boardService.selectList(map);
 		
 		// 자전거 상품 글 가져오기
