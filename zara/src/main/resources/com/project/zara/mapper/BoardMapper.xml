@@ -103,9 +103,15 @@
  		WHERE rnum >= #{start} AND rnum <= #{end}
  		]]>                                 
  	</select>
- 	
+ 		
 
-
+	<!--  유저별 가져오기 -->
+	<select id="getboardList" resultType="BoardVO">
+	
+		select * from board
+		where mem_id = #{mem_id}
+	
+	</select>
 
  	
 

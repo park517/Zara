@@ -31,6 +31,13 @@
 		WHERE cos_num = #{cos_num}
 	
 	</update>
+	
+		<!--  유저별 가져오기 -->
+	<select id="getcosList" resultType="courseVO">
+		select * from course
+		where mem_id = #{mem_id}
+	</select>
+	
 
 
 </mapper>

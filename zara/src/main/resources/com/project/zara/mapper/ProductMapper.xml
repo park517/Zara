@@ -9,7 +9,7 @@
 		insert into
 		product (
 			pno,
-			mem_id,
+			mem_no,
 			pro_category,
 			pro_name,
 			pro_price,
@@ -20,11 +20,13 @@
 			pro_com,
 			pro_status,
 			pro_date,
-			pro_sum
+			pro_sum,
+			del_yn,
+			hit
 		)
 		values (
 			seq_product.nextval,
-			#{mem_id},
+			#{mem_no},
 			#{pro_category},
 			#{pro_name},
 			#{pro_price},
@@ -35,7 +37,9 @@
 			#{pro_com},
 			#{pro_status},
 			sysdate,
-			#{pro_sum}
+			#{pro_sum},
+			'N',
+			0
 		)
 	</insert>
 	
@@ -85,10 +89,13 @@
 	</update>
 	
 	<!-- 글 삭제 -->
-	<delete id="deleteProduct" parameterType="int">
-		delete from product
+	<update id="deleteProduct" parameterType="int">
+		update product
+		set 
+			del_yn ='Y',
+			delete_at = sysdate
 		where pno = #{pno}
-	</delete>
+	</update>
 	
 	<!--  유저별 상품 갯수 가져오기 -->
 	<select id="UserProductCount" resultType="int">

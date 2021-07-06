@@ -3,6 +3,7 @@ package com.project.zara.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,15 +43,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void doDelete(String id) {
+	public void doDelete(long mem_no) {
 		
-		memberMapper.doDelete(id);
+		memberMapper.doDelete(mem_no);
 		
 	}
 
 	@Override
-	public void updateLoginDate(String mem_id) {
-		memberMapper.updateLoginDate(mem_id);
+	public void updateLoginDate(long mem_no) {
+		memberMapper.updateLoginDate(mem_no);
 	}
 
 	@Override

@@ -163,7 +163,7 @@
 	// 
 		var btn_delete = document.getElementById('btn_delete');
 		btn_delete.addEventListener('click', function(){
-			location.href= '/user/writeList';
+			location.href= '/user/delete';
 		});
 		
 		</script>
