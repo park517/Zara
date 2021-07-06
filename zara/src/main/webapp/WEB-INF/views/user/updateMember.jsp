@@ -85,6 +85,7 @@
 									<li>
 										<label>아이디</label> 
 										<input id="id" value="${loginMember.mem_id}" readonly="readonly" name="id">
+										<input id="mem_no" value="${loginMember.mem_no}" type="hidden" readonly="readonly" name="mem_no">
 						
 									</li>
 									

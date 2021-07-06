@@ -21,7 +21,7 @@
 		.card {
 
 			margin : auto;
-			width: 600px;
+			width: 550px;
 		}
 		
 		.card-body {
@@ -31,7 +31,7 @@
 		.form-group label {
 			font-size : 15px;
 			margin-right: 20px;
-			width: 110px;
+			width: 130px;
 			margin-bottom: 25px;
 			
 		}				
@@ -71,7 +71,6 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
             	<div class="card">
 					<article class="card-body">
 						<h4 class="card-title text-center mb-4 mt-1">회원가입</h4>

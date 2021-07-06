@@ -66,7 +66,7 @@ public class MemberController {
 		MemberVO member = memberService.getMember(id, password);
 		
 		if(member !=null) {
-			memberService.updateLoginDate(id);
+			memberService.updateLoginDate(member.getMem_no());
 			session.setAttribute("loginMember",member);
 			return "good";
 		}
@@ -157,12 +157,11 @@ public class MemberController {
 	@RequestMapping(path = "/delete", method=RequestMethod.GET)
 	public String doDelete(HttpSession session ,Model model) {
 		MemberVO member = (MemberVO) session.getAttribute("loginMember");
-		String mem_id = member.getMem_id();
-		String msg = mem_id+" 계정이 삭제 되었습니다.";
+		long mem_no = member.getMem_no();
+		String msg = mem_no+" 계정이 삭제 되었습니다.";
 		String url = "/";
 		
-		
-		memberService.doDelete(mem_id);
+		memberService.doDelete(mem_no);
 		
 		session.removeAttribute("loginMember");
 		model.addAttribute("msg",msg);

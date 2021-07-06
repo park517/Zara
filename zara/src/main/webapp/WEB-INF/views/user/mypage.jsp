@@ -113,8 +113,6 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
 	     				<div class="mem_info">
 	     				
 	     					<ul>
