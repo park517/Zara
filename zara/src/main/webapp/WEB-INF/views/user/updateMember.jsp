@@ -4,14 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>회원가입</title>
-    
+ 
     <!--  부트 스트랩 부분 -->
 	<%@include file="../../include/boot-head.jspf" %>
 
@@ -68,14 +61,12 @@
         }
         
 	</style>
-</head>
 
 <body id="page-top">
 
 	<c:if test="${not empty loginMember}">
 	    <!-- Page Wrapper -->
 	    <div id="wrapper">
-			<%@include file="../../include/sidemenu.jspf" %>
 	        <!-- Content Wrapper -->
 	        <div id="content-wrapper" class="d-flex flex-column">
 	
@@ -94,6 +85,7 @@
 									<li>
 										<label>아이디</label> 
 										<input id="id" value="${loginMember.mem_id}" readonly="readonly" name="id">
+										<input id="mem_no" value="${loginMember.mem_no}" type="hidden" readonly="readonly" name="mem_no">
 						
 									</li>
 									

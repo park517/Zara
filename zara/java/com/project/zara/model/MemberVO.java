@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberVO {
-	
+	private long mem_no; // 회원 번호
 	private String mem_id;  // 회원아이디
 	private String mem_password; // 회원 비밀번호
 	private String mem_name; // 회원 이름

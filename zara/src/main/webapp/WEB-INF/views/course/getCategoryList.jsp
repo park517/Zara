@@ -5,14 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>게시판</title>
-    
     
     <!--  부트 스트랩 부분 -->
    <%@include file="../../include/boot-head.jspf" %>
@@ -53,13 +46,11 @@
 
       
    </style>
-</head>
 
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-      <%@include file="../../include/sidemenu.jspf" %>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
