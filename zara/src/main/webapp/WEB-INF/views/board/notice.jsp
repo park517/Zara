@@ -31,7 +31,7 @@
 		
 	</style>
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -40,8 +40,6 @@
 
             <!-- Main Content -->
             <div id="content">
-                <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
             	
         		<div class="main">
         			<h2>공지사항</h2>

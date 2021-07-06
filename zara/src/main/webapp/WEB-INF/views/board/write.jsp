@@ -77,7 +77,8 @@
 		
 	</style>
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
+	<main class="flex-shrink-0">
 	<c:if test="${not empty loginMember}">
 
 	    <!-- Page Wrapper -->
@@ -87,8 +88,6 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
 					
 					
 	            	<div id="boardMain">
@@ -222,7 +221,7 @@
     }
 
 	</script>
-
+</main>
 </body>
 
 </html>

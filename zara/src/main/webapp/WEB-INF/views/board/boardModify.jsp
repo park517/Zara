@@ -42,7 +42,7 @@
 	</style>
 </head>
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
 	<c:if test="${not empty loginMember}">
 
 	    <!-- Page Wrapper -->
@@ -52,8 +52,6 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
 					
 					
 	            	<div id="boardMain">
@@ -87,15 +85,12 @@
 	            			</div>
 	            		</form>
 	            		
-	            		
-	            		
-	            		     	</div>
+	            	</div>
 	           
 	            </div>
 	     
 	        </div> 
 	            
-	              <!-- End of Toolbar -->
 	    </div>
     </c:if>
     <!-- End of Page Wrapper -->

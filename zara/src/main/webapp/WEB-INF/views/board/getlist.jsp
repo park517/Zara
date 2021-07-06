@@ -45,7 +45,7 @@
       
    </style>
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -54,8 +54,6 @@
 
             <!-- Main Content -->
             <div id="content">
-                <!-- Toolbar -->
-            <%@include file="../../include/toolbar.jspf" %>
                <div id="boardMain">
                   <h2>전체게시판!</h2>
                   <br><br><br>

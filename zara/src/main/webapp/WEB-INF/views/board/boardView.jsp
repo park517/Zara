@@ -48,7 +48,7 @@
 		</style>
 		
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
 	    <!-- Page Wrapper -->
 	    <div id="wrapper">
 	        <!-- Content Wrapper -->
@@ -56,9 +56,7 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
-					
+	               
 					
 	            	<div id="boardMain">
 	            		<h2>글 상세 보기</h2>
