@@ -5,8 +5,8 @@
 <mapper namespace="com.project.zara.mapper.MemberMapper">
 
 	<!--  로그인 성공 시 회원 정보 가져오기 -->
-	<select id="getMember" parameterType="String" resultType="com.project.zara.model.MemberVO">
-		select * from member where mem_id=#{mem_id} AND mem_password = #{mem_password} AND DEL_YN ='N'
+	<select id="getMember" parameterType="Map" resultType="com.project.zara.model.MemberVO">
+		select * from member where mem_id=#{mem_id} AND mem_password = #{mem_password} and DEL_YN ='N'
 	</select>
 	
 	<!--  로그인 성공 시 마지막 로그인 일자 업데이트 하기 -->
@@ -20,10 +20,10 @@
 	
 	<!--  회원가입  -->
 	
-	<insert id="doRegister" parameterType="map" useGeneratedKeys="true" keyProperty="mem_no">
+	<insert id="doRegister" parameterType="map" useGeneratedKeys="true" keyProperty="mem_id">
 	
 		insert into member VALUES(
-		seq_member.nextval,
+		SEQ_MEMBER.nextval,
 		#{id},
 		#{password},
 		#{name},
@@ -46,8 +46,8 @@
 	
 	<!--  아이디 중복 체크  -->
 	
-	<select id="checkId" parameterType="String" resultType="String">
-		select count(*) from member where mem_id = #{id} and del_yn = 'N'
+	<select id="checkId" parameterType="String" resultType="int">
+		select count(*) from member where mem_id = #{id} and del_yn='N'
 	</select>
 	
 	<!--  회원 정보 Update 실시  -->
@@ -74,17 +74,18 @@
 		set
 			delete_at = sysdate,
 			del_yn = 'Y'
-		where
-			mem_no = #{mem_no}
+		where mem_no = #{mem_no}
+
 	</update>
 	
 	<!--  아이디 찾기 -->
 	<select id="findId" parameterType="map" resultType="String">
-		select mem_id from member where mem_name =#{name} and mem_tel = #{tel}
+		select mem_id from member where mem_name =#{name} and mem_tel = #{tel} and DEL_YN ='N'
 	
 	</select>
+	
 	<!-- 비밀번호 찾기 -->
 	<select id="findPassword" parameterType="map" resultType="String">
-		select mem_password from member where mem_id =#{id} and mem_name = #{name} and mem_tel = #{tel} 
+		select mem_password from member where mem_id =#{id} and mem_name = #{name} and mem_tel = #{tel} and DEL_YN ='N'
 	</select>
 </mapper>

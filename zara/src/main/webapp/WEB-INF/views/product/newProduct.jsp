@@ -129,6 +129,7 @@
 					    <p>상품 등록하기</p>
                         <form class="insert_form" action="/product/new" method="Post" enctype="multipart/form-data">
                             <input type="hidden" value="${loginMember.mem_id}" name="mem_id">
+                            <input type="hidden" value="${loginMember.mem_no}" name="mem_no">
                             <ul class="sell_input">
                                 <li>
                                     <div>

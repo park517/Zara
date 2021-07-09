@@ -71,6 +71,14 @@ public class CourseServiceImpl implements CourseService {
 		courseMapper.updateCosHit(cos_num);
 	}
 
+	
+	// 멤버별 코스 글 가져오기
+	@Override
+	public List<CourseVO> getcosList(String mem_id) {
+		// TODO Auto-generated method stub
+		return courseMapper.getcosList(mem_id);
+	}
+
 
 
 	

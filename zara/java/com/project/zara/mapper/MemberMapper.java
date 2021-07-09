@@ -14,18 +14,18 @@ public interface MemberMapper {
 	// 멤버 정보 가져오기
 	public MemberVO getMember(@Param("mem_id") String mem_id ,@Param("mem_password") String mem_password);
 	
-	// 마지막 로그인 날짜 수정
+	// 마지막 로그인 일자 수정
 	public void updateLoginDate(@Param("mem_no") long mem_no);
 	
-	// 가입하기
-	public void doRegister(Map<String,Object> param);
+	// 회원가입
+	public void doRegister(Map<String, Object> param);
 	
 	// 수정하기
 	public void doUpdate(Map<String,Object> param);
 	
 	// 아이디 중복 체크
-	public String checkId(String id);
-	
+	public String checkId(@Param("id") String id);
+
 	// 아이디 삭제
 	public void doDelete(@Param("mem_no") long mem_no);
 	

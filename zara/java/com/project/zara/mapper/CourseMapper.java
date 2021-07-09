@@ -48,4 +48,6 @@ public interface CourseMapper {
 	@Update("UPDATE course SET hit = hit + 1 WHERE cos_num = #{cos_num}")
 	public void updateCosHit(Integer cos_num);
 	
+	// 유저별 코스 가져오기
+	public List<CourseVO> getcosList(String mem_id);
 }
