@@ -3,14 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>회원가입</title>
-    
     <!--  부트 스트랩 부분 -->
 	<%@include file="../../include/boot-head.jspf" %>
 
@@ -28,7 +21,7 @@
 		.card {
 
 			margin : auto;
-			width: 600px;
+			width: 550px;
 		}
 		
 		.card-body {
@@ -38,7 +31,7 @@
 		.form-group label {
 			font-size : 15px;
 			margin-right: 20px;
-			width: 110px;
+			width: 130px;
 			margin-bottom: 25px;
 			
 		}				
@@ -67,20 +60,17 @@
         	margin-right: 10px;
         }
 	</style>
-</head>
 
 <body id="page-top">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-		<%@include file="../../include/sidemenu.jspf" %>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
                 <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
             	<div class="card">
 					<article class="card-body">
 						<h4 class="card-title text-center mb-4 mt-1">회원가입</h4>

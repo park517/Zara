@@ -4,15 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>로그인</title>
-    
-    
     <!--  부트 스트랩 부분 -->
 	<%@include file="../../include/boot-head.jspf" %>
 
@@ -37,24 +29,25 @@
 		.card-body {
 			margin-top : 30px;
 		}
+		i { 
+			height: 100%;
+			font-size: 30px;
+		}
+		
 		
 		
 		
 	</style>
-</head>
 
-<body id="page-top">
+<body id="page-top" class="d-flex flex-column h-100">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-		<%@include file="../../include/sidemenu.jspf" %>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
-                <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
             	<div class="card">
 					<article class="card-body">
 						<h4 class="card-title text-center mb-4 mt-1">로그인</h4>
@@ -64,7 +57,7 @@
 						<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-prepend">
-							    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+							    <span class="input-group-text"><i class="fa fa-user"></i></span>
 							 </div>
 							<input id="id" name="id" class="form-control"   placeholder="아이디를 입력해주세요" type="text">
 						</div> <!-- input-group.// -->
@@ -78,7 +71,7 @@
 						</div> <!-- input-group.// -->
 						</div> <!-- form-group// -->
 						<div class="form-group">
-						<button type="button" class="btn btn-primary btn-block" onclick='doLogin()'> 로그인  </button>
+						<button type="button" class="btn btn-primary btn-block" onclick='doLogin()'>로그인</button>
 						<button type="button" class="btn btn-primary btn-block" onclick="location.href='/user/register'"> 회원가입</button>
 						</div> <!-- form-group// -->
 						<p class="text-center"><a href="/user/find" class="btn">아이디 및 비밀번호를 잊어버리셨나요?</a></p>

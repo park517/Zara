@@ -59,7 +59,6 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-      <%@include file="../../include/sidemenu.jspf" %>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
