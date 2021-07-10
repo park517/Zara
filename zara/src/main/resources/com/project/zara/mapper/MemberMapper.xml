@@ -5,9 +5,14 @@
 <mapper namespace="com.project.zara.mapper.MemberMapper">
 
 	<!--  로그인 성공 시 회원 정보 가져오기 -->
-	<select id="getMember" parameterType="Map" resultType="com.project.zara.model.MemberVO">
-		select * from member where mem_id=#{mem_id} AND mem_password = #{mem_password} and DEL_YN ='N'
+	<select id="getMember" parameterType="Map" resultType="MemberVO">
+		select m.*,a.auth from member m ,user_auth a 
+		where 
+			mem_id=#{mem_id} AND mem_password = #{mem_password} 
+			and DEL_YN ='N' and m.mem_no = a.mem_no
+		
 	</select>
+	
 	
 	<!--  로그인 성공 시 마지막 로그인 일자 업데이트 하기 -->
 	<update id="updateLoginDate" parameterType="long">
@@ -20,26 +25,33 @@
 	
 	<!--  회원가입  -->
 	
-	<insert id="doRegister" parameterType="map" useGeneratedKeys="true" keyProperty="mem_id">
+	<insert id="doRegister" parameterType="MemberVO"  useGeneratedKeys="true" keyColumn="mem_no" keyProperty="mem_no" >
 	
-		insert into member VALUES(
-		SEQ_MEMBER.nextval,
-		#{id},
-		#{password},
-		#{name},
-		#{tel},
-		#{email},
-		#{mem_zip},
-		#{mem_road},
-		#{mem_adrdetail},
-		#{gender},
-		sysdate,
-		null,
-		null,
-		'N',
-		null,
-		0,
-		0
+ 		insert into 
+		member (
+			mem_no,mem_id,mem_password,mem_name,mem_tel,
+			mem_email,mem_zip,mem_road,mem_adrdetail,gender,
+			create_at,update_at,last_login,del_yn,delete_at,
+			mem_point,mem_type
+		)
+		VALUES(
+			SEQ_MEMBER.nextval,
+			#{mem_id},
+			#{mem_password},
+			#{mem_name},
+			#{mem_tel},
+			#{mem_email},
+			#{mem_zip},
+			#{mem_road},
+			#{mem_adrdetail},
+			#{gender},
+			sysdate,
+			null,
+			null,
+			'N',
+			null,
+			0,
+			0
 		)
 	
 	</insert>
@@ -88,4 +100,15 @@
 	<select id="findPassword" parameterType="map" resultType="String">
 		select mem_password from member where mem_id =#{id} and mem_name = #{name} and mem_tel = #{tel} and DEL_YN ='N'
 	</select>
+	
+	<!-- 권한 넣기 -->
+	<insert id="insertAuth" parameterType="long">
+		insert into user_auth
+		values(
+			#{mem_no},
+			'ROLE_USER'
+		)
+		
+	
+	</insert>
 </mapper>

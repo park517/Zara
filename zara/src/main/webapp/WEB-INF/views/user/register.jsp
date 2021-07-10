@@ -81,13 +81,13 @@
 							<ul>
 								<li>
 									<label>아이디</label> 
-									<input id="id" placeholder="아이디를 입력해주세요" required="required" name="id">
+									<input id="id" placeholder="아이디를 입력해주세요" required="required" name="mem_id">
 									<button id="checkId" class="btn btn-primary" type="button">중복체크</button>
 								</li>
 								
 								<li>
 									<label>비밀번호</label>
-									<input type="password" id="password" placeholder="비밀번호를 입력해주세요" required="required" name="password">
+									<input type="password" id="password" placeholder="비밀번호를 입력해주세요" required="required" name="mem_password">
 								</li>
 								
 								<li>
@@ -97,17 +97,17 @@
 								
 								<li>
 									<label>이름</label>
-									<input placeholder="이름을 입력해주세요" required="required" name="name">
+									<input placeholder="이름을 입력해주세요" required="required" name="mem_name">
 								</li>
 								
 								<li>
 									<label>전화번호</label>
-									<input placeholder="전화번호를 입력해주세요" required="required" name="tel">
+									<input placeholder="전화번호를 입력해주세요" required="required" name="mem_tel">
 								</li>
 								
 								<li>
 									<label>이메일</label>
-									<input placeholder="이메일을 입력해주세요" required="required" name="email">
+									<input placeholder="이메일을 입력해주세요" required="required" name="mem_email">
 								</li>
 								
 								<li>
@@ -133,6 +133,7 @@
 						<div class="form-group">
 						<button id="btn_register" type="button" class="btn btn-primary btn-block">회원가입</button>
 						</div> <!-- form-group// -->
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 						</form>
 					</article>
 				</div> <!-- card.// -->
@@ -156,6 +157,8 @@
 		var btn_check = document.getElementById('checkId');
 		var check_id_flag = 0;
 		var btn_register = document.getElementById('btn_register');
+	    var csrfHeaderName ="${_csrf.headerName}"; 
+       	var csrfTokenValue="${_csrf.token}";
 		
 	
 		
@@ -164,23 +167,23 @@
 		
 			btn_register.addEventListener('click',function() {
 				
-				if(document.register_form.id.value ==""){
+				if(document.register_form.mem_id.value ==""){
 					alert("아이디를 입력해주세요!");
 				}
 				
-				else if(document.register_form.password.value =="") {
+				else if(document.register_form.mem_password.value =="") {
 					alert("비밀번호를 입력해주세요!");
 				}
 				
-				else if(document.register_form.name.value =="") {
+				else if(document.register_form.mem_name.value =="") {
 					alert("이름을 입력해주세요!");
 				}
 				
-				else if(document.register_form.tel.value =="") {
+				else if(document.register_form.mem_tel.value =="") {
 					alert("전화번호를 입력해주세요!");
 				}
 				
-				else if(document.register_form.email.value =="") {
+				else if(document.register_form.mem_email.value =="") {
 					alert("이메일 입력해주세요!");
 				}
 				
@@ -226,6 +229,9 @@
 				
 	            $.ajax({
 	                url : "/user/checkId",
+        			beforeSend: function(xhr) {
+                        xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+                  	},
 	                type : "post",
 	                dataType : 'text',
 	                data : {

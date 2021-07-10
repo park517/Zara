@@ -28,4 +28,5 @@ public class MemberVO {
 	private String del_yn; // 삭제여부
 	private Date delete_at; // 삭제일자
 	private int mem_point; //포인트
+	private String auth;
 }

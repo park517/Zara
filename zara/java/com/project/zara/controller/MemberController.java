@@ -93,17 +93,20 @@ public class MemberController {
 	// 회원가입 시 중복 체크
 	@RequestMapping(path = "/checkId", method=RequestMethod.POST)
 	@ResponseBody
-	public String checkId(@RequestParam("id") String id){
+	public int checkId(@RequestParam("id") String id){
+		System.out.println("중복체크 Controller 실행");
 		return memberService.checkId(id);
 	}
 	
 	// 회원가입 시도
 	@RequestMapping(path = "/register", method=RequestMethod.POST)
-	public String doRegister(@RequestParam Map<String,Object> param ,Model model) {
-		
+	public String doRegister(MemberVO memberVO ,Model model) {
+		System.out.println("멤버 정보 " +memberVO);
 		String msg = "회원가입에 성공하셨습니다.";
 		String url = "/";
-		memberService.doRegister(param);
+		long mem_no = memberService.doRegister(memberVO);
+		System.out.println("멤버 번호 " +mem_no);
+		memberService.insertAuth(mem_no);
 		model.addAttribute("msg",msg);
 		model.addAttribute("url",url);
 		return "common/redirect";

@@ -18,13 +18,13 @@ public interface MemberMapper {
 	public void updateLoginDate(@Param("mem_no") long mem_no);
 	
 	// 회원가입
-	public void doRegister(Map<String, Object> param);
+	public long doRegister(MemberVO memberVO);
 	
 	// 수정하기
 	public void doUpdate(Map<String,Object> param);
 	
 	// 아이디 중복 체크
-	public String checkId(@Param("id") String id);
+	public int checkId(@Param("id") String id);
 
 	// 아이디 삭제
 	public void doDelete(@Param("mem_no") long mem_no);
@@ -34,5 +34,8 @@ public interface MemberMapper {
 	
 	// 비밀번호 찾기
 	public String findPassword(Map<String,Object> param);
+	
+	// 권한 부여하기
+	public void insertAuth(long mem_no);
 	
 }
