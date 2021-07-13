@@ -42,7 +42,7 @@
                              <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bicycle</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="blog-home.html">자전거 정보</a></li>
+                                    <li><a class="dropdown-item" href="/product/aboutRide">자전거 정보</a></li>
                                     <li><a class="dropdown-item" href="blog-post.html">중고장터</a></li>
                                     <li><a class="dropdown-item" href="/product/getlist">판매</a></li>
                                 </ul>
