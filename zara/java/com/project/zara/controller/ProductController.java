@@ -196,5 +196,11 @@ public class ProductController {
 		model.addAttribute("url",url);
 		return "common/redirect";
 	}
+	
+	@RequestMapping(value="/aboutRide")
+	public String aboutBike() {
+		return "/product/aboutRide";
+		
+	}
 
 }
