@@ -3,15 +3,29 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="customAccessDenied" class="com.project.zara.security.CustomAccessDeniedHandler"></bean>
 
+	<bean id="customLoginSuccess" class="com.project.zara.security.CustomLoginSuccessHandler"></bean>
+
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<bean id="customUserDetailsService" class="com.project.zara.security.CustomUserDetailsService"></bean>
 
 	<security:http>
-		<security:form-login />
-		
+		<security:form-login login-page="/user/login" authentication-success-handler-ref="customLoginSuccess" />
+		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+
+		<security:logout logout-url="/user/logout" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID" />
 
 	</security:http>
 
 	<security:authentication-manager>
+
+		<security:authentication-provider user-service-ref="customUserDetailsService">
+
+			<security:password-encoder ref="bcryptPasswordEncoder" />
+
+		</security:authentication-provider>
 
 	</security:authentication-manager>
 </beans>

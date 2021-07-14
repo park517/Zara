@@ -5,11 +5,10 @@
 <mapper namespace="com.project.zara.mapper.MemberMapper">
 
 	<!--  로그인 성공 시 회원 정보 가져오기 -->
-	<select id="getMember" parameterType="Map" resultType="MemberVO">
+	<select id="getMember" parameterType="String" resultType="MemberVO">
 		select m.*,a.auth from member m ,user_auth a 
 		where 
-			mem_id=#{mem_id} AND mem_password = #{mem_password} 
-			and DEL_YN ='N' and m.mem_no = a.mem_no
+			mem_id=#{mem_id} and DEL_YN ='N' and m.mem_no = a.mem_no
 		
 	</select>
 	

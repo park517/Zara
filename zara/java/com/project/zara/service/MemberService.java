@@ -9,7 +9,7 @@ import com.project.zara.model.MemberVO;
 
 public interface MemberService {
 	// 멤버 정보 가져오기
-	public MemberVO getMember(String mem_id , String mem_password);
+	public MemberVO getMember(String mem_id);
 	
 	// 마지막 로그인 날짜 수정
 	public void updateLoginDate(@Param("mem_no") long mem_no);

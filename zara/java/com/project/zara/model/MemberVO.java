@@ -2,7 +2,7 @@ package com.project.zara.model;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
-
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +28,5 @@ public class MemberVO {
 	private String del_yn; // 삭제여부
 	private Date delete_at; // 삭제일자
 	private int mem_point; //포인트
-	private String auth;
+	private List<MemberAuthVO> authList;	//권한 리스트
 }

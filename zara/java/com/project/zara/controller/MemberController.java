@@ -63,11 +63,11 @@ public class MemberController {
 	@ResponseBody
 	public String doLogin(HttpSession session, Model model ,@RequestParam("id") String id ,@RequestParam("password") String password ) {
 		
-		MemberVO member = memberService.getMember(id, password);
+		MemberVO member = memberService.getMember(id);
 		
 		if(member !=null) {
 			memberService.updateLoginDate(member.getMem_no());
-			session.setAttribute("loginMember",member);
+//			session.setAttribute("loginMember",member);
 			return "good";
 		}
 		return "error";

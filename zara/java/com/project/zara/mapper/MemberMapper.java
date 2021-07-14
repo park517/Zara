@@ -12,7 +12,7 @@ import com.project.zara.model.MemberVO;
 public interface MemberMapper {
 	
 	// 멤버 정보 가져오기
-	public MemberVO getMember(@Param("mem_id") String mem_id ,@Param("mem_password") String mem_password);
+	public MemberVO getMember(@Param("mem_id") String mem_id);
 	
 	// 마지막 로그인 일자 수정
 	public void updateLoginDate(@Param("mem_no") long mem_no);

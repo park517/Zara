@@ -5,21 +5,26 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.zara.mapper.MemberMapper;
 import com.project.zara.model.MemberVO;
+
+import lombok.Setter;
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	MemberMapper memberMapper;
 	
+	@Setter(onMethod_ = @Autowired)
+	private PasswordEncoder pwencoder;
 	// 멤버 정보 가져오기
 	@Override
-	public MemberVO getMember(String mem_id , String mem_password) {
-		if(memberMapper.getMember(mem_id,mem_password) != null) {
-			return memberMapper.getMember(mem_id,mem_password);
+	public MemberVO getMember(String mem_id) {
+		if(memberMapper.getMember(mem_id) != null) {
+			return memberMapper.getMember(mem_id);
 		}
 		return null;
 		
@@ -28,6 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	// 회원가입
 	@Override
 	public long doRegister(MemberVO memberVO) {
+		memberVO.setMem_password( pwencoder.encode(memberVO.getMem_password()));
 		memberMapper.doRegister(memberVO);
 		return memberVO.getMem_no();
 	}
