@@ -30,5 +30,6 @@ public class ProductVO {
 	private String del_yn; // 상품 삭제 여부
 	private Date delete_at; // 상품 삭제 일
 	private int pro_hit; // 상품 조회 수 
+	private String mem_id; // 판매자 아이디
 
 }

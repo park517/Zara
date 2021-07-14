@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,8 +55,6 @@
 
             <!-- Main Content -->
             <div id="content">
-                <!-- Toolbar -->
-            <%@include file="../../include/toolbar.jspf" %>
                <div id="boardMain">
                   <h2>자전거 판매 게시판</h2>
                   <br><br><br>
@@ -80,8 +79,8 @@
                                  <th width="20%">자전거 종류</th> 
                                  <th width="40%">제목</th> 
                                  <th width="10%">작성자</th> 
-                                 <th width="20%">작성일</th> 
-                                 <th width="10%">조회수</th>
+                                 <th width="15%">작성일</th> 
+                                 <th width="15%">조회수</th>
                                </tr> 
                            </thead> 
                            <tbody> 
@@ -91,7 +90,7 @@
                                  <td>${product.pro_category}</td> 
                                  <td id="title"><a href="/product/detail?pno=${product.pno}">   ${product.pro_name} </a></td> 
                                  <td>${product.mem_id}</td> 
-                                 <td>${product.pro_date}</td> 
+                                 <td><fmt:formatDate pattern="yyyy-MM-dd" value="${product.pro_date}" /></td> 
                                  <td>${product.pro_hit}</td> 
                               <tr> 
                               </c:forEach> 
