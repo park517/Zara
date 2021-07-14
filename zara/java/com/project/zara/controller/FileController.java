@@ -3,9 +3,11 @@ package com.project.zara.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +16,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.project.zara.model.FileVO;
 import com.project.zara.service.FileService;
+import com.project.zara.util.FileUtil;
+
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequestMapping("/file")
@@ -28,6 +40,19 @@ public class FileController {
 	
 	@Autowired
 	FileService fileService;
+	
+	
+	@PostMapping(value ="/upload", produces = MediaType.APPLICATION_JSON_UTF8_VALUE) 
+	@ResponseBody
+	public ResponseEntity<List<FileVO>> fileUpload(MultipartFile[] files , @RequestParam("table_name") String table_name) throws IllegalStateException, IOException
+	{	
+		FileUtil fileUtil = new FileUtil();
+		List<FileVO> fileList = fileUtil.setFiles(files,table_name);
+		
+		return new ResponseEntity<>(fileList, HttpStatus.OK);
+	}
+	
+	
 	
 	@RequestMapping("/down/{no}/{index}/{table_name}")
     private void fileDown(@PathVariable int no, @PathVariable int index, 

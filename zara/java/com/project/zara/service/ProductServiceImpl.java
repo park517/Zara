@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.zara.mapper.ProductMapper;
+import com.project.zara.model.FileVO;
 import com.project.zara.model.ProductVO;
 
 @Service
@@ -16,10 +17,20 @@ public class ProductServiceImpl implements ProductService{
 	@Autowired
 	ProductMapper productMapper;
 	
+	@Autowired 
+	FileService fileService;
 	// 글 등록
 	@Override
 	public int insertProduct(ProductVO productVO) {
 		productMapper.insertProduct(productVO);
+		int pno = productVO.getPno();
+		List<FileVO> fileList = productVO.getFileList();
+		if(fileList.size()!=0) {
+			for(FileVO file : fileList) {
+				file.setNo(pno);
+			}
+			fileService.fileUpload(fileList);
+		}
 		return productVO.getPno();
 	}
 

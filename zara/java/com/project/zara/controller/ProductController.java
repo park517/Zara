@@ -28,6 +28,7 @@ import com.project.zara.service.ReplyService;
 import com.project.zara.util.FileUtil;
 import com.project.zara.util.PagingUtil;
 
+import jdk.internal.org.jline.utils.Log;
 import lombok.extern.log4j.Log4j;
 
 @Controller
@@ -82,28 +83,17 @@ public class ProductController {
 	
 	// 새 상품 등록
 	@RequestMapping(value="/new", method=RequestMethod.POST)
-	public String InsertProduct(@RequestParam("files") MultipartFile files[] ,ProductVO productVO,Model model , HttpSession session ) throws IllegalStateException, IOException {
+	public String InsertProduct(ProductVO productVO,Model model , HttpSession session ) throws IllegalStateException, IOException {
 		
 		// 상품 보너스 포인트 , 총가격, 상태 수정하기
-	
+		
 		productVO.setPro_point((Double.valueOf(String.format("%.1f",productVO.getPro_price()*0.01))));
 		productVO.setPro_status("판매중");
 		if(productVO.getPro_price() <=50000) {
 			productVO.setPro_sum(productVO.getPro_price()+3000);
 		}
 		int pno =productService.insertProduct(productVO);
-		
-		
-		// 상품 이미지 파일 넣기
-		
-		List<FileVO> file_list = new ArrayList<>();
-		if(files != null && files.length !=0) {
-			FileUtil fileUtil = new FileUtil();
-			file_list = fileUtil.setFiles(files,pno,"product");
-			System.out.println("파일들 : "+file_list);
-			fileService.fileUpload(file_list);
-		}
-		String msg = "상품이 등록되었습니다";
+		String msg = pno+"번 상품이 등록되었습니다";
 		String url = "/product/getlist";
 		
 		model.addAttribute("msg",msg);
@@ -166,7 +156,7 @@ public class ProductController {
 		if(!files[0].isEmpty()) {
 			fileService.deleteFile(map);
 			FileUtil fileUtil = new FileUtil();
-			file_list = fileUtil.setFiles(files,productVO.getPno(),"product");
+			file_list = fileUtil.setFiles(files,"product");
 			fileService.fileUpload(file_list);
 		}
 		productService.updateProduct(productVO);

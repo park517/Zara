@@ -127,7 +127,7 @@
 					<%@include file="../../include/toolbar.jspf" %>
 					  <div id="insert_zone">         
 					    <p>상품 등록하기</p>
-                        <form class="insert_form" action="/product/new" method="Post" enctype="multipart/form-data">
+                        <form id="insert_form" class="insert_form" action="/product/new" method="Post" enctype="multipart/form-data">
                             <input type="hidden" value="${loginMember.mem_id}" name="mem_id">
                             <input type="hidden" value="${loginMember.mem_no}" name="mem_no">
                             <ul class="sell_input">
@@ -136,7 +136,7 @@
                                         <h2><b>이미지 미리보기</b></h2>
                                         <div class="input_wrap">
                                             <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
-                                            <input type="file" id="input_imgs" name="files" multiple/>
+                                            <input type="file" id="input_imgs" name="file_list" multiple/>
                                         </div>
                                     </div>
 
@@ -150,15 +150,15 @@
                                 </li>
                                 <li>
                                     <label>상품 이름</label>
-                                    <input type="text" name="pro_name" placeholder="최대 50자">
+                                    <input type="text" id="pro_name" name="pro_name" placeholder="최대 50자">
                                 </li>
                                 <li>
                                     <label>상품 무게</label>
-                                    <input type="text" name="pro_weight" placeholder="최대 50자">
+                                    <input type="text" id="pro_weight" name="pro_weight" placeholder="최대 50자">
                                 </li>
                                 <li>
                                     <label>자전거 종류</label>
-                                    <select name="pro_category" id="">
+                                    <select name="pro_category" id="pro_category">
                                         <option value="" selected>------</option>
                                         <option value="hybrid">하이브리드</option>
                                         <option value="road">로드</option>
@@ -168,25 +168,25 @@
                                 </li>
                                 <li>
                                     <label>상품 제조사</label>
-                                    <input type="text" name="pro_com" placeholder="최대 50자">
+                                    <input type="text" id="pro_com" name="pro_com" placeholder="최대 50자">
                                 </li>
 
                                 <li>
                                     <label>가격</label>
-                                    <input type="text" name="pro_price">원
+                                    <input type="text" id="pro_price" name="pro_price">원
                                 </li>
 
                                 <li>
-                                    <label for="description"  >상품 설명</label>
-                                    <textarea name="pro_info" id="" cols="30" rows="10"></textarea>
+                                    <label>상품 설명</label>
+                                    <textarea name="pro_info" id="pro_info" cols="30" rows="10"></textarea>
                                 </li>
                                 <li>
                                     <label>수량</label>
-                                    <input type="text" name="pro_stock" value="1">개
+                                    <input type="text" name="pro_stock" id="pro_stock" value="1">개
                                 </li>
                                 
                             </ul>
-                            <button class="btn btn-primary">판매글 작성</button>
+                            <button type="button" id="btn_insert" class="btn btn-primary">판매글 작성</button>
                         </form> 
                      </div>   
 	           	
@@ -202,71 +202,13 @@
 
 	
 	<!-- 부트스트랩 js 부분 -->
+
 	<%@include file="../../include/boot-footer.jspf" %>
 	</c:if>
 	<c:if test="${empty loginMember}">
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>
-        <script>
-        
-
-            var sel_files = [];
-
-
-            $(document).ready(function() {
-                $("#input_imgs").on("change", handleImgFileSelect);
-            }); 
-
-            function fileUploadAction() {
-                console.log("fileUploadAction");
-                $("#input_imgs").trigger('click');
-            }
-
-            function handleImgFileSelect(e) {
-
-                // 이미지 정보들을 초기화
-                sel_files = [];
-                $(".imgs_list").empty();
-
-                var files = e.target.files;
-                var filesArr = Array.prototype.slice.call(files);
-
-                var index = 0;
-                filesArr.forEach(function(f) {
-                    if(!f.type.match("image.*")) {
-                        alert("확장자는 이미지 확장자만 가능합니다.");
-                        return;
-                    }
-
-                    sel_files.push(f);
-
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-
-                         var html = "<li class='img_li'><a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a></li>";
-
-                        $(".imgs_list").append(html);
-                        index++;
-
-                    }
-                    reader.readAsDataURL(f);
-                    
-                });
-            }
-
-            function deleteImageAction(index) {            
-            console.log("index : "+index);
-            sel_files.splice(index, 1);
- 
-            var img_id = "#img_id_"+index;
-            $(img_id).remove();
- 
-            console.log(sel_files);
-        }
-
-        
-        </script>
-	
+	<script src="/resources/js/newProduct.js"></script>
 		
 
 </body>

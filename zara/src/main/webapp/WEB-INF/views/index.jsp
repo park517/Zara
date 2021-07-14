@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">   
 
@@ -35,8 +36,10 @@
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                             <c:forEach items="${productList}" var="list" varStatus="status">
                             	<div class="col mb-5 h-100">
+                            	
                                     <h2 class="h5"><a href="/product/detail?pno=${list.pno}">${list.pro_name}</a></h2>
-                                    <p class="mb-0">${list.pro_date}</p>
+                                 
+                                    <p class="mb-0"><fmt:formatDate pattern="yyyy-MM-dd" value="${list.pro_date}" /></p>
                                 </div>
 							</c:forEach>
                                 

@@ -1,6 +1,7 @@
 package com.project.zara.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,5 +32,5 @@ public class ProductVO {
 	private Date delete_at; // 상품 삭제 일
 	private int pro_hit; // 상품 조회 수 
 	private String mem_id; // 판매자 아이디
-
+	private List<FileVO> fileList;
 }

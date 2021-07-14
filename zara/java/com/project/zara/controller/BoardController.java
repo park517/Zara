@@ -130,7 +130,7 @@ public class BoardController {
 		System.out.println("파일목록 : "+files);
 		if(files != null && files.length !=0) {
 			FileUtil fileUtil = new FileUtil();
-			file_list = fileUtil.setFiles(files, bno ,"board");
+			file_list = fileUtil.setFiles(files,"board");
 			System.out.println("파일들 : "+file_list);
 			fileService.fileUpload(file_list);
 		}

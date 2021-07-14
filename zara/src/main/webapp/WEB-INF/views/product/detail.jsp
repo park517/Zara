@@ -108,15 +108,14 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
+
 					<div class="main">
 	                    <h2>상품 정보</h2>
 	                    <div class="product_wrap">
 	                        <div class="pro_img">
 	                            <ul>
-	                            	<c:forEach items="${files}" varStatus="status" var="files">
-		                                <li><img src="/resources/upload/product/${files.file_name}/" alt="상품 이미지"></li>
+	                            	<c:forEach items="${files}" varStatus="status" var="file">
+		                                <li><img src="/image/${file.file_path}/${file.file_name}" alt="상품 이미지"></li>
 									</c:forEach>
 	                            </ul>
 	                            
