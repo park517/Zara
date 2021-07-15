@@ -60,9 +60,9 @@
             <!-- Main Content -->
             <div id="content">
                <div id="boardMain">
-                  <h2>자전거 판매 게시판</h2>
-                  <br><br><br>
-                	
+                <center><h2 style="font-weight: bold">안타시는 자전거를 팔아보세요!</h2></center>
+                  <br><br>
+                
                	  <c:if test="${not empty loginMember}">
                      <div align="right">
                            <button  id="btnWrite" class ="btn btn-primary" onclick="location.href='/product/new'">판매 글 작성</button>
@@ -81,10 +81,10 @@
                               <tr> 
                                  <th width="10%">번호</th> 
                                  <th width="20%">자전거 종류</th> 
-                                 <th width="40%">제목</th> 
+                                 <th width="30%">제목</th> 
                                  <th width="10%">작성자</th> 
-                                 <th width="15%">작성일</th> 
-                                 <th width="15%">조회수</th>
+                                 <th width="20%">작성일</th> 
+                                 <th width="20%">조회수</th>
                                </tr> 
                            </thead> 
                            <tbody> 
