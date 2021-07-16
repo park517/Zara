@@ -24,7 +24,7 @@ public interface MemberMapper {
 	public void doUpdate(Map<String,Object> param);
 	
 	// 아이디 중복 체크
-	public String checkId(@Param("id") String id);
+	public int checkId(@Param("id") String id);
 
 	// 아이디 삭제
 	public void doDelete(@Param("mem_no") long mem_no);

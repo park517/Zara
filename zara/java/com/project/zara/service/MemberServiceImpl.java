@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String checkId(String id) {
+	public int checkId(String id) {
 		// TODO Auto-generated method stub
 		return memberMapper.checkId(id);
 	}

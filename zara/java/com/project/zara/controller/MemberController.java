@@ -94,7 +94,7 @@ public class MemberController {
 	@RequestMapping(path = "/checkId", method=RequestMethod.POST)
 	@ResponseBody
 	public String checkId(@RequestParam("id") String id){
-		return memberService.checkId(id);
+		return Integer.toString(memberService.checkId(id));
 	}
 	
 	// 회원가입 시도

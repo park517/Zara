@@ -12,7 +12,7 @@ public interface MemberService {
 	public void updateLoginDate(@Param("mem_no") long mem_no);
 	public void doRegister(Map<String,Object> param);
 	public void doUpdate(Map<String,Object> param);
-	public String checkId(String id);
+	public int checkId(String id);
 	public void doDelete(@Param("mem_no") long mem_no);
 	public List<String> findId(Map<String,Object> param);
 	public String findPassword(Map<String,Object> param);
