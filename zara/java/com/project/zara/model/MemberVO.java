@@ -27,5 +27,6 @@ public class MemberVO {
 	private Date last_login; // 마지막 로그인 일자
 	private String del_yn; // 삭제여부
 	private Date delete_at; // 삭제일자
+	private int mem_type; // 멤버 타입
 	private int mem_point; //포인트
 }

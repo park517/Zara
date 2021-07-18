@@ -54,42 +54,19 @@
             <div id="content">
             	
         		<div class="main">
-
-        			
-        			<h2 id="banner">Zara 공지사항</h2>
-        			<c:if test="${loginMember.mem_type == 1}">
-        				<button id="btn_write_notice" class ="btn btn-primary">공지사항 작성하기</button>
-        			</c:if>
-        			<br>
-        			<br>
-        			<table class="table table-hover">
-        				<thead>
-        					<th>글번호</th>
-        					<th>제목</th>
-        					<th>작성일</th>
-        					<th>수정일자</th>
-        					<th>조회수</th>
-        				</thead>
-        				
-        				<tbody>
-        					<tr>
-        						<td>1</td>
-        						<td><storg>공지사항1</storg></td>
-        						<td>2021-05-23</td>
-        						<td>2021-05-23</td>
-        						<td>0</td>
-        					</tr>
-        				
-        				
-        				
-        				</tbody>
-
-        			</table>
-        		
-        		
-        		
-        		
-        		
+					<h2>Zara 공지사항 작성하기 </h2>
+					<div class="notice_wrap">
+						<ul>
+							<li>
+								<label><strong>공지제목</strong></label>
+								<input type="text">
+							</li>
+							<li>
+							</li>
+						
+						</ul>
+					
+					</div>
         		</div>
            
             </div>
