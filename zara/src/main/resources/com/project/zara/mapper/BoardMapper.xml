@@ -112,7 +112,17 @@
 		where mem_id = #{mem_id}
 	
 	</select>
+	
+	<!-- 댓글 달기 -->
+	<insert id="insertReply" parameterType="BoardReplyVO">
+		
+		INSERT INTO comments
 
+		VALUES 
+			(
+				seq_comment.nextval,#{bno},#{mem_id},#{content},SYSDATE, null,#{parent_no},#{depth}
+			)
+	</insert>
  	
 
 	

@@ -14,6 +14,7 @@ import oracle.sql.DATE;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class BoardReplyVO {
 	private int cno; //댓글번호
 	private int bno; //게시글 번호
@@ -23,4 +24,6 @@ public class BoardReplyVO {
 	private Date create_at; //작성일
 	@JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
 	private Date update_at; //수정일
+	private int depth;
+	private int parent_no;
 }

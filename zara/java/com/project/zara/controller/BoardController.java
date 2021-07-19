@@ -121,21 +121,12 @@ public class BoardController {
 	
 	//게시판 글 작성처리 전송하기
 	@RequestMapping(value="/write", method=RequestMethod.POST)
-	public String doWrite(@RequestParam("files") MultipartFile files[],BoardVO board , Model model) throws IllegalStateException, IOException {
+	public String doWrite(BoardVO board , Model model) {
 		
 		List<FileVO> file_list = new ArrayList<>();
-		
+		System.out.println("게시물 정보 : "+board);
 		// 글 insert 후 생성된 글 번호 가져오기
 		int bno = boardService.insertBoard(board);
-		System.out.println("파일목록 : "+files);
-		if(files != null && files.length !=0) {
-			FileUtil fileUtil = new FileUtil();
-			file_list = fileUtil.setFiles(files,"board");
-			System.out.println("파일들 : "+file_list);
-			fileService.fileUpload(file_list);
-		}
-		
-	
 		String msg  = "글이 작성되었습니다";
 		String url = "/board/getCategoryList?category="+board.getCategory();
 		model.addAttribute("msg", msg);

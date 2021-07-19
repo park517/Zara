@@ -26,7 +26,7 @@
          padding-bottom: 5%;
       }
       .table > thead { 
-         background-color: #55bcfc; 
+         background-color: #212529; 
          color: white;
       } 
       
@@ -39,7 +39,10 @@
       }
       
       #btnWrite, #btnSearch{
-         background-color: #55bcfc; 
+         background-color: gray; 
+      }
+      #btnWrite {
+      	margin-bottom : 10px;	
       }
 
       

@@ -45,6 +45,21 @@
 			width: 200px;
 			height: 200px;
 		}
+		
+		.board_info label {
+            color: gray;
+        }
+
+        .board_info a {
+            color: lightsalmon;
+            text-decoration:none;
+            
+        }
+        .write_wrap {
+            margin-top: 200px;
+            margin: auto;
+            width: 60%;
+        }
 		</style>
 		
 
@@ -57,54 +72,45 @@
 	            <!-- Main Content -->
 	            <div id="content">
 	               
+					<br>
+					<br>
 					
-	            	<div id="boardMain">
-	            		<h2>글 상세 보기</h2>
-	            		<br><br><br>
-	            		<c:if test="${loginMember.mem_id eq board.mem_id}">
-		            		<input type="button" value="수정" class ="btn btn-primary" onclick="location.href='update?bno=${board.bno}'" >
-		            		<input type="button" value="삭제" class ="btn btn-primary" id="delete_btn">
-	            		</c:if>
-	            		<!-- 글 정보 입력 -->
-	            		<ul>
-	            			<li>작성자 : ${board.mem_id}</li>
-	            			<li>카테고리 : ${board.category }</li>
-	            			<li>제목 : ${board.title }</li>
-	            			<li>작성일 : ${board.create_at}</li>
-	            			<li>
-	            				첨부 파일
-	            				<c:forEach items="${fileList}" var="fileList" varStatus="stats">
-	            					<br>
-	            					<a href="/file/down/${fileList.no}/${stats.index}/board">${fileList.file_real_name}</a>
-	            				</c:forEach>
-	            				<br>
-	            				사진 미리보기(1개만 대표로)
-	            				<br>
-	            				<img id="img_preview" alt="대표사진" src="/resources/upload//board/${fileList[0].file_name}">
-	            			</li>
-	            		</ul>
-	            		<hr>
-	            		<div>
-	            			내용 : <br>
-	            			${board.content}
-	            		</div>
-	            		<hr>
+				    <div class="write_wrap">
+				        
+				        <strong>${board.category}</strong>
+				        
+				        <h2 style="margin-top : 10px; margin-bottom : 10px">제목</h2>
+				        <div class="board_info">
+				            <label>${board.mem_id} | ${board.create_at}</label> |
+				            <a href="/board/update?bno=${board.bno}"> 수정 </a> | <a href="/board/delete?bno=${board.bno}"> 삭제 </a>
+				       		| 조회수 ${board.hit}
+				        </div>
+				        <br>
+				        <hr>
+				        <br>
+				        ${board.content}
+				
+				
+				    
+	            	
+	            	<hr>
 	            				
 	            		<div> <!-- 댓글 달기 -->
 	            			<div class="reply_wrap">
-		            			댓글 : <br>
 		            			<c:forEach items="${boardReply}" var="getList">
-		            				<li>
-		            					<div>
-		            						<p>${getList.mem_id} / ${getList.create_at}</p>
-		            						<p>${getList.content}</p>
-		            					</div>
-		            				</li>
+		            				<strong> ${getList.mem_id}  | ${getList.create_at}</strong>  <br><br>
+		            				${getList.content}<br><br>
 		            				<c:if test="${loginMember.mem_id eq getList.mem_id}">
-		            					<button type="button" class="btn_replyUpdate" onclick="update_reply(${getList.cno})">수정</button>
-		            					<button type="button" class="btn_replyDelete" onclick="delete_reply(${getList.cno})">삭제</button>
+		            					<div>
+		            						<button>대댓글 달기</button>
+		            						<button type="button" class="btn_replyUpdate" onclick="update_reply(${getList.cno})">수정</button>
+		            						<button type="button" class="btn_replyDelete" onclick="delete_reply(${getList.cno})">삭제</button>
+		            					</div>
+		            					
 		            				</c:if>
+		            				<hr>
 		            			</c:forEach>
+		            			
 		            			<br><br>
 								<ul class="pagination" id="pagination">
 									<li class="disabled">
@@ -147,7 +153,7 @@
 		            		<input type="button" value="목록" class ="btn btn-primary" onclick="location.href='getCategoryList?category=와글와글'">
 	            		
 	            	</div>
-	           
+	           	</div>
 	            </div>
 	     
 	        </div> 
@@ -173,7 +179,9 @@
 	         data : {
 	             bno : $('#bno').val(),
 	             mem_id : $('#mem_id').val(),
-	             content: $('#reply_content').val()
+	             content: $('#reply_content').val(),
+	             depth : 0,
+	             parent_no : 0
 	         },
 	         success : function(result) {
 	        	 alert("댓글이 입력 되었습니다");
@@ -266,19 +274,18 @@
 	        	 var resultJson = JSON.parse(result);
 	        	 var reply_html = '';
 	             $('.reply_wrap').html('');
-	             reply_html+= "댓글 : <br>";
 	             for(var i = 0 ; i<resultJson.list.length ; i++) {
 	            	 
-	 				 reply_html+= "<li>";
-	 				 reply_html+= "<div>";
-	 				 reply_html+= "<p>"+resultJson.list[i].mem_id+"/"+
-	 				 resultJson.list[i].create_at+"</p>";
-	 				 reply_html+= "<p>"+resultJson.list[i].content+"</p>";
-	 				 reply_html+= "</div>"; 
-	 				 reply_html+= "</li>"; 
+	 				 reply_html+= "<strong>"+resultJson.list[i].mem_id+" | "+
+	 				 resultJson.list[i].create_at+"</strong><br><br>";
+	 		
+	 				 reply_html+= resultJson.list[i].content+"<br><br>";
 					 if( "${loginMember.mem_id}" === resultJson.list[i].mem_id) {
-						 reply_html+= "<button type='button' class='btn_replyUpdate' onclick='update_reply("+resultJson.list[i].cno+")'>수정</button>";
-						 reply_html+= "<button type='button' class='btn_replyDelete' onclick='delete_reply("+resultJson.list[i].cno+")'>삭제</button>";
+						 reply_html+= "<div>";
+						 	reply_html+= "<button>대댓글 달기</button>";
+						 	reply_html+= "<button type='button' class='btn_replyUpdate' onclick='update_reply("+resultJson.list[i].cno+")'>수정</button>";
+						 	reply_html+= "<button type='button' class='btn_replyDelete' onclick='delete_reply("+resultJson.list[i].cno+")'>삭제</button>";
+						 reply_html+= "</div><hr>";
 					 }
 	             }
 					 reply_html+= "<br><br>"

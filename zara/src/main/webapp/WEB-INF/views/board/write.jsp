@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    
 <!DOCTYPE html>
 <html lang="en">
 
+
+    
     <!--  부트 스트랩 부분 -->
 	<%@include file="../../include/boot-head.jspf" %>
 	<style type="text/css">
@@ -76,9 +77,18 @@
 	    }
 		
 	</style>
+	
+	<!-- include libraries(jQuery, bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<body class="d-flex flex-column h-100">
-	<main class="flex-shrink-0">
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
+
+<body id="page-top">
 	<c:if test="${not empty loginMember}">
 
 	    <!-- Page Wrapper -->
@@ -88,10 +98,11 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
+	                <!-- Toolbar -->
 					
 					
 	            	<div id="boardMain">
-	            		<h2>글쓰기</h2>
+						
 	            		<br><br><br>
 	            		<!-- 글쓰기 폼 작성 -->
 	            		<form id="write_form" value="write_form" method="post" action="/board/write" enctype="multipart/form-data">
@@ -99,12 +110,12 @@
 	            		<input type="hidden" value="${loginMember.mem_id}" name="mem_id">
 	            		<ul>
 	            			<li>
-	            				<label for="title">제목</label>
+	            				<label for="cos_title">제목</label>
 	            				<input type="text" id="title" name="title" required="required" >
 	            			</li>
 	            			
 	            			<li>
-	            				<label for="title">카테고리</label>
+	            				<label for="category">카테고리</label>
 	            				<select name='category'>
 								    <option value='' selected>-- 선택 --</option>
 								    <option value='와글와글'>와글와글</option>
@@ -113,34 +124,49 @@
 								</select>
 	            			</li>
 	            			
-                                <li>
-                                    <div>
-                                        <h4><b>이미지 미리보기</b></h4>
-                                        <div class="input_wrap">
-                                            <input name="files" type="file" id="input_imgs" multiple accept=".gif,.jpg,.png"/>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <div class="imgs_wrap">
-                                            <ul class="imgs_list">
-                                             <img id="img" alt="640x640 이미지를 넣어주세요!"/>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </li>
 	            			<li>
-	            				<label for="content">내용</label>
-	            				<textarea rows="10" cols="50" id="content" name="content"></textarea>
+	            				<label for="content">내용</label> 
+	            				<textarea id="content" name="content" class="summernote"></textarea>
+	            				
+	            				<script>
+									$('.summernote').summernote({
+										height : 500, // 에디터 높이 
+										focus : true,
+										//콜백 함수
+										callbacks : {
+											onImageUpload : function(files, editor, welEditable) {
+												// 파일 업로드(다중업로드를 위해 반복문 사용)
+												for (var i = files.length - 1; i >= 0; i--) {
+													uploadSummernoteImageFile(files[i], this);
+												}
+											}
+										}
+									});
+								/**
+								 * 이미지 파일 업로드
+								 */
+								function uploadSummernoteImageFile(file, editor) {
+									data = new FormData();
+									data.append("file", file);
+									$.ajax({
+										data : data,
+										type : "POST",
+										url : "/course/uploadSummernoteImageFile",
+										contentType : false,
+										enctype : 'multipart/form-data',
+										processData : false,
+										success : function(data) {
+											$(editor).summernote('editor.insertImage', data.url);
+										}
+									});
+								}
+							</script>
 	            			</li>
-	            			<!-- <li>
-	            				<label for="upload">이미지 첨부</label>
-	            				<input type="file" name="upload" id="upload" accept="image/gif, image/png, image/jpeg">
-	            			</li> -->
+	            			
 	            		</ul>
 	            		<div align="center">
 	            			<input type="submit" class ="btn btn-primary" value="작성하기">
-	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/board/getlist'">
+	            			<input type="button" class ="btn btn-primary" value="목록" onclick="location.href='/course/getList'">
 	            		</div>
 	            		</div>
 	            		</form>
@@ -159,69 +185,10 @@
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>
 	
-	<!-- 부트스트랩 js 부분 -->
-	<%@include file="../../include/boot-footer.jspf" %>
 	
-	<script>
 
-    
+	
 
-        var sel_files = [];
-
-
-        $(document).ready(function() {
-            $("#input_imgs").on("change", handleImgFileSelect);
-        }); 
-
-        function fileUploadAction() {
-            console.log("fileUploadAction");
-            $("#input_imgs").trigger('click');
-        }
-
-        function handleImgFileSelect(e) {
-
-            // 이미지 정보들을 초기화
-            sel_files = [];
-            $(".imgs_list").empty();
-
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
-
-            var index = 0;
-            filesArr.forEach(function(f) {
-                if(!f.type.match("image.*")) {
-                    alert("확장자는 이미지 확장자만 가능합니다.");
-                    return;
-                }
-
-                sel_files.push(f);
-
-                var reader = new FileReader();
-                reader.onload = function(e) {
-
-                     var html = "<li class='img_li'><a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a></li>";
-
-                    $(".imgs_list").append(html);
-                    index++;
-
-                }
-                reader.readAsDataURL(f);
-                
-            });
-        }
-
-        function deleteImageAction(index) {            
-        console.log("index : "+index);
-        sel_files.splice(index, 1);
-
-        var img_id = "#img_id_"+index;
-        $(img_id).remove();
-
-        console.log(sel_files);
-    }
-
-	</script>
-</main>
 </body>
 
 </html>

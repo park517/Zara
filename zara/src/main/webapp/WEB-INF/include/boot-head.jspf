@@ -75,6 +75,9 @@
                                     	<li><a class="dropdown-item" href="/user/logout">로그아웃</a></li>
                                     	<li><a class="dropdown-item" href="/user/checkPassword?job=update">정보수정</a></li>
                                     	<li><a class="dropdown-item" href="/user/myPage">Mypage</a></li>
+                                    	<c:if test="${loginMember.mem_type ==1 }">
+                                    		<li><a class="dropdown-item" href="/admin">관리자페이지</a></li>
+                                    	</c:if>
                                		</c:if>
                                		
                                 </ul>

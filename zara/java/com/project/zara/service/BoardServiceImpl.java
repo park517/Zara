@@ -90,6 +90,7 @@ public class BoardServiceImpl implements BoardService {
 	// 댓글 등록
 	@Override
 	public void insertReply(BoardReplyVO boardReply) {
+		System.out.println("댓글 정보 : "+boardReply);
 		boardMapper.insertReply(boardReply);
 	}
 

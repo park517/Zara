@@ -52,7 +52,6 @@ public interface BoardMapper {
 	public int selectRowCountReply(@Param("bno") int bno);
 
 	//댓글 작성
-	@Insert("INSERT INTO comments (cno, bno, mem_id, content, create_at, update_at) VALUES (seq_comment.nextval,#{bno},#{mem_id},#{content},SYSDATE, null)")
 	public void insertReply(BoardReplyVO boardReply);
 
 	//댓글 수정
