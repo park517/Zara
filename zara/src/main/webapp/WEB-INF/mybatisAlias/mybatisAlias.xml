@@ -11,6 +11,7 @@
 		<typeAlias type="com.project.zara.model.ProductVO" alias="ProductVO"/> 
 		<typeAlias type="com.project.zara.model.ReplyVO" alias="ReplyVO"/>  
 		<typeAlias type="com.project.zara.model.CourseVO" alias="CourseVO"/> 
+		<typeAlias type="com.project.zara.model.NoticeVO" alias="NoticeVO"/> 
 	</typeAliases>
 	
 	

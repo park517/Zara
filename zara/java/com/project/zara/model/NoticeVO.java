@@ -13,11 +13,12 @@ public class NoticeVO {
 	
 	private long nno;
 	private String title;
-	private String content;
+	private String contents;
 	private Date create_at;
 	private Date update_at;
 	private Date delete_at;
-	private int hit;
 	private String del_yn;
+	private int hit;
+
 	
 }

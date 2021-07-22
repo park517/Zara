@@ -34,7 +34,7 @@
                              <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">About</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                    <li><a class="dropdown-item" href="/notice">공지사항</a></li>
+                                    <li><a class="dropdown-item" href="/notice/list">공지사항</a></li>
                                     <li><a class="dropdown-item" href="/board/hello">사이트소개</a></li>
                                     <li><a class="dropdown-item" href="/board/event">행사안내</a></li>
                                 </ul>
@@ -43,7 +43,7 @@
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bicycle</a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
                                     <li><a class="dropdown-item" href="/product/aboutRide">자전거 정보</a></li>
-                                    <li><a class="dropdown-item" href="blog-post.html">중고장터</a></li>
+                                    <li><a class="dropdown-item" href="/product/getlist">중고장터</a></li>
                                     <li><a class="dropdown-item" href="/product/getlist">판매</a></li>
                                 </ul>
                             </li>
@@ -76,7 +76,7 @@
                                     	<li><a class="dropdown-item" href="/user/checkPassword?job=update">정보수정</a></li>
                                     	<li><a class="dropdown-item" href="/user/myPage">Mypage</a></li>
                                     	<c:if test="${loginMember.mem_type ==1 }">
-                                    		<li><a class="dropdown-item" href="/admin">관리자페이지</a></li>
+                                    		<li><a class="dropdown-item" href="/admin/main">관리자페이지</a></li>
                                     	</c:if>
                                		</c:if>
                                		

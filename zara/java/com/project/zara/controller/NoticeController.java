@@ -17,9 +17,8 @@ public class NoticeController {
 	
 	
 	// 공지사항 페이지 보여주기
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String showNotice(Model model) {
-	
 		return "notice/list";
 	
 	}
@@ -30,30 +29,29 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/write") 
-	public String doWriteNotice(Model model) {
+	public void doWriteNotice(Model model) {
 		
 		String msg = "공지사항이 등록되었습니다.";
 		String url = "/notice";
-		
-		return "common/redirect";
+		alertMessage(model,msg,url);
+
 	}
 	
-	@GetMapping("/update") 
-	public String updateNotice(Model model) {
+	@GetMapping("/update/{nno}") 
+	public void updateNotice(Model model , @PathVariable("nno") long nno) {
 		
 		String msg = "공지사항이 등록되었습니다.";
 		String url = "/notice";
-		
-		return "common/redirect";
+		alertMessage(model,msg,url);
+
 	}
 	
 	@PostMapping("/update") 
-	public String doUpdateNotice(Model model) {
+	public void doUpdateNotice(Model model) {
 		
 		String msg = "공지사항이 수정되었습니다.";
 		String url = "/notice";
-		
-		return "common/redirect";
+		alertMessage(model,msg,url);
 	}
 	
 	@GetMapping("/delete/{nno}")
@@ -61,4 +59,12 @@ public class NoticeController {
 		
 		return "";
 	}
+	
+	public String alertMessage(Model model , String msg , String url) {
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("url",url);
+		
+		return "common/redirect";
+		}
 }

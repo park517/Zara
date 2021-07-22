@@ -58,7 +58,9 @@
         			
         			<h2 id="banner">Zara 공지사항</h2>
         			<c:if test="${loginMember.mem_type == 1}">
-        				<button id="btn_write_notice" class ="btn btn-primary">공지사항 작성하기</button>
+        				<button onclick="location.href='/notice/write'" id="btn_write_notice" class ="btn btn-primary">공지사항 작성하기</button>
+        				<button onclick="location.href='/notice/update'" id="btn_update_notice" class ="btn btn-danger">공지사항 수정하기</button>
+        				<button onclick="location.href='/notice/delete'" id="btn_delete_notice" class ="btn btn-danger">공지사항 삭제하기</button>
         			</c:if>
         			<br>
         			<br>
