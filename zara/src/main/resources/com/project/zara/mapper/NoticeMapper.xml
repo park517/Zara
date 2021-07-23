@@ -4,25 +4,69 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.zara.mapper.NoticeMapper">
 
-	<select id="getNoticeList" resultType="NoticeVO">
-		select * from notice  where del_yn = 'N'
+	<select id="getNoticeList" resultType="NoticeVO" parameterType="map">
+	
+		SELECT *
+		FROM (SELECT rownum rnum, a.*
+			  FROM (SELECT * FROM notice
+			  		WHERE del_yn = 'N'
+			  		ORDER BY nno DESC)A)
+		WHERE rnum BETWEEN #{start} AND #{end}
+		
 	</select>
 	
 	<select id="getNotice" resultType="NoticeVO">
-		select * from notice where del_yn = 'N' and nno = #{nno}
+		select * from notice where 
+		nno = #{nno}
 	</select>
 	
 	<update id="updateNotice">
 		update notice set
 		
-		where nno = #{nno}
+			title = #{title},
+			contents = #{contents},
+			update_at = sysdate
+			
+			where nno = #{nno}
 	
 	</update>
 	
 	<update id="deleteNotice">
 		update notice set
-		del_yn = 'Y'
-		where nno = #{nno}
+			del_yn = 'Y'
+			where nno = #{nno}
 		
+	</update>
+	
+	<insert id="insertNotice">
+		insert into notice
+		values (
+		
+			seq_notice.nextval,
+			#{title},
+			#{contents},
+			sysdate,
+			null,
+			null,
+			'N',
+			0
+		)
+	
+	</insert>
+	
+	<select id="NoticeCount" resultType="int">
+	
+		select count(*) 
+		from notice
+		where del_yn = 'N'
+	
+	</select>
+	
+	<update id="hitUp" parameterType="long">
+	
+		update notice set
+		hit = hit +1
+		where nno = #{nno}
+
 	</update>
 </mapper>

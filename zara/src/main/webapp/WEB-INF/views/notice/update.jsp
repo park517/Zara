@@ -103,21 +103,21 @@
 					
 					
 	            	<div id="boardMain">
-	            		<h2>공지사항 작성하기</h2>
+	            		<h2>공지사항 수정하기</h2>
 	            		<br><br><br>
 	            		<!-- 글쓰기 폼 작성 -->
-	            		<form id="write_form" value="write_form" method="post" action="/notice/write" enctype="multipart/form-data">
+	            		<form id="write_form" value="write_form" method="post" action="/notice/update" enctype="multipart/form-data">
 	            		<div class="form-group">
-	            		<input type="hidden" value="${loginMember.mem_id}" name="mem_id">
+	            		<input type="hidden" value="${notice.nno}" name="nno">
 	            		<ul>
 	            			<li>
 	            				<label for="title">제목</label>
-	            				<input type="text" id="title" name="title" required="required" >
+	            				<input type="text" id="title" name="title" required="required" value="${notice.title}" >
 	            			</li>
 	            			
 	            			<li>
 	            				<label for="contents">내용</label> 
-	            				<textarea id="contents" name="contents" class="summernote"></textarea>
+	            				<textarea id="contents" name="contents" class="summernote" >${notice.contents}</textarea>
 	            				
 	            				<script>
 									$('.summernote').summernote({

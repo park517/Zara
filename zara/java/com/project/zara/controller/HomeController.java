@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.zara.model.BoardVO;
+import com.project.zara.model.NoticeVO;
 import com.project.zara.model.ProductVO;
 import com.project.zara.service.BoardService;
+import com.project.zara.service.NoticeService;
 import com.project.zara.service.ProductService;
 
 /**
@@ -33,6 +35,9 @@ public class HomeController {
 	@Autowired
 	ProductService productService;
 	
+	@Autowired
+	NoticeService noticeService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		
@@ -47,6 +52,11 @@ public class HomeController {
 		System.out.println("상품 리스트 : "+productList);
 		model.addAttribute("boardList",boardList);
 		model.addAttribute("productList",productList);
+		
+		
+		//공지사항 글 가져오기
+		List<NoticeVO> notice = noticeService.getNoticeList(map);
+		model.addAttribute("notice",notice);
 		
 		return "index";
 	}

@@ -34,12 +34,11 @@
                         <div class="col-lg-4 mb-5 mb-lg-0"><h2 class="fw-bolder mb-0"><a href="/product/getlist">공지사항</a></h2></div>
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
-                            <c:forEach items="${productList}" var="list" varStatus="status">
+                            <c:forEach items="${notice}" var="list" varStatus="status">
                             	<div class="col mb-5 h-100">
                             	
-                                    <h2 class="h5"><a href="/product/detail?pno=${list.pno}">${list.pro_name}</a></h2>
-                                 
-                                    <p class="mb-0"><fmt:formatDate pattern="yyyy-MM-dd" value="${list.pro_date}" /></p>
+                                    <h2 class="h5"><a href="/notice/detail?nno=${list.nno}">${list.title}</a></h2>
+                                    <p class="mb-0"><fmt:formatDate pattern="yyyy-MM-dd" value="${list.create_at}" /></p>
                                 </div>
 							</c:forEach>
                                 
@@ -58,7 +57,7 @@
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                             <c:forEach items="${boardList}" var="list" varStatus="status">
                             	<div class="col mb-5 h-100">
-                                    <h2 class="h5"><a href="/board/detail?pno=${list.bno}">${list.title}</a></h2>
+                                    <h2 class="h5"><a href="/board/detail?bno=${list.bno}">${list.title}</a></h2>
                                     <p class="mb-0">${list.create_at}</p>
                                 </div>
 							</c:forEach>

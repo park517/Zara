@@ -36,7 +36,7 @@
 		FROM (SELECT ROWNUM RN, A.*
 				FROM (
                     SELECT * FROM board
-                    where category = #{category}
+                    where category = #{category} and del_yn='N'
                     ORDER BY bno DESC) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -47,8 +47,8 @@
 	<!-- 글쓰기 -->
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bno" keyColumn="bno">
 		insert into board
-		 		(bno, mem_id, title, content, category, create_at, update_at, hit)
-		 VALUES (seq_board.nextval, #{mem_id}, #{title}, #{content}, #{category}, SYSDATE , null,0)		
+		 		(bno, mem_id, title, content, category, create_at, update_at, hit,del_yn)
+		 VALUES (seq_board.nextval, #{mem_id}, #{title}, #{content}, #{category}, SYSDATE , null,0,'N')		
 	</insert>
 
 	<!-- 글 상세 조회 -->
@@ -70,10 +70,11 @@
 	</update>
 	
 	<!-- 글 삭제 -->
-	<delete id="deleteBoard">
-		DELETE FROM board
-		WHERE bno = #{bno}
-	</delete>
+	<update id="deleteBoard">
+		update board set
+		del_yn = 'Y'
+		where bno = #{bno}
+	</update>
 	
 	<!-- 글 조회수 증가 -->
 	<update id="updateHit" parameterType="boardVO">
