@@ -35,7 +35,7 @@
 		<!--  유저별 가져오기 -->
 	<select id="getcosList" resultType="courseVO">
 		select * from course
-		where mem_id = #{mem_id}
+		where mem_no = #{mem_no}
 	</select>
 	
 

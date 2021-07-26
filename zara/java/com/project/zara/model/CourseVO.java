@@ -16,7 +16,7 @@ public class CourseVO {
 	
 	private int cos_num; //게시판 번호
 	private int cos_category; //게시판 카테고리
-	private String mem_id; //관리자 아이디 get
+	private String mem_no; //관리자 아이디 번호
 	private String cos_title; //글 제목
 	private String cos_content; //내용
 	private int hit; //조회수

@@ -56,7 +56,8 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
+<section class="py-5" id="scroll- scroll-target">
 	<c:if test="${not empty loginMember}">
 
 	    <!-- Page Wrapper -->
@@ -66,8 +67,6 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
 					
 					
 	            	<div id="boardMain">
@@ -160,11 +159,13 @@
 	    </div>
     </c:if>
     <!-- End of Page Wrapper -->
-    
+    </section>
     <c:if test="${empty loginMember}">
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>
 	
+   <!-- 부트스트랩 js 부분 -->
+   <%@include file="../../include/boot-footer.jspf" %>
 
 </body>
 

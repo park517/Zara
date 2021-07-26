@@ -88,7 +88,8 @@
 
 
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
 	<c:if test="${not empty loginMember}">
 
 	    <!-- Page Wrapper -->
@@ -98,8 +99,6 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					
 					
 	            	<div id="boardMain">
 						
@@ -107,7 +106,7 @@
 	            		<!-- 글쓰기 폼 작성 -->
 	            		<form id="write_form" value="write_form" method="post" action="/board/write" enctype="multipart/form-data">
 	            		<div class="form-group">
-	            		<input type="hidden" value="${loginMember.mem_id}" name="mem_id">
+	            		<input type="hidden" value="${loginMember.mem_no}" name="mem_no">
 	            		<ul>
 	            			<li>
 	            				<label for="cos_title">제목</label>
@@ -176,11 +175,10 @@
 	     
 	        </div> 
 	            
-	              <!-- End of Toolbar -->
 	    </div>
     </c:if>
     <!-- End of Page Wrapper -->
-    
+    </section>
     <c:if test="${empty loginMember}">
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>

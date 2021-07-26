@@ -44,8 +44,9 @@
 		
 	</style>
 
-<body id="page-top">
 
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -53,8 +54,6 @@
 
             <!-- Main Content -->
             <div id="content">
-                <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
             	
        			<div class="main">
        			
@@ -115,7 +114,7 @@
               <!-- End of Toolbar -->
     </div>
     <!-- End of Page Wrapper -->
-	
+	</section>
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
 	

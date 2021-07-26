@@ -61,8 +61,9 @@
         }
 	</style>
 
-<body id="page-top">
 
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -70,7 +71,6 @@
 
             <!-- Main Content -->
             <div id="content">
-                <!-- Toolbar -->
             	<div class="card">
 					<article class="card-body">
 						<h4 class="card-title text-center mb-4 mt-1">회원가입</h4>
@@ -141,10 +141,9 @@
      
         </div> 
             
-              <!-- End of Toolbar -->
     </div>
     <!-- End of Page Wrapper -->
-	
+	</section>
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
 	

@@ -47,8 +47,8 @@
 	<!-- 글쓰기 -->
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bno" keyColumn="bno">
 		insert into board
-		 		(bno, mem_id, title, content, category, create_at, update_at, hit,del_yn)
-		 VALUES (seq_board.nextval, #{mem_id}, #{title}, #{content}, #{category}, SYSDATE , null,0,'N')		
+		 		(bno, mem_no, title, content, category, create_at, update_at, hit,del_yn)
+		 VALUES (seq_board.nextval, #{mem_no}, #{title}, #{content}, #{category}, SYSDATE , null,0,'N')		
 	</insert>
 
 	<!-- 글 상세 조회 -->
@@ -89,7 +89,7 @@
  		SELECT
  		   cno,
  		   bno,
- 		   mem_id,
+ 		   mem_no,
  		   content,
  		   create_at
  		FROM (SELECT 
@@ -97,7 +97,7 @@
  		        rownum rnum
  		      FROM (SELECT
  		              *
- 		            FROM comments
+ 		            FROM comments 
  		            WHERE bno = #{bno}
  		            ORDER BY cno DESC)a)
  		<![CDATA[
@@ -110,7 +110,7 @@
 	<select id="getboardList" resultType="BoardVO">
 	
 		select * from board
-		where mem_id = #{mem_id}
+		where mem_no = #{mem_no}
 	
 	</select>
 	
@@ -121,7 +121,7 @@
 
 		VALUES 
 			(
-				seq_comment.nextval,#{bno},#{mem_id},#{content},SYSDATE, null,#{parent_no},#{depth}
+				seq_comment.nextval,#{bno},#{mem_no},#{content},SYSDATE, null,#{parent_no},#{depth}
 			)
 	</insert>
  	

@@ -38,7 +38,7 @@ public interface CourseService {
 	public void updateCosHit(Integer cos_num);
 
 	// 유저별 코스 가져오기
-	public List<CourseVO> getcosList(String mem_id);
+	public List<CourseVO> getcosList(String mem_no);
    
 	
 

@@ -48,8 +48,9 @@
       
    </style>
 
-<body class="d-flex flex-column h-100">
 
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -91,7 +92,7 @@
                                  <td>${board.bno}</td> 
                                  <td>${board.category}</td> 
                                  <td id="title"><a href="detail?bno=${board.bno}">   ${board.title} </a></td> 
-                                 <td>${board.mem_id}</td> 
+                                 <td>${board.mem_no}</td> 
                                  <td>${board.create_at}</td> 
                                  <td>${board.hit}</td> 
                               <tr> 
@@ -102,7 +103,7 @@
                            <select class="selectpicker" name="type">
                                <option value="" selected="selected">분류를 선택해주세요</option>
                             <option value="title">제목</option>
-                            <option value="mem_id">작성자</option>
+                            <option value="mem_no">작성자</option>
                            </select>
                         <input type="text" class="" name="keyword" id="search">
                         <button class="btn btn-primary" name="btnSearch" id="btnSearch">검색</button>
@@ -122,10 +123,9 @@
      
         </div> 
             
-              <!-- End of Toolbar -->
     </div>
     <!-- End of Page Wrapper -->
-   
+   </section>
    <!-- 부트스트랩 js 부분 -->
    <%@include file="../../include/boot-footer.jspf" %>
 

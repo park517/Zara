@@ -45,8 +45,9 @@
       
    </style>
 
-<body class="d-flex flex-column h-100">
 
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -88,7 +89,7 @@
                                  <td>${board.bno}</td> 
                                  <td>${board.category}</td> 
                                  <td id="title"><a href="detail?bno=${board.bno}">   ${board.title} </a></td> 
-                                 <td>${board.mem_id}</td> 
+                                 <td>${board.mem_no}</td> 
                                  <td>${board.create_at}</td> 
                                  <td>${board.hit}</td> 
                               <tr> 
@@ -119,10 +120,9 @@
      
         </div> 
             
-              <!-- End of Toolbar -->
     </div>
     <!-- End of Page Wrapper -->
-   
+   </section>
    <!-- 부트스트랩 js 부분 -->
    <%@include file="../../include/boot-footer.jspf" %>
 
