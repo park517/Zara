@@ -82,7 +82,7 @@
 				        
 				        <h2 style="margin-top : 10px; margin-bottom : 10px">제목</h2>
 				        <div class="board_info">
-				            <label>${board.mem_no} | ${board.create_at}</label> |
+				            <label>${board.mem_id} | ${board.create_at}</label> |
 				            <a href="/board/update?bno=${board.bno}"> 수정 </a> | <a href="/board/delete?bno=${board.bno}"> 삭제 </a>
 				       		| 조회수 ${board.hit}
 				        </div>
