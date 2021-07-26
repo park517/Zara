@@ -111,6 +111,7 @@ public class CourseController {
 	public String submit(CourseVO course,
 						 Model model) {
 		//글쓰기
+		System.out.println("코스 정보 " +course);
 		courseService.insertCosBoard(course);
 		
 		
@@ -138,7 +139,7 @@ public class CourseController {
 		// 내부경로로 저장
 		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
 		String fileRoot = contextRoot+"resources/fileupload/";
-
+		System.out.println("파일 저장 위치 : "+fileRoot);
 		String originalFileName = multipartFile.getOriginalFilename();   //오리지날 파일명
 		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));   //파일 확장자
 		String savedFileName = UUID.randomUUID() + extension;   //저장될 파일 명

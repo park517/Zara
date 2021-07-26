@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CourseVO {
+	
 	private int cos_num; //게시판 번호
 	private int cos_category; //게시판 카테고리
 	private String mem_no; //관리자 아이디 번호

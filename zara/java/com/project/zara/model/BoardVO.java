@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class BoardVO {
 	private int bno; //게시판 번호
 	private String mem_no; //사용자 아이디 번호
+	private String mem_id; //사용자 아이디 
 	private String title; //게시판 제목
 	private String content; //게시판 내용
 	private String category; //게시판 카테고리

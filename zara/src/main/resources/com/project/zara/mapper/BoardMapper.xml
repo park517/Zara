@@ -35,8 +35,9 @@
 		SELECT *
 		FROM (SELECT ROWNUM RN, A.*
 				FROM (
-                    SELECT * FROM board
-                    where category = #{category} and del_yn='N'
+                    SELECT b.*,m.mem_id as mem_id
+                    FROM board b , member m 
+                    where  category = #{category} and b.del_yn='N' and b.mem_no = m.mem_no
                     ORDER BY bno DESC) A
 				)
 		WHERE RN BETWEEN #{start} AND #{end}
@@ -54,9 +55,9 @@
 	<!-- 글 상세 조회 -->
 	<select id="selectBoard" resultType="BoardVO" parameterType="map">
 		SELECT 
-			* 
-		FROM board
-		WHERE bno = #{bno}
+			b.* , m.mem_id as mem_id 
+		FROM board b , member m 
+		WHERE bno = #{bno} and b.mem_no = m.mem_no
 	</select>
 	
 	<!-- 글 수정 -->
