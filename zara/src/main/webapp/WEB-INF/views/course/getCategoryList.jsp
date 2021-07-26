@@ -47,7 +47,8 @@
       
    </style>
 
-<body id="page-top">
+<body class="d-flex flex-column h-100">
+<section class="py-5" id="scroll- scroll-target">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -56,8 +57,6 @@
 
             <!-- Main Content -->
             <div id="content">
-                <!-- Toolbar -->
-            <%@include file="../../include/toolbar.jspf" %>
                <div id="boardMain">
                   <h2>
                   	<c:if test="${list[0].cos_category eq 1}">
@@ -100,7 +99,7 @@
                               <tr> 
                                  <td>${course.cos_num}</td> 
                                  <td id="cos_title"><a href="/course/detail?cos_num=${course.cos_num}">   ${course.cos_title} </a></td> 
-                                 <td>${course.mem_id}</td> 
+                                 <td>${course.mem_no}</td> 
                                  <td>${course.create_at}</td> 
                                  <td>${course.hit}</td> 
                               <tr> 
@@ -111,7 +110,7 @@
                            <select class="selectpicker" name="type">
                                <option value="" selected="selected">분류를 선택해주세요</option>
                             <option value="title">제목</option>
-                            <option value="mem_id">작성자</option>
+                            <option value="mem_no">작성자</option>
                            </select>
                         <input type="text" class="" name="keyword" id="search">
                         <button class="btn btn-primary" name="btnSearch" id="btnSearch">검색</button>
@@ -134,7 +133,7 @@
               <!-- End of Toolbar -->
     </div>
     <!-- End of Page Wrapper -->
-   
+   </section>
    <!-- 부트스트랩 js 부분 -->
    <%@include file="../../include/boot-footer.jspf" %>
 

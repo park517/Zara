@@ -39,8 +39,8 @@
 		
 	</style>
 
-<body id="page-top" class="d-flex flex-column h-100">
-
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
@@ -70,7 +70,8 @@
 						    <input id="password" class="form-control" name="password" placeholder="비밀번호를 입력해주세요" type="password">
 						</div> <!-- input-group.// -->
 						</div> <!-- form-group// -->
-						<div class="form-group">
+						<br>
+						<div class="form-group text-center">
 						<button type="button" class="btn btn-primary btn-block" onclick='doLogin()'>로그인</button>
 						<button type="button" class="btn btn-primary btn-block" onclick="location.href='/user/register'"> 회원가입</button>
 						</div> <!-- form-group// -->
@@ -86,7 +87,7 @@
               <!-- End of Toolbar -->
     </div>
     <!-- End of Page Wrapper -->
-	
+</section>	
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
 	

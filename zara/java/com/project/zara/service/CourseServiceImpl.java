@@ -74,9 +74,9 @@ public class CourseServiceImpl implements CourseService {
 	
 	// 멤버별 코스 글 가져오기
 	@Override
-	public List<CourseVO> getcosList(String mem_id) {
+	public List<CourseVO> getcosList(String mem_no) {
 		// TODO Auto-generated method stub
-		return courseMapper.getcosList(mem_id);
+		return courseMapper.getcosList(mem_no);
 	}
 
 

@@ -29,17 +29,14 @@
 		
 	</style>
 
-<body id="page-top">
-
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="">
-                <!-- Toolbar -->
-				<%@include file="../../include/toolbar.jspf" %>
             	
          		 <div class="card">
 					<article class="card-body">
@@ -51,17 +48,17 @@
 							 </div>
 						    <input id="password" class="form-control" name="password" placeholder="비밀번호를 입력해주세요" type="password">
 						</div> <!-- input-group.// -->
+						<div class="text-center">
 						<button id="btn_check" type="button" class="btn btn-primary btn-block">확인</button>
-		
+						</div>
 					</article>
 				</div> <!-- card.// -->
             </div>
         </div> 
             
               <!-- End of Toolbar -->
-    </div>
     <!-- End of Page Wrapper -->
-	
+	</section>
 	<!-- 부트스트랩 js 부분 -->
 	<%@include file="../../include/boot-footer.jspf" %>
 	
