@@ -70,8 +70,9 @@
 	</style>
 </head>
 
-<body id="page-top">
 
+<body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
 	<c:if test="${not empty loginMember}">
 	    <!-- Page Wrapper -->
 	    <div id="wrapper">
@@ -80,8 +81,6 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
 	            	<div class="card">
 						<article class="card-body">
 							<h4 class="card-title text-center mb-4 mt-1">정보 수정하기</h4>
@@ -142,7 +141,7 @@
 								
 								</ul>
 							</div> <!-- form-group// -->
-							<div class="form-group">
+							<div class="form-group text-center">
 							<button id="btn_update" type="button" class="btn btn-primary btn-block">정보 수정하기</button>
 							</div> <!-- form-group// -->
 							</form>
@@ -157,7 +156,7 @@
 	    </div>
     </c:if>
     <!-- End of Page Wrapper -->
-	
+	</section>
 	<c:if test="${empty loginMember}">
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>

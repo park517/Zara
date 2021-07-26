@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+    <!--  부트 스트랩 부분 -->
+	<%@include file="../../include/boot-head.jspf" %>
 	<style type="text/css">
 	
 		#logo {
@@ -43,6 +45,7 @@
 </head>
 
 <body class="d-flex flex-column h-100">
+<section class="py-5" id="scroll- scroll-target">
 	<c:if test="${not empty loginMember}">
 
 	    <!-- Page Wrapper -->
@@ -94,7 +97,7 @@
 	    </div>
     </c:if>
     <!-- End of Page Wrapper -->
-    
+    </section>
     <c:if test="${empty loginMember}">
 		<%@include file="../../include/noLogin.jspf" %>
     </c:if>

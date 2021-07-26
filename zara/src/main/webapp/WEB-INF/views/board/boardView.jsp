@@ -64,6 +64,7 @@
 		
 
 <body class="d-flex flex-column h-100">
+<section class="py-5 scroll-target">
 	    <!-- Page Wrapper -->
 	    <div id="wrapper">
 	        <!-- Content Wrapper -->
@@ -81,7 +82,7 @@
 				        
 				        <h2 style="margin-top : 10px; margin-bottom : 10px">제목</h2>
 				        <div class="board_info">
-				            <label>${board.mem_id} | ${board.create_at}</label> |
+				            <label>${board.mem_no} | ${board.create_at}</label> |
 				            <a href="/board/update?bno=${board.bno}"> 수정 </a> | <a href="/board/delete?bno=${board.bno}"> 삭제 </a>
 				       		| 조회수 ${board.hit}
 				        </div>
@@ -158,11 +159,9 @@
 	     
 	        </div> 
 	            
-	              <!-- End of Toolbar -->
-	    </div>
 
     <!-- End of Page Wrapper -->
-    
+    </section>
 
 	
 	<!-- 부트스트랩 js 부분 -->

@@ -69,7 +69,8 @@
 		};
 	};
 </script>
-<body id="page-top">
+<body class="d-flex flex-column h-100">
+<section class="py-5" id="scroll- scroll-target">
 	    <!-- Page Wrapper -->
 	    <div id="wrapper">
 	        <!-- Content Wrapper -->
@@ -77,20 +78,18 @@
 	
 	            <!-- Main Content -->
 	            <div id="content">
-	                <!-- Toolbar -->
-					<%@include file="../../include/toolbar.jspf" %>
 					
 					
 	            	<div id="boardMain">
 	            		<h2>글 상세 보기</h2>
 	            		<br><br><br>
-	            		<c:if test="${loginMember.mem_id eq course.mem_id}">
+	            		<c:if test="${loginMember.mem_no eq course.mem_no}">
 		            		<input type="button" value="수정" class ="btn btn-primary" onclick="location.href='update?cos_num=${course.cos_num}'" >
 		            		<input type="button" value="삭제" class ="btn btn-primary" id="delete_btn" >
 	            		</c:if>
 	            		<!-- 글 정보 입력 -->
 	            		<ul>
-	            			<li>작성자 : ${course.mem_id}</li>
+	            			<li>작성자 : ${course.mem_no}</li>
 	            			<li>제목 : ${course.cos_title }</li>
 	            			<li>작성일 : ${course.create_at}</li>
 	            			
@@ -115,7 +114,7 @@
 	    </div>
 
     <!-- End of Page Wrapper -->
-    
+    </section>
 
 	
 	<!-- 부트스트랩 js 부분 -->
