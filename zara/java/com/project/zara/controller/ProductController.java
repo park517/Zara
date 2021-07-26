@@ -28,11 +28,9 @@ import com.project.zara.service.ReplyService;
 import com.project.zara.util.FileUtil;
 import com.project.zara.util.PagingUtil;
 
-import jdk.internal.org.jline.utils.Log;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@Log4j
 // 중고 자전거 판매 
 @RequestMapping("/product")
 public class ProductController {
