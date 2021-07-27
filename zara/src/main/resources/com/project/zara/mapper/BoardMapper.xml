@@ -88,21 +88,19 @@
 	<!-- 댓글 목록 -->
  	<select id="selectListReply" parameterType="map" resultType="BoardReplyVO">
  		SELECT
- 		   cno,
- 		   bno,
- 		   mem_no,
- 		   content,
- 		   create_at
- 		FROM (SELECT 
- 		        a.*,
- 		        rownum rnum
- 		      FROM (SELECT
- 		              *
- 		            FROM comments 
- 		            WHERE bno = #{bno}
- 		            ORDER BY cno DESC)a)
+			*
+			FROM (SELECT ROWNUM RN, A.*
+			        FROM 
+			        (
+			        SELECT c.* , m.mem_id 
+			        FROM comments c , member m  
+                    WHERE bno = 163 and c.mem_no = m.mem_no
+			        START WITH "depth" = 0
+			        CONNECT BY PRIOR cno = "parent_no"
+			        )A
+			      )
  		<![CDATA[
- 		WHERE rnum >= #{start} AND rnum <= #{end}
+ 		WHERE RN >= #{start} AND RN <= #{end}
  		]]>                                 
  	</select>
  		

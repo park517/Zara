@@ -42,7 +42,7 @@
 			font-size: 15px;
 		}
 		#img_preview {
-			width: 200px;
+			width: 200px; 
 			height: 200px;
 		}
 		
@@ -59,6 +59,10 @@
             margin-top: 200px;
             margin: auto;
             width: 60%;
+        }
+        
+        .rreply_wrap {
+        	margin-left : 20px;
         }
 		</style>
 		
@@ -99,17 +103,47 @@
 	            		<div> <!-- 댓글 달기 -->
 	            			<div class="reply_wrap">
 		            			<c:forEach items="${boardReply}" var="getList">
-		            				<strong> ${getList.mem_id}  | ${getList.create_at}</strong>  <br><br>
-		            				${getList.content}<br><br>
-		            				<c:if test="${loginMember.mem_id eq getList.mem_id}">
-		            					<div>
-		            						<button>대댓글 달기</button>
-		            						<button type="button" class="btn_replyUpdate" onclick="update_reply(${getList.cno})">수정</button>
-		            						<button type="button" class="btn_replyDelete" onclick="delete_reply(${getList.cno})">삭제</button>
-		            					</div>
-		            					
-		            				</c:if>
-		            				<hr>
+		            				<c:if test="${getList.depth eq 0}">
+			            				<strong> ${getList.mem_id}  | ${getList.create_at}</strong>  <br><br>
+			            				${getList.content}<br><br>
+			            				<c:if test="${not empty loginMember}">
+			            					<button type="button" id="${getList.cno}" onclick="showReplyDiv(this.id)">대댓글 달기</button>
+				            				<c:if test="${loginMember.mem_id eq getList.mem_id}">
+												
+				            						<button type="button" class="btn_replyUpdate" onclick="update_reply(${getList.cno})">수정</button>
+				            						<button type="button" class="btn_replyDelete" onclick="delete_reply(${getList.cno})">삭제</button>
+
+				            				</c:if>
+			            				</c:if>
+			            					<br>
+			            					<div style="display: none"  id="reply${getList.cno}">
+			            						<textarea rows="3" cols="50" id="rreplyContent${getList.cno}"></textarea>
+			            						<br>
+			            						<button type="button" onclick="insert_reply(1,${getList.cno})" >대댓글 작성하기</button>
+			            					</div>
+			            				<hr>
+			            			</c:if>
+			            			
+			            		    <c:if test="${getList.depth eq 1}">
+			            				<div class="rreply_wrap">
+				            				<strong> ${getList.mem_id}  | ${getList.create_at}</strong>  <br><br>
+				            				${getList.content}<br><br>
+				            				<c:if test="${loginMember.mem_id eq getList.mem_id}">
+				            					
+												
+				            					<button type="button" class="btn_replyUpdate" onclick="update_reply(${getList.cno})">수정</button>
+				            					<button type="button" class="btn_replyDelete" onclick="delete_reply(${getList.cno})">삭제</button>
+				            					
+				            				</c:if>
+				            					<br>
+				            					<div style="display: none" class="rreply_wrap" id="reply${getList.cno}">
+				            						<textarea rows="3" cols="50" id="rreplyContent${getList.cno}"></textarea>
+				            						<br>
+				            						<button type="button" onclick="insert_reply(1,${getList.cno})" >대댓글 작성하기</button>
+				            					</div>
+				            				<hr>
+			            				</div>
+			            			</c:if>		
 		            			</c:forEach>
 		            			
 		            			<br><br>
@@ -136,14 +170,14 @@
 	            			<c:if test="${not empty loginMember}">
 		            			<form id="writeReply" action="/board/detail/writeReply" method="post">
 		            				<input type="hidden" name="bno" value="${board.bno}" id="bno">
-		            				<input type="hidden" name="mem_id" value="${loginMember.mem_id}" id="mem_id">
+		            				<input type="hidden" name="mem_no" value="${loginMember.mem_no}" id="mem_no">
 		            				
 		            				<!-- 로그인 체크 필욯 -->
 		            				
 		            				<textarea rows = "3" cols = "50" name="content" id="reply_content"></textarea>
 		            				
 		            				<div id="comment_submit" align="right">
-		            					<input type="button" value="전송" id="btn_insertReply" onclick="insert_reply()">
+		            					<input type="button" value="댓글달기" onclick="insert_reply(0,0)">
 		            				</div>
 		            			
 		            			</form>
@@ -169,18 +203,25 @@
 	<script>
 	
 	// 댓글 입력
-	function insert_reply(){
-		
+	function insert_reply(depth,parent_no){
+		 var content;
+		 var rreply_id = "#rreplyContent"+parent_no;
+		 if(depth == 0) {
+			 content = $('#reply_content').val();
+		 }
+		 else {
+			 content = $(rreply_id).val();
+		 }
 		 $.ajax({
 	         url : "/board/detail/writeReply",
 	         type : "post",
 	         dataType : 'text',
 	         data : {
 	             bno : $('#bno').val(),
-	             mem_id : $('#mem_id').val(),
-	             content: $('#reply_content').val(),
-	             depth : 0,
-	             parent_no : 0
+	             mem_no : $('#mem_no').val(),
+	             content: content,
+	             depth : depth,
+	             parent_no : parent_no
 	         },
 	         success : function(result) {
 	        	 alert("댓글이 입력 되었습니다");
@@ -199,7 +240,7 @@
 	
 	function delete_reply(cno) {
 		var is_delete = confirm("정말로 삭제 하시겠습니까?");
-		if(is_delete) {
+		if(is_delete) { 
 		 $.ajax({
 	         url : "/board/detail/deleteReply",
 	         type : "post",
@@ -273,24 +314,63 @@
 	        	 var resultJson = JSON.parse(result);
 	        	 var reply_html = '';
 	             $('.reply_wrap').html('');
+	             
+	             
 	             for(var i = 0 ; i<resultJson.list.length ; i++) {
+	            	 if(resultJson.list[i].depth ==0) {
+	            		 
+		 				 reply_html+= "<strong>"+resultJson.list[i].mem_id+" | "+
+		 				 resultJson.list[i].create_at+"</strong><br><br>";
+		 		
+		 				 reply_html+= resultJson.list[i].content+"<br><br>";
+		 				 if("${loginMember.mem_id} != null") {
+		 					reply_html+= "<button id='"+resultJson.list[i].cno+"' onclick='showReplyDiv(this.id)'>대댓글 달기</button>";
+			 				 
+							 if( "${loginMember.mem_id}" === resultJson.list[i].mem_id) {
+								 	
+								 	reply_html+= "<button type='button' class='btn_replyUpdate' onclick='update_reply("+resultJson.list[i].cno+")'>수정</button>";
+								 	reply_html+= "<button type='button' class='btn_replyDelete' onclick='delete_reply("+resultJson.list[i].cno+")'>삭제</button>";
+								 	
+							 }
+		 				 }
+		 				 reply_html += "<br><div style='display: none'  id='reply"+resultJson.list[i].cno+"'>";
+		 				 reply_html += "<textarea rows='3' cols='50' id='rreplyContent"+resultJson.list[i].cno+"'></textarea>";
+		 				 reply_html += "<br>";
+		 				 reply_html += "<button type='button' onclick='insert_reply(1,"+resultJson.list[i].cno+")' >대댓글 작성하기</button>";
+		 				 reply_html += "</div>";
+		 				 reply_html += "<hr>";
+	            	 }	 
 	            	 
-	 				 reply_html+= "<strong>"+resultJson.list[i].mem_id+" | "+
-	 				 resultJson.list[i].create_at+"</strong><br><br>";
-	 		
-	 				 reply_html+= resultJson.list[i].content+"<br><br>";
-					 if( "${loginMember.mem_id}" === resultJson.list[i].mem_id) {
-						 reply_html+= "<div>";
-						 	reply_html+= "<button>대댓글 달기</button>";
-						 	reply_html+= "<button type='button' class='btn_replyUpdate' onclick='update_reply("+resultJson.list[i].cno+")'>수정</button>";
-						 	reply_html+= "<button type='button' class='btn_replyDelete' onclick='delete_reply("+resultJson.list[i].cno+")'>삭제</button>";
-						 reply_html+= "</div><hr>";
-					 }
+	            	 else {
+	            		 reply_html+="<div class ='rreply_wrap'";
+		 				 reply_html+= "<strong>"+resultJson.list[i].mem_id+" | "+
+		 				 resultJson.list[i].create_at+"</strong><br><br>";
+		 		
+		 				 reply_html+= resultJson.list[i].content+"<br><br>";
+		 				 if("${loginMember.mem_id} != null") {
+			 				 
+							 if( "${loginMember.mem_id}" === resultJson.list[i].mem_id) {
+								 	
+								 	reply_html+= "<button type='button' class='btn_replyUpdate' onclick='update_reply("+resultJson.list[i].cno+")'>수정</button>";
+								 	reply_html+= "<button type='button' class='btn_replyDelete' onclick='delete_reply("+resultJson.list[i].cno+")'>삭제</button>";
+								 	
+							 }
+		 				 }
+		 				 reply_html += "<br><div style='display: none'  id='reply"+resultJson.list[i].cno+"'>";
+		 				 reply_html += "<textarea rows='3' cols='50' id='rreplyContent"+resultJson.list[i].cno+"'></textarea>";
+		 				 reply_html += "<br>";
+		 				 reply_html += "<button type='button' onclick='insert_reply(1,"+resultJson.list[i].cno+")' >대댓글 작성하기</button>";
+		 				 reply_html += "</div>";
+		 				 reply_html += "<hr>"; 
+		 				 reply_html += "</div>";
+	            	 }
+
+	 				 
 	             }
 					 reply_html+= "<br><br>"
 					 reply_html+= "<ul class='pagination' id='pagination'>";
 					 reply_html+= "<li class='disabled'><a href='#'><span>«</span></a></li>"
-					 for(var i =1 ;i<=${totalPageNum} ; i++) {
+					 for(var i =1 ;i<=resultJson.totalPageNum ; i++) {
 						 reply_html+= "<li id='"+i+"'>";
 						 reply_html+= "<a href ='javascript:get_reply("+i+")'>"+i;
 						 reply_html+= "</a></li>";
@@ -307,7 +387,16 @@
 	     });
 	}
 	
+	function showReplyDiv(id) {
+		let divId = "#reply"+id;
+		$(divId).toggle();
+	}
+	
+	
+	
 	</script>
+	
+	
 
 </body>
 
